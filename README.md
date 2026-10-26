@@ -11,6 +11,8 @@ Crops and solar panels compete for the same sunlight. A fixed panel angle favour
 | Question | Result |
 |---|---|
 | How accurately does the controller co-optimise crop light and electricity? | 864 cases with noisy sensors: **99.6 %** of the best possible combined score; **82 %** of the best electricity and **98 %** of the best crop light value. Fixed 45°: 91.2 %. Monthly plan: 98.8 %. Fixed 15° (electricity only): 80.0 %. |
+| Does it hold at other climates? | Seven climates from 9.9° to 30.9° N: **99.6 to 99.7 %** at every site (monthly schedule 98.2 to 99.2 %, fixed 45° 89.1 to 91.5 %). Eight noise draws: 99.57 ± 0.04 %. |
+| Which sensors matter? | With the crop light model wrong by 20 %, the full controller keeps 99.6 %; without the PAR sensor 98.6 to 99.0 %; without the temperature, humidity and soil stress 98.8 to 99.2 % (`eval_general.js`). |
 | Does it hold across conditions? | 99.5 to 99.7 % in every sky, soil and season group; 99.6 % with a dirty, reflecting or dead light sensor (a single-reading controller drops to 97.4 to 98.7 %). |
 | Does the MATLAB code agree with the browser twin? | Identical mode and angle in 40 of 40 random cases; the twin and MATLAB engine agree to 0.0000 % on 22 outputs. |
 | Physics checks | PV model within +5.0 % of PVGIS (annual); shadow model within 0.010 mean lit-fraction difference of a Blender Cycles ray trace (80 comparisons). |

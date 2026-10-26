@@ -1,0 +1,16 @@
+light mismatch m,variant,combined % (mean of 7 sites),worst site combined %,electricity %,crop light %,tilt RMSE deg
+0.8,Six-sensor controller,99.6,99.6,80.9,98.6,5.4
+0.8,No PAR sensor,98.6,98.2,82.5,94.9,6.4
+0.8,No DHT11 or soil stress,99.2,98.7,79.7,99,5.9
+0.8,Single readings, no guard,99.6,99.5,80.9,98.4,5.8
+0.8,Monthly plan,98.7,98.6,83,94.8,10.4
+1,Six-sensor controller,99.6,99.6,82.7,98.2,5.5
+1,No PAR sensor,99.7,99.6,82.5,98.4,5.7
+1,No DHT11 or soil stress,99,98.3,81,98.7,6.6
+1,Single readings, no guard,99.5,99.3,82.6,98,6
+1,Monthly plan,98.8,98.2,83,96.4,9.8
+1.2,Six-sensor controller,99.6,99.5,84.5,98.1,5.5
+1.2,No PAR sensor,99,98.8,82.5,98.8,6.8
+1.2,No DHT11 or soil stress,98.8,97.9,82.5,98.6,7.5
+1.2,Single readings, no guard,99.4,99.3,84.3,97.9,5.9
+1.2,Monthly plan,98.3,97.6,83,97.2,9.8

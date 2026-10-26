@@ -1,0 +1,36 @@
+site,latitude,strategy,electricity %,crop light %,combined %,tilt RMSE deg
+"TCE Ground, Madurai (plains, semi-arid tropical)",9.88,Six-sensor controller,81.8,97.9,99.6,4.9
+"TCE Ground, Madurai (plains, semi-arid tropical)",9.88,Monthly plan,82.2,96.3,98.8,9.5
+"TCE Ground, Madurai (plains, semi-arid tropical)",9.88,Fixed 45 deg,81,84.6,91.2,16.3
+"TCE Ground, Madurai (plains, semi-arid tropical)",9.88,Fixed 15 deg,99.2,45.2,80,34
+"TCE Ground, Madurai (plains, semi-arid tropical)",9.88,Sun tracking,88.6,64.3,84,25
+"Coastal tropical (Chennai-type)",13.08,Six-sensor controller,81.8,98.4,99.6,6
+"Coastal tropical (Chennai-type)",13.08,Monthly plan,82.3,96.9,99.1,10.2
+"Coastal tropical (Chennai-type)",13.08,Fixed 45 deg,81.4,84.9,91.5,16.2
+"Coastal tropical (Chennai-type)",13.08,Fixed 15 deg,99.4,46.5,80.7,34.2
+"Coastal tropical (Chennai-type)",13.08,Sun tracking,88.8,65.4,84.5,25.2
+"Mountain / hill (Nilgiris-type)",11.41,Six-sensor controller,81.2,98.5,99.7,5.1
+"Mountain / hill (Nilgiris-type)",11.41,Monthly plan,82.6,96.3,99.2,9.3
+"Mountain / hill (Nilgiris-type)",11.41,Fixed 45 deg,81.5,84,91.2,16.2
+"Mountain / hill (Nilgiris-type)",11.41,Fixed 15 deg,99.4,46.1,80.7,35.2
+"Mountain / hill (Nilgiris-type)",11.41,Sun tracking,88.8,65,84.5,25.3
+"Humid tropical (Kerala-type)",9.93,Six-sensor controller,81,98.7,99.7,4.6
+"Humid tropical (Kerala-type)",9.93,Monthly plan,82.4,96.4,99.2,9.7
+"Humid tropical (Kerala-type)",9.93,Fixed 45 deg,81.5,83.5,91.1,16.5
+"Humid tropical (Kerala-type)",9.93,Fixed 15 deg,99.4,46,80.6,35.2
+"Humid tropical (Kerala-type)",9.93,Sun tracking,89,64.8,84.6,25.6
+"Arid desert (Rajasthan-type)",26.91,Six-sensor controller,84.5,97.5,99.6,6
+"Arid desert (Rajasthan-type)",26.91,Monthly plan,83.9,95.8,98.2,10
+"Arid desert (Rajasthan-type)",26.91,Fixed 45 deg,78.5,86.3,89.1,17.5
+"Arid desert (Rajasthan-type)",26.91,Fixed 15 deg,98.7,51.4,82.1,30.7
+"Arid desert (Rajasthan-type)",26.91,Sun tracking,86.9,69.9,84.4,25.4
+"Northern plains (Punjab-type)",30.9,Six-sensor controller,84.4,98,99.6,5.9
+"Northern plains (Punjab-type)",30.9,Monthly plan,83.7,96.4,98.3,10.6
+"Northern plains (Punjab-type)",30.9,Fixed 45 deg,80.3,86.9,90.7,17.1
+"Northern plains (Punjab-type)",30.9,Fixed 15 deg,99.2,48.8,80.8,32.4
+"Northern plains (Punjab-type)",30.9,Sun tracking,87.6,69.1,84.6,25.1
+"Deccan plateau (Vidarbha-type)",20.93,Six-sensor controller,83.8,98.5,99.6,6
+"Deccan plateau (Vidarbha-type)",20.93,Monthly plan,84.1,96.6,98.7,9.1
+"Deccan plateau (Vidarbha-type)",20.93,Fixed 45 deg,80.2,86.2,90.1,17.3
+"Deccan plateau (Vidarbha-type)",20.93,Fixed 15 deg,99.2,51.7,82.4,33
+"Deccan plateau (Vidarbha-type)",20.93,Sun tracking,88.1,69.7,85.1,25.9

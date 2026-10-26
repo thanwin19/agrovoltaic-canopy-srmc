@@ -1,0 +1,4 @@
+metric,mean %,sd,95% interval low,95% interval high,min,max
+combined,99.57,0.042,99.53,99.60,99.50,99.63
+electricity,81.82,0.170,81.68,81.96,81.54,82.02
+crop,97.89,0.192,97.72,98.05,97.56,98.13

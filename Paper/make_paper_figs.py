@@ -22,20 +22,17 @@ th = [i * 0.5 for i in range(6, 181)]
 bx.plot(th, [L * math.cos(math.radians(t) - a) for t in th], 'C0', lw=1.4, label='45\u00b0 offset arm'); bx.plot(th, [L * math.cos(math.radians(t)) for t in th], 'C3--', lw=1.2, label='plain arm')
 bx.axhline(0.31, color='0.5', lw=0.5, ls=':'); bx.text(4, 0.318, '0.31 m', fontsize=6.3, color='0.35'); bx.set_xlabel('Panel tilt (deg)'); bx.set_ylabel('Lever length (m)'); bx.set_xlim(0, 90); bx.set_ylim(0, 0.46); bx.legend(fontsize=6.3, frameon=False, loc='lower left'); bx.set_title('(b) Lever length', fontsize=7.5, loc='left')
 fig.tight_layout(pad=0.4); fig.savefig(os.path.join(OUT, 'fig2_lever_arm.png'), dpi=300); plt.close(fig)
-# ---- Fig 3: accuracy scatter
-rows = list(csv.DictReader(open(os.path.join(SC, 'T11_accuracy_v2.csv'))))
-fig, ax = plt.subplots(figsize=(3.3, 2.3))
-for r in rows:
-    k = r['strategy']; x, y = float(r['electricity % of best']), float(r['crop light value % of best']); ctl = k.startswith('SC'); ax.plot(x, y, 'o', color='C0' if ctl else '0.4', ms=4.5 if ctl else 4)
-ax.annotate('Six-sensor controller (three variants)', (82.0, 97.8), textcoords='offset points', xytext=(14, 4), fontsize=6.3, arrowprops=dict(arrowstyle='-', lw=0.4))
-ax.annotate('Monthly plan', (82.2, 96.3), textcoords='offset points', xytext=(14, -9), fontsize=6.3, arrowprops=dict(arrowstyle='-', lw=0.4))
-for nm, x, y, o in [('Fixed 45°', 81.0, 84.6, (6, -3)), ('Sun tracking', 88.6, 64.3, (6, 3)), ('Fixed 15° (PV-max)', 99.2, 45.2, (-6, 6))]:
-    ax.annotate(nm, (x, y), textcoords='offset points', xytext=o, ha='left' if o[0] > 0 else 'right', fontsize=6.3)
-ax.set_xlabel('Electricity (% of best possible)'); ax.set_ylabel('Crop light value (% of best possible)'); ax.set_xlim(78, 102); ax.set_ylim(40, 105); ax.grid(lw=0.3, alpha=0.5)
+# ---- Fig 3: accuracy scatter, all seven sites
+rows = list(csv.DictReader(open(os.path.join(SC, 'T20_multisite.csv'))))
+fig, ax = plt.subplots(figsize=(3.3, 2.35)); sty = {'Six-sensor controller': ('C0', 'o', 'Six-sensor controller'), 'Monthly plan': ('C1', 's', 'Monthly plan'), 'Fixed 45 deg': ('0.45', '^', 'Fixed 45°'), 'Fixed 15 deg': ('C3', 'v', 'Fixed 15°'), 'Sun tracking': ('C2', 'D', 'Sun tracking')}
+for k, (c, m, lab) in sty.items():
+    pts = [(float(r['electricity %']), float(r['crop light %'])) for r in rows if r['strategy'] == k]
+    ax.plot([p[0] for p in pts], [p[1] for p in pts], m, color=c, ms=4, label=lab, alpha=0.85, mec='k', mew=0.3)
+ax.set_xlabel('Electricity (% of best possible)'); ax.set_ylabel('Crop light value (% of best possible)'); ax.set_xlim(76, 101); ax.set_ylim(40, 103); ax.grid(lw=0.3, alpha=0.5); ax.legend(fontsize=6.2, frameon=False, loc='lower left')
 fig.tight_layout(pad=0.4); fig.savefig(os.path.join(OUT, 'fig3_accuracy.png'), dpi=300); plt.close(fig)
 # ---- Fig 4: weight sweep
 G = json.load(open(os.path.join(SC, 'gaps_study.json')))['weight_sweep']; w = [r['w'] for r in G]; tmax = max(r['total'] for r in G)
 fig, ax = plt.subplots(figsize=(3.3, 2.25)); ax.plot(w, [r['pv_pct_of_max'] for r in G], 'o-', color='C1', ms=3, lw=1.2, label='Electricity'); ax.plot(w, [r['crop_pct_of_max'] for r in G], 's-', color='C2', ms=3, lw=1.2, label='Crop income'); ax.plot(w, [100 * r['total'] / tmax for r in G], '^-', color='C0', ms=3, lw=1.2, label='Total income')
-ax.axvline(0.5, color='0.5', lw=0.6, ls='--'); ax.text(0.51, 8, 'w = 0.5', fontsize=6.5, color='0.35'); ax.set_xlabel('Electricity weight $w$ in the objective (4)'); ax.set_ylabel('Value (% of the best over all weights)'); ax.set_ylim(-8, 105); ax.set_xlim(0, 1); ax.grid(lw=0.3, alpha=0.5); ax.legend(fontsize=6.5, frameon=False, loc='center left')
+ax.axvline(0.5, color='0.5', lw=0.6, ls='--'); ax.text(0.51, 8, 'w = 0.5', fontsize=6.5, color='0.35'); ax.set_xlabel('Electricity weight $w$ in the objective (1)'); ax.set_ylabel('Value (% of the best over all weights)'); ax.set_ylim(-8, 105); ax.set_xlim(0, 1); ax.grid(lw=0.3, alpha=0.5); ax.legend(fontsize=6.5, frameon=False, loc='center left')
 fig.tight_layout(pad=0.4); fig.savefig(os.path.join(OUT, 'fig4_weight_sweep.png'), dpi=300); plt.close(fig)
 print('figures written to', OUT)
