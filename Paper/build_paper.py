@@ -52,11 +52,36 @@ set_cell(row0.cells[0], T.TITLE)
 cells1 = []; seen1 = set()
 for c in row1.cells:
     if id(c._tc) not in seen1: seen1.add(id(c._tc)); cells1.append(c)
-set_cell(cells1[0], 'Author names and affiliations withheld for review')
-for c in cells1[1:]: set_cell(c, '')
-try:
-    cells1[0].merge(cells1[-1]); [setattr(p, 'alignment', WD_ALIGN_PARAGRAPH.CENTER) for p in tt.rows[1].cells[0].paragraphs]
-except Exception as e: print('merge skipped', e)
+CAMERA = os.environ.get('CAMERA') == '1'
+if CAMERA: OUT = os.path.join(HERE, 'SRMC_Research_Paper_CAMERA_READY_SAMPLE.docx')
+def author_cell(cell, a):
+    p = cell.paragraphs[0]
+    for extra in cell.paragraphs[1:]: extra._p.getparent().remove(extra._p)
+    for ch in list(p._p):
+        if ch.tag != qn('w:pPr'): p._p.remove(ch)
+    p.add_run(a['name']); p.add_run().add_break()
+    for line in a['affiliation']:
+        r = p.add_run(line); r.italic = True; p.add_run().add_break()
+    p.add_run(a['email'])
+if CAMERA:
+    A = T.SAMPLE_AUTHORS
+    for c, a in zip(cells1, A[:3]): author_cell(c, a)
+    for extra_row in range(3, len(A), 3):
+        tr = copy.deepcopy(row1._tr); row1._tr.addnext(tr)
+        from docx.table import _Row
+        nr = _Row(tr, tt); cs = []; sn = set()
+        for c in nr.cells:
+            if id(c._tc) not in sn: sn.add(id(c._tc)); cs.append(c)
+        chunk = A[extra_row:extra_row + 3]
+        slots = [cs[1]] if len(chunk) == 1 else cs[:len(chunk)]
+        for c in cs: set_cell(c, '')
+        for c, a in zip(slots, chunk): author_cell(c, a)
+else:
+    set_cell(cells1[0], 'Author names and affiliations withheld for review')
+    for c in cells1[1:]: set_cell(c, '')
+    try:
+        cells1[0].merge(cells1[-1]); [setattr(p, 'alignment', WD_ALIGN_PARAGRAPH.CENTER) for p in tt.rows[1].cells[0].paragraphs]
+    except Exception as e: print('merge skipped', e)
 for el in title_tbl.iter(qn('w:commentRangeStart'), qn('w:commentRangeEnd'), qn('w:commentReference')): pass
 for tag in ('w:commentRangeStart', 'w:commentRangeEnd', 'w:commentReference'):
     for el in list(body.iter(qn(tag))):
@@ -82,7 +107,7 @@ after_eq = [False]
 def build_p(text):
     p = new_par('Body Text Indent'); add_marked(p, text)
     if after_eq[0]: p.paragraph_format.first_line_indent = Pt(0)
-    after_eq[0] = False; place(p._p)
+    after_eq[0] = False; place(p._p); return p
 def build_bul(text): p = new_par('BulletList'); add_marked(p, text); place(p._p)
 def build_eq(text, num):
     p = new_par('Body Text Indent'); pf = p.paragraph_format; pf.first_line_indent = Pt(0); pf.left_indent = Pt(0)
@@ -142,7 +167,10 @@ build_h1('References')
 for i, ref in enumerate(T.REFS, 1):
     p = new_par('Heading 3'); add_marked(p, '[%d] %s' % (i, ref)); p.paragraph_format.space_before = Pt(0); p.paragraph_format.space_after = Pt(5); place(p._p)
 build_h1('About the Authors')
-build_p('Author information is withheld for review and will be added to the camera-ready version.')
+if CAMERA:
+    for bio in T.SAMPLE_BIOS: bp = build_p(bio); bp.paragraph_format.space_after = Pt(10)
+else:
+    build_p('Author information is withheld for review and will be added to the camera-ready version.')
 # ------------------------------------------------------------ clean the package: comments, hyperlinks, unused pictures
 used = set(re.findall(r'r:embed="(rId\d+)"', doc.element.xml))
 for rid, rel in list(doc.part.rels.items()):
