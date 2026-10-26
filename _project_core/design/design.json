@@ -1,0 +1,233 @@
+{
+ "_note": "Single source of truth for geometry. Switch the active preset, or edit 'custom'. Pivot height is DERIVED from the required lowest-edge clearance.",
+ "active": "feasible",
+ "presets": {
+  "recommended": {
+   "label": "Recommended: wire-spec mechanism + guideline clearance",
+   "bayLen": 12.5,
+   "panelPitch": 2.5,
+   "panelGap": 0.003,
+   "clearanceLowestEdge": 4.5,
+   "maxTiltDeg": 60,
+   "stopsDeg": [
+    15,
+    60
+   ],
+   "rainSlopeDeg": 3,
+   "columnSize": 0.22,
+   "field": {
+    "width": 25,
+    "length": 25
+   },
+   "wires": {
+    "driveDiaMm": 4,
+    "carrierDiaMm": 16,
+    "braceDiaMm": 12
+   },
+   "gutter": {
+    "width": 0.4,
+    "depth": 0.3
+   },
+   "cistern": {
+    "m3": 300,
+    "side": 6,
+    "depth": 3.2
+   },
+   "source": "wire spec (mechanism, 12.5 m bays) + SRMC guidelines (4.5 m clearance, 16 mm carrier wire)",
+   "sagRatio": 0.0256,
+   "tube": {
+    "D": 60.3,
+    "t": 3
+   }
+  },
+  "wire_spec": {
+   "label": "Wire-driven spec as written",
+   "bayLen": 12.5,
+   "panelPitch": 3.125,
+   "panelGap": 0.003,
+   "clearanceLowestEdge": 4.0,
+   "maxTiltDeg": 60,
+   "stopsDeg": [
+    15,
+    60
+   ],
+   "rainSlopeDeg": 3,
+   "columnSize": 0.22,
+   "field": {
+    "width": 25,
+    "length": 25
+   },
+   "wires": {
+    "driveDiaMm": 4,
+    "carrierDiaMm": 16,
+    "braceDiaMm": 12
+   },
+   "gutter": {
+    "width": 0.4,
+    "depth": 0.3
+   },
+   "cistern": {
+    "m3": 300,
+    "side": 6,
+    "depth": 3.2
+   },
+   "source": "Wire_Driven_Agrivoltaic_Technical_Specification (Rev 1.0)",
+   "sagRatio": 0.0256,
+   "tube": {
+    "D": 60.3,
+    "t": 3
+   }
+  },
+  "smallholder": {
+   "label": "Smallholder: SRMC guideline scale (5 m column spacing)",
+   "bayLen": 5.0,
+   "panelPitch": 2.5,
+   "panelGap": 0.003,
+   "clearanceLowestEdge": 4.5,
+   "maxTiltDeg": 30,
+   "stopsDeg": [
+    15,
+    30
+   ],
+   "rainSlopeDeg": 3,
+   "columnSize": 0.1,
+   "field": {
+    "width": 25,
+    "length": 25
+   },
+   "wires": {
+    "driveDiaMm": 4,
+    "carrierDiaMm": 16,
+    "braceDiaMm": 12
+   },
+   "gutter": {
+    "width": 0.3,
+    "depth": 0.2
+   },
+   "cistern": {
+    "m3": 100,
+    "side": 4,
+    "depth": 3.0
+   },
+   "source": "SRMC_Engineering_Guidelines (column spacing 5 m, 4.5 m clearance); tilt range limited",
+   "sagRatio": 0.0256,
+   "tube": {
+    "D": 60.3,
+    "t": 3
+   }
+  },
+  "custom": {
+   "label": "Your own values",
+   "bayLen": 12.5,
+   "panelPitch": 2.5,
+   "panelGap": 0.003,
+   "clearanceLowestEdge": 4.5,
+   "maxTiltDeg": 60,
+   "stopsDeg": [
+    15,
+    60
+   ],
+   "rainSlopeDeg": 3,
+   "columnSize": 0.22,
+   "field": {
+    "width": 25,
+    "length": 25
+   },
+   "wires": {
+    "driveDiaMm": 4,
+    "carrierDiaMm": 16,
+    "braceDiaMm": 12
+   },
+   "gutter": {
+    "width": 0.4,
+    "depth": 0.3
+   },
+   "cistern": {
+    "m3": 300,
+    "side": 6,
+    "depth": 3.2
+   },
+   "source": "edit me",
+   "sagRatio": 0.0256,
+   "tube": {
+    "D": 60.3,
+    "t": 3
+   }
+  },
+  "feasible": {
+   "label": "Structurally checked: 5 m rope grid, 114x4 tube, sag L/12, 20 mm stays",
+   "bayLen": 5.0,
+   "panelPitch": 2.5,
+   "panelGap": 0.003,
+   "clearanceLowestEdge": 4.5,
+   "maxTiltDeg": 60,
+   "stopsDeg": [
+    15,
+    60
+   ],
+   "rainSlopeDeg": 3,
+   "columnSize": 0.2,
+   "field": {
+    "width": 25,
+    "length": 25
+   },
+   "wires": {
+    "driveDiaMm": 6,
+    "carrierDiaMm": 16,
+    "braceDiaMm": 20
+   },
+   "gutter": {
+    "width": 0.3,
+    "depth": 0.2
+   },
+   "cistern": {
+    "m3": 100,
+    "side": 4,
+    "depth": 3.0
+   },
+   "source": "passes structural_check.m (IS 875 wind, rope MBL/2, tube bending); guideline 5 m column spacing",
+   "sagRatio": 0.0833,
+   "tube": {
+    "D": 114.3,
+    "t": 4
+   },
+   "drive": {
+    "winchKN": 10,
+    "motorKW": 0.25,
+    "driveWireDiaMm": 6,
+    "note": "raised after the strength check: 3 kN winch is 1.4x overloaded and the 4 mm wire at 0.9 of its limit at 54 km/h wind (panels held, 60 deg); 10 kN winch and 6 mm wire give margin",
+    "leverArm": {
+     "lengthM": 0.44,
+     "offsetDeg": 45,
+     "note": "fixed 45 deg offset keeps a lever (>= 0.31 m) at the 90 deg storm stow"
+    }
+   },
+   "hardware": {
+    "turnbuckle": "M24 SS316, >= 72 kN breaking",
+    "anchor": "screw / rock anchor, or about 1.6 m3 buried concrete each (pull-out 26 kN x 1.5), soil test required",
+    "columnFoundationPad": "0.9 x 0.9 x 0.6 m M20"
+   },
+   "controller": {
+    "type": "five-sensor SRMC-SC",
+    "sensors": [
+     "pyranometer",
+     "PAR (under canopy)",
+     "DHT11 (T, RH)",
+     "soil moisture",
+     "rain",
+     "cup anemometer (wind)"
+    ],
+    "energyWeight": 0.5,
+    "rule": "wind >= 15 m/s -> stow 90 deg (resume below 12); rain -> flat 3 deg; night -> park; else maximise 0.5 PV + 0.5 crop light over 15..60 deg in 0.5 deg steps; PAR corrects the model; VPD/soil stress relax the crop light need"
+   },
+   "sensors": [
+    "pyranometer",
+    "PAR (under canopy)",
+    "DHT11 (T, RH)",
+    "soil moisture",
+    "rain",
+    "cup anemometer (wind)"
+   ]
+  }
+ }
+}

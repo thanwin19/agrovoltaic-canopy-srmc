@@ -1,0 +1,5 @@
+strategy,applied water m3/ha/yr,irrigation events,water-stress days,relative yield from water,percolation loss mm,probe saves vs this %
+Timer every 2 days,5687,331,14.8,0.995,25,5.5
+Timer every 4 days,5641,164,20,0.988,27,4.8
+Timer every 7 days,5655,94,29.3,0.966,35,5
+Soil probe decides (ideal),5372,99,0,1,0,

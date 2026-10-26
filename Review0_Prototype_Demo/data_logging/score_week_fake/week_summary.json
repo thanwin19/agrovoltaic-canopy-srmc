@@ -1,0 +1,87 @@
+{
+ "file": "week_fake.csv",
+ "rows": 2016,
+ "days": 7,
+ "interval_s": 300,
+ "daytime_scored_rows": 935,
+ "soil_calibration": {
+  "dry_raw": 3200,
+  "wet_raw": 1300
+ },
+ "scores": {
+  "controller": {
+   "electricity_pct": 73.7,
+   "crop_pct": 97.4,
+   "J_pct": 99,
+   "angle_rmse_deg": 8.9,
+   "kWh_per_m2_week": 2.65
+  },
+  "logged angle": {
+   "electricity_pct": 73.4,
+   "crop_pct": 96.9,
+   "J_pct": 98.6,
+   "angle_rmse_deg": 9.3,
+   "kWh_per_m2_week": 2.64
+  },
+  "fixed 45 deg": {
+   "electricity_pct": 82,
+   "crop_pct": 79.7,
+   "J_pct": 92.9,
+   "angle_rmse_deg": 13.4,
+   "kWh_per_m2_week": 2.91
+  },
+  "fixed 15 deg": {
+   "electricity_pct": 99.9,
+   "crop_pct": 32.5,
+   "J_pct": 75.9,
+   "angle_rmse_deg": 39.1,
+   "kWh_per_m2_week": 3.52
+  },
+  "monthly plan": {
+   "electricity_pct": 76.6,
+   "crop_pct": 92.3,
+   "J_pct": 97.5,
+   "angle_rmse_deg": 9.8,
+   "kWh_per_m2_week": 2.74
+  }
+ },
+ "kWh_per_m2_week_best_possible": 2.69,
+ "controller_angle_changes": 213,
+ "data_quality": {
+  "complete_pct": 100,
+  "dht11_failures": 24,
+  "dht11_failure_pct": 1.2,
+  "par_guard_triggers": 36,
+  "pyranometer_above_clearsky": 0,
+  "data_gaps": 0,
+  "stuck_soil_events": 1,
+  "rain_rows": 12,
+  "storm_rows_wind_ge_15": 5
+ },
+ "flagged_days": {
+  "2026-10-26": [
+   "DHT11 read failures"
+  ],
+  "2026-10-27": [
+   "DHT11 read failures"
+  ],
+  "2026-10-28": [
+   "DHT11 read failures"
+  ],
+  "2026-10-29": [
+   "DHT11 read failures",
+   "PAR/pyranometer ratio implausible",
+   "PAR sensor implausible"
+  ],
+  "2026-10-30": [
+   "DHT11 read failures"
+  ],
+  "2026-10-31": [
+   "DHT11 read failures",
+   "soil probe stuck for 3 h"
+  ],
+  "2026-11-01": [
+   "DHT11 read failures"
+  ]
+ }
+}

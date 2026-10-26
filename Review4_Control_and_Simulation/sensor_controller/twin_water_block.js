@@ -1,0 +1,23 @@
+/* ---------------- Water link: the soil probe decides when irrigation runs; water saved against a timer ---------------- */
+const WL = { R: null, probe: null, timer: null };
+function irrSims() {
+  if (WL.R !== R) { const so = DATA.soils.find(x => x.id === st.soilId), c = { P: R.P, clim, soil: so, zones: R.zones, tankM3: R.P.tankM3 }; WL.probe = SRMC_IRR.simulate(S, c, { type: 'probe' }); WL.timer = SRMC_IRR.simulate(S, c, { type: 'timer' }); WL.R = R; WL.cp = R.zones.map(z => z.crop.p); }
+  return WL;
+}
+function hudWater(P) {          // live: soil probe per zone, who decides irrigation, water used to date vs a timer, cistern
+  const w = irrSims(), d = st.day, col = v => v < 30 ? '#ff8a5c' : v < 50 ? '#f0c24a' : '#6fe07c', bar = (v, trig) => `<span class="hb"><i style="width:${Math.max(0, Math.min(100, v))}%;background:${col(v)}"></i></span>`;
+  const av = [0, 1, 2, 3].map(z => w.probe.availSeries[z][d]), irr = w.probe.irrSeries[d], tank = w.probe.tankSeries[d], rain = R.wb.rain[d], sum = (a, n) => { let s = 0; for (let i = 0; i <= n; i++) s += a[i]; return s; };
+  const used = sum(w.probe.irrSeries, d), timer = sum(w.timer.irrSeries, d), saved = timer - used, live = typeof SENS !== 'undefined' && SENS.live && Date.now() - SENS.live.t < 5000 ? SENS.live : null;
+  return `Soil probe (plant-available water): ${av.map((v, i) => 'Z' + (i + 1) + ' ' + bar(v) + ' ' + fmt(v, 0) + '%').join(' &nbsp;')}${live ? '<br><span style="color:#9ad0ff">real probe: ' + fmt(live.soil, 0) + ' %</span>' : ''}<br>` +
+    (irr > 0.5 ? `<span class="pulse"></span><b style="color:#4fd1ff">PROBE SAYS DRY: IRRIGATING</b> ${fmt(irr, 0)} m³ today (drip)` : 'Probe says wet enough: irrigation off today') + ` · rain ${fmt(rain, 0)} mm<br>` +
+    `Water used so far: <b>${fmt(used, 0)} m³</b> (probe) vs ${fmt(timer, 0)} m³ (timer) → ${saved >= 0 ? 'saved' : 'used more'} <b style="color:${saved >= 0 ? '#7CFFB2' : '#f0c24a'}">${fmt(Math.abs(saved), 0)} m³</b>${timer > 50 ? ' (' + fmt(100 * saved / timer, 1) + ' %)' : ''}<br>Cistern ${bar(100 * tank / P.tankM3)} ${fmt(tank, 0)} / ${fmt(P.tankM3)} m³<br>`;
+}
+function tabWaterLink() {
+  const el = $('#wl-chart'); if (!el || !R) return; const w = irrSims(), c = cv(el, 250), g = c.g, L = 56, B = 34, Wd = c.w - L - 16, Ht = 250 - B - 16;
+  const cum = a => { let s = 0; return a.map(x => (s += x)); }, A = cum(w.timer.irrSeries), Bp = cum(w.probe.irrSeries), mx = Math.max(A[364], Bp[364], 1) * 1.05;
+  g.font = '11px sans-serif'; g.strokeStyle = GRID; g.fillStyle = TXT; for (let k = 0; k <= 4; k++) { const y = 10 + Ht * (1 - k / 4); g.beginPath(); g.moveTo(L, y); g.lineTo(L + Wd, y); g.stroke(); g.textAlign = 'right'; g.fillText(fmt(mx * k / 4, 0), L - 5, y + 4); }
+  [[A, '#c0392b', 'timer: every 4 days, fixed depth'], [Bp, '#2e9d44', 'soil probe decides']].forEach(([a, col, lab], j) => { g.strokeStyle = col; g.lineWidth = 2.5; g.beginPath(); a.forEach((v, i) => { const x = L + Wd * i / 364, y = 10 + Ht * (1 - v / mx); i ? g.lineTo(x, y) : g.moveTo(x, y); }); g.stroke(); g.fillStyle = col; g.textAlign = 'left'; g.fillText(lab, L + 10 + j * 220, 24); });
+  const x0 = L + Wd * st.day / 364; g.strokeStyle = '#ffd36a'; g.lineWidth = 1.5; g.beginPath(); g.moveTo(x0, 10); g.lineTo(x0, 10 + Ht); g.stroke(); g.fillStyle = TXT; g.textAlign = 'center'; g.fillText('m³ per hectare, day of year (yellow = today)', L + Wd / 2, 250 - 8); g.lineWidth = 1;
+  const T = window.SRMC_IRRSTUDY || []; $('#wl-note').innerHTML = `The soil probe measures plant-available water in each zone. When it reads at or below the trigger (the crop's readily-available-water limit) the drip controller irrigates that zone back to field capacity (maximum 25 mm a day); otherwise it waits, so rain is never wasted. A timer irrigates every 4 days in the crop season whatever the rain and the soil. Over the year the probe applies <b>${fmt(w.probe.appliedM3, 0)} m³</b> against <b>${fmt(w.timer.appliedM3, 0)} m³</b> for the timer: <b>${fmt(w.timer.appliedM3 - w.probe.appliedM3, 0)} m³ saved (${fmt(100 * (w.timer.appliedM3 - w.probe.appliedM3) / w.timer.appliedM3, 1)} %)</b>, with ${fmt(w.probe.stressDays, 0)} water-stress days instead of ${fmt(w.timer.stressDays, 0)}.`;
+  $('#wl-table').innerHTML = '<tr><th>Strategy (per hectare per year)</th><th>water applied m³</th><th>cistern m³</th><th>borewell m³</th><th>events</th><th>stress days</th><th>relative yield</th><th>saved vs timer</th></tr>' + T.map(r => `<tr><td>${r.name}</td><td>${r.applied_m3_ha}</td><td>${r.cistern_m3}</td><td>${r.borewell_m3}</td><td>${r.events}</td><td>${r.stress_days}</td><td>${r.relative_yield_from_water}</td><td>${r.water_saved_vs_timer_pct} %</td></tr>`).join('');
+}

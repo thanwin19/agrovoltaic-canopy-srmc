@@ -1,0 +1,24 @@
+{
+  "v1": {
+    "electricity_pct": 83.482618935396573,
+    "crop_pct": 98.870749363276644,
+    "J_pct": 99.524730745422346,
+    "angle_rmse_deg": 3.4398759394596254
+  },
+  "v2": {
+    "electricity_pct": 83.421664228290481,
+    "crop_pct": 98.939279983985955,
+    "J_pct": 99.544728306817817,
+    "angle_rmse_deg": 3.4020499205584609
+  },
+  "js_v2_in_matlab": {
+    "J_pct": 99.549844835414646,
+    "angle_rmse_deg": 3.3266952683482605
+  },
+  "same_angle_js_vs_matlab_v2": {
+    "identical": 140,
+    "of": 142,
+    "max_diff_deg": 6
+  },
+  "cases": 142
+}

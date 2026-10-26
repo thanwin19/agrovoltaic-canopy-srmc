@@ -1,0 +1,14 @@
+id,test,expected,got,result
+S01,"Scroll bars set to the model values give the same decision as the model","same angle and PV","43.5 vs 43.5 deg; 102.7 vs 102.7 W/m2",PASS
+S02,"Half the pyranometer reading -> about half the electricity (same angle)","PV ratio 0.40 to 0.60","0.54",PASS
+S03,"Dim sky (300 W/m2) vs bright sky (1000 W/m2): the angle changes and electricity rises","different angle, PV bright > PV dim","55.5 vs 39.5 deg; 36 vs 124 W/m2",PASS
+S04,"PAR reading at 50 % of what the pyranometer implies lowers the crop-light score (same angle)","lower than the consistent case","0.29 vs 0.62",PASS
+S05,"Plausibility check: PAR/GHI far from 2.06 umol/J is flagged","consistent = true, 50 % PAR = false","1 / 0",PASS
+S06,"A pyranometer value above the clear-sky limit is flagged","ghiClamped = true","1",PASS
+S07,"Serial line with two extra fields (real pyranometer, PAR) is read; 7-field line leaves them empty","ghi 812, par 1650; NaN","812, 1650; 1",PASS
+M01,"Module model at 1000 W/m2, 25 C gives about 400 W at about 41 V","390-410 W; 39-43 V","400.8 W at 41.1 V",PASS
+M02,"Best voltage moves with temperature (hotter cell -> lower voltage)","Vmpp(65 C) < Vmpp(25 C) by > 3 V","35.6 V vs 41.1 V",PASS
+M03,"P&O tracker settles within 1 % of the true maximum (constant sun)",">= 99 %","99.99 %",PASS
+M04,"Cloud transient (800 -> 400 -> 900 W/m2): tracking efficiency over the run",">= 98 %","99.79 % (fixed voltage 97.36 %)",PASS
+M05,"MPPT beats a fixed voltage in that run","gain > 0 %","+2.49 %",PASS
+X01,"Explanation window builds; decision equals the full 0.5-degree search","gap 0.0 deg","gap 0.0 deg, score gap 0.00 %",PASS

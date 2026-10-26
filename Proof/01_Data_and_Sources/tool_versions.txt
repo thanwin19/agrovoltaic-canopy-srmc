@@ -1,0 +1,5 @@
+date: 2026-10-13T12:53:30
+node: v24.14.0
+python: Python 3.11.8
+blender: Blender 5.2.2 LTS
+matlab: R2025a (Simulink, Statistics and Machine Learning Toolbox)

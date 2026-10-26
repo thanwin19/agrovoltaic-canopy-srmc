@@ -1,0 +1,10 @@
+id,name,drainage 1-5,field capacity m3/m3,wilting point m3/m3,infiltration mm/day,pH min,pH max,organic carbon start %,organic carbon max %,EC dS/m,note
+red_sandy_loam,"Red sandy loam (Alfisol)",4,0.21,0.1,150,5.8,7,0.5,1.5,0.3,"Common around Madurai; drains well, low organic matter"
+black_cotton,"Black cotton / regur (Vertisol)",2,0.45,0.28,25,7.5,8.5,0.6,1.5,0.6,"High water holding, cracks when dry, waterlogs when wet"
+alluvial,"Alluvial",3,0.33,0.16,60,6.5,8,0.7,1.6,0.4,"River plains, fertile, medium drainage"
+laterite,"Laterite",4,0.2,0.11,120,4.8,6.2,0.4,1.3,0.2,"Acidic, iron-rich, leaches nutrients"
+sandy,"Sandy / coastal sand",5,0.12,0.05,400,6,7.8,0.3,1,1.5,"Very low water holding, needs frequent irrigation; mild salinity near sea"
+clay,"Clay",1,0.42,0.27,15,6.5,8,0.8,1.7,0.5,"Waterlogging risk, slow infiltration"
+loam,"Loam (reference)",3,0.31,0.14,80,6,7.5,1.2,2,0.3,"Balanced texture, ideal reference soil"
+saline_alkaline,"Saline / alkaline",2,0.3,0.15,20,8.5,9.5,0.3,1,6,"High salts and pH; needs gypsum and salt-tolerant crops"
+hill_forest,"Hill / forest soil",4,0.38,0.2,100,5,6.5,3,4,0.2,"Mountain soil, acidic, high organic matter, erodible on slopes"

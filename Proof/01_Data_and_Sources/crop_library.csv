@@ -1,0 +1,25 @@
+id,name,group,min light fraction,optimum light fraction,Kc,root depth m,depletion fraction p,yield response Ky,potential yield t/ha,price INR/kg,cost INR/ha,season days,sow month,T min,T max,pH min,pH max
+turmeric,"Turmeric","Shade-tolerant spice",0.25,0.55,1,0.5,0.5,1,25,35,150000,270,6,20,30,5.5,7.5
+ginger,"Ginger","Shade-tolerant spice",0.25,0.5,1,0.4,0.4,1.1,20,60,250000,240,5,19,28,5.5,6.5
+coriander,"Coriander (leaf)","Leafy / herb",0.2,0.5,0.9,0.3,0.4,1,8,35,60000,100,10,17,27,6,7.5
+amaranth,"Amaranth (keerai)","Leafy / herb",0.2,0.5,1,0.3,0.4,1,12,20,40000,60,10,20,32,6,7.5
+coffee,"Coffee (shade-grown)","Plantation",0.3,0.5,0.95,1,0.5,0.9,1,400,200000,365,1,15,28,5,6.5
+tea,"Tea","Plantation",0.3,0.6,1,1,0.5,1,2,200,250000,365,1,15,25,4.5,5.8
+tomato,"Tomato","Vegetable",0.4,0.75,1.05,0.6,0.4,1.05,40,15,250000,130,10,18,28,6,7
+chilli,"Chilli","Vegetable",0.4,0.75,1,0.5,0.3,1.1,15,35,200000,150,9,20,30,6,7.5
+brinjal,"Brinjal","Vegetable",0.4,0.7,1.05,0.6,0.45,1,30,18,180000,150,10,20,30,5.5,6.8
+okra,"Okra","Vegetable",0.5,0.8,1,0.5,0.5,1,12,30,120000,110,6,22,35,6,7.5
+potato,"Potato","Vegetable",0.55,0.85,1.1,0.5,0.35,1.1,20,22,200000,100,10,14,22,5,6.5
+paddy,"Paddy (rice)","Cereal",0.5,0.85,1.2,0.3,0.2,1.1,6,22,80000,130,10,20,35,5.5,7.5
+maize,"Maize","Cereal",0.6,0.9,1.2,0.8,0.55,1.25,6,21,70000,110,6,21,30,5.8,7.5
+wheat,"Wheat","Cereal",0.6,0.9,1.1,0.9,0.55,1.15,4.5,24,65000,120,11,12,25,6,7.8
+barley,"Barley (salt-tolerant)","Cereal",0.55,0.85,1,0.8,0.55,0.9,3.5,22,55000,110,11,12,25,6,8.5
+ragi,"Ragi (finger millet)","Millet",0.55,0.85,0.9,0.5,0.5,0.8,3.2,32,45000,110,7,20,32,5,8
+cumbu,"Cumbu (pearl millet)","Millet",0.55,0.85,0.85,0.8,0.6,0.7,3,25,40000,85,6,25,35,5.5,8
+sorghum,"Sorghum (cholam)","Millet",0.55,0.85,0.9,0.8,0.55,0.9,3.5,28,45000,110,9,24,32,5.5,8
+groundnut,"Groundnut","Oilseed / pulse",0.5,0.8,1,0.5,0.5,0.8,2.5,65,90000,110,6,24,32,5.5,7
+greengram,"Green gram","Oilseed / pulse",0.5,0.8,0.95,0.5,0.5,1,1,80,40000,70,10,25,35,6,7.5
+cowpea,"Cowpea (pulse / cover)","Oilseed / pulse",0.35,0.65,1,0.5,0.45,0.8,1.2,60,35000,70,7,22,35,5.5,7.5
+cotton,"Cotton","Cash crop",0.7,0.9,1.15,1,0.65,0.85,2.2,65,100000,170,8,21,32,6,8.5
+sugarcane,"Sugarcane","Cash crop",0.7,0.9,1.1,1.2,0.65,1.2,90,3.5,160000,330,1,20,32,6,8
+banana,"Banana","Cash crop",0.5,0.75,1.1,0.6,0.35,1.2,40,14,300000,330,1,20,32,5.5,7.5

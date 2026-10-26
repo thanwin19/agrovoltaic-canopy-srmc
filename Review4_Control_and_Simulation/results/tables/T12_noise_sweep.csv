@@ -1,0 +1,5 @@
+noise x base,v1 combined %,v2 combined %,v1 angle RMSE,v2 angle RMSE
+0.5,99.6,99.7,5,5.2
+1,99.4,99.6,5.5,4.8
+2,98.8,99.4,6.5,5.4
+3,98.5,99.1,7.5,6

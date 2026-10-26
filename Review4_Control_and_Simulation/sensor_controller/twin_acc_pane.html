@@ -1,0 +1,16 @@
+  <section class="pane" id="pane-acc" style="display:none">
+    <div class="card"><h4>How accurate is the six-sensor controller? (goal: best electricity AND best crop light)</h4>
+      <div id="acc-head" class="kpis" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px"></div>
+      <div class="note">100 % = a controller with perfect knowledge of the sun, weather and crop (same 50 % electricity + 50 % crop light score). Test: 12 representative days x 3 skies x 2 soils x 14 daylight hours = 864 cases with noisy sensors (pyranometer 5 %, PAR 5 %, DHT11 ±2 °C / ±5 % RH, soil ±3 %). The score is the controller's own objective; yield and rupees are in the table below.</div></div>
+    <div class="grid2"><div class="card"><h4>Combined score, % of the best</h4><canvas id="acc-bars"></canvas></div><div class="card"><h4>Electricity, % of the best</h4><canvas id="acc-bars2"></canvas></div></div>
+    <div class="grid2"><div class="card"><h4>Crop light value, % of the best</h4><canvas id="acc-bars3"></canvas></div><div class="card"><h4>Accuracy when the sensors get noisier</h4><canvas id="acc-noise"></canvas><div class="note">v2 filters each channel with the median of 5 readings and ignores an implausible PAR sensor.</div></div></div>
+    <div class="grid2"><div class="card"><h4>Faulty PAR sensor</h4><table id="acc-faults"></table></div><div class="card"><h4>Same test in MATLAB</h4><div id="acc-matlab" class="note"></div></div></div>
+    <div class="card"><h4>Yield and rupees (each strategy's hourly angles through the engine's crop, water and economics model, per hectare per year)</h4><table id="acc-money"></table><div class="note">Money uses assumed prices (INR 3/kWh, farmer share 30 %). The hourly score is not the money objective, so a PV-only panel still earns more rupees.</div></div>
+    <div class="card"><h4>Live accuracy test at the current hour</h4>
+      <label>Sensor noise <b id="v-acc-noise-in">x1</b></label><input type="range" id="acc-noise-in" min="0" max="3" step="0.5" value="1">
+      <label>Controller version</label><select id="acc-ver"><option value="v2">v2: median of 5 readings + fault guard</option><option value="v1">v1: one reading, no guard</option></select>
+      <label>PAR sensor fault</label><select id="acc-fault-in"><option value="none">none</option><option value="dirty">dirty or shaded (reads 35 %)</option><option value="refl">reflection (reads 190 %)</option><option value="dead">dead (reads 0)</option></select>
+      <button class="b" id="acc-run">Run 40 noisy decisions now</button>
+      <div id="acc-live-out" class="note" style="font-size:14px;line-height:1.7"></div></div>
+  </section>
+

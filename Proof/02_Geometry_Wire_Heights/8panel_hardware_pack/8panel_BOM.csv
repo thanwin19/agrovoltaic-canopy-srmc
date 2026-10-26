@@ -1,0 +1,20 @@
+﻿Item,Qty,Unit,kg per unit,Total kg,Note,Source
+"Monocrystalline module 550 Wp, 2278 x 1134 x 35 mm",8,nos,27.5,220.0,"2 rows x 4, landscape across the tube",cited listings 26.9 to 27.5 kg
+"Module rails, clamps, fasteners",8,set,3.0,24.0,assumed,assumption
+"Pivot tube S355 CHS 114.3 x 4.0, galvanised",2,nos (4.70 m),53.65,107.3,10.9 kg/m + 5 % zinc,calculated
+"Bearing block, self-aligning, IP65, 50 mm",4,nos,2.5,10.0,"tube rotates in these, hung from the carrier ropes",catalogue typical
+"Column RHS 200 x 200 x 6, 6.64 m",4,nos,266.686,1066.7,36.5 kg/m + zinc + base plate,calculated
+Carrier rope SS316 16 mm 7x19,12.6,m,0.975,12.3,"2 lines, 5 m span, sag L/12",supplier 0.975 kg/m
+Longitudinal rope SS316 16 mm 7x19,12.6,m,0.975,12.3,ties column tops N-S,supplier 0.975 kg/m
+Stay rope SS316 20 mm,40.1,m,1.524,61.1,"one per column, 9.22 m slope",derived 0.00381 d^2
+Turnbuckle M24 SS316 (>= 72 kN breaking),4,nos,1.8,7.2,stay pre-tension (M16 would be too weak),assumption
+Drive wire SS316 6 mm 7x19,12,m,0.137,1.6,loop through both lever-arm tips,derived 0.00381 d^2
+"Lever arm SS316, 0.44 m, fixed 45 deg offset from the panel normal",2,nos,1.5,3.0,one per tube; the offset keeps a lever at the 90 deg stow,assumption
+Guide pulley SS316 80 mm,2,nos,0.8,1.6,column ends,assumption
+"Thimbles, swaged terminals, clamps",1,set,4.0,4.0,,assumption
+"Gearmotor winch 10 kN, IP66, worm gear about 0.25 kW, encoder 0.5 deg",1,nos,25.0,25.0,one motor tilts both rows,catalogue typical
+"Controller + 5 sensors (pyranometer, PAR, DHT11, soil, rain) + cable",1,set,4.0,4.0,ESP32,assumption
+Cup anemometer on a 3 m mast (wind sensor),1,nos,2.0,2.0,"storm stow at 15 m/s (54 km/h), resume below 12 m/s",assumption (catalogue)
+Inverter 5 kW + protection,1,set,18.0,18.0,,assumption
+Column pad 0.9 x 0.9 x 0.6 m M20,4,nos,1166.4,4665.6,"depth assumed, soil test needed",assumption
+"Ground anchor, buried concrete 1.63 m3 each (or a screw/rock anchor rated 38 kN)",4,nos,3911.235,15644.9,sized for 26 kN stay uplift x 1.5,calculated

@@ -1,0 +1,722 @@
+[
+ {
+  "id": "turmeric",
+  "name": "Turmeric",
+  "group": "Shade-tolerant spice",
+  "lmin": 0.25,
+  "lopt": 0.55,
+  "kc": 1.0,
+  "zr": 0.5,
+  "p": 0.5,
+  "ky": 1.0,
+  "ym": 25,
+  "price": 35,
+  "cost": 150000,
+  "days": 270,
+  "sow": 6,
+  "t": [
+   20,
+   30
+  ],
+  "ph": [
+   5.5,
+   7.5
+  ],
+  "drain": [
+   3,
+   5
+  ],
+  "ec": 1.5,
+  "h": 0.9
+ },
+ {
+  "id": "ginger",
+  "name": "Ginger",
+  "group": "Shade-tolerant spice",
+  "lmin": 0.25,
+  "lopt": 0.5,
+  "kc": 1.0,
+  "zr": 0.4,
+  "p": 0.4,
+  "ky": 1.1,
+  "ym": 20,
+  "price": 60,
+  "cost": 250000,
+  "days": 240,
+  "sow": 5,
+  "t": [
+   19,
+   28
+  ],
+  "ph": [
+   5.5,
+   6.5
+  ],
+  "drain": [
+   3,
+   5
+  ],
+  "ec": 1.5,
+  "h": 0.7
+ },
+ {
+  "id": "coriander",
+  "name": "Coriander (leaf)",
+  "group": "Leafy / herb",
+  "lmin": 0.2,
+  "lopt": 0.5,
+  "kc": 0.9,
+  "zr": 0.3,
+  "p": 0.4,
+  "ky": 1.0,
+  "ym": 8,
+  "price": 35,
+  "cost": 60000,
+  "days": 100,
+  "sow": 10,
+  "t": [
+   17,
+   27
+  ],
+  "ph": [
+   6.0,
+   7.5
+  ],
+  "drain": [
+   3,
+   5
+  ],
+  "ec": 1.5,
+  "h": 0.35
+ },
+ {
+  "id": "amaranth",
+  "name": "Amaranth (keerai)",
+  "group": "Leafy / herb",
+  "lmin": 0.2,
+  "lopt": 0.5,
+  "kc": 1.0,
+  "zr": 0.3,
+  "p": 0.4,
+  "ky": 1.0,
+  "ym": 12,
+  "price": 20,
+  "cost": 40000,
+  "days": 60,
+  "sow": 10,
+  "t": [
+   20,
+   32
+  ],
+  "ph": [
+   6.0,
+   7.5
+  ],
+  "drain": [
+   3,
+   5
+  ],
+  "ec": 2.0,
+  "h": 0.5
+ },
+ {
+  "id": "coffee",
+  "name": "Coffee (shade-grown)",
+  "group": "Plantation",
+  "lmin": 0.3,
+  "lopt": 0.5,
+  "kc": 0.95,
+  "zr": 1.0,
+  "p": 0.5,
+  "ky": 0.9,
+  "ym": 1.0,
+  "price": 400,
+  "cost": 200000,
+  "days": 365,
+  "sow": 1,
+  "t": [
+   15,
+   28
+  ],
+  "ph": [
+   5.0,
+   6.5
+  ],
+  "drain": [
+   3,
+   5
+  ],
+  "ec": 1.2,
+  "h": 1.8
+ },
+ {
+  "id": "tea",
+  "name": "Tea",
+  "group": "Plantation",
+  "lmin": 0.3,
+  "lopt": 0.6,
+  "kc": 1.0,
+  "zr": 1.0,
+  "p": 0.5,
+  "ky": 1.0,
+  "ym": 2.0,
+  "price": 200,
+  "cost": 250000,
+  "days": 365,
+  "sow": 1,
+  "t": [
+   15,
+   25
+  ],
+  "ph": [
+   4.5,
+   5.8
+  ],
+  "drain": [
+   3,
+   5
+  ],
+  "ec": 1.0,
+  "h": 1.0
+ },
+ {
+  "id": "tomato",
+  "name": "Tomato",
+  "group": "Vegetable",
+  "lmin": 0.4,
+  "lopt": 0.75,
+  "kc": 1.05,
+  "zr": 0.6,
+  "p": 0.4,
+  "ky": 1.05,
+  "ym": 40,
+  "price": 15,
+  "cost": 250000,
+  "days": 130,
+  "sow": 10,
+  "t": [
+   18,
+   28
+  ],
+  "ph": [
+   6.0,
+   7.0
+  ],
+  "drain": [
+   3,
+   5
+  ],
+  "ec": 2.5,
+  "h": 1.1
+ },
+ {
+  "id": "chilli",
+  "name": "Chilli",
+  "group": "Vegetable",
+  "lmin": 0.4,
+  "lopt": 0.75,
+  "kc": 1.0,
+  "zr": 0.5,
+  "p": 0.3,
+  "ky": 1.1,
+  "ym": 15,
+  "price": 35,
+  "cost": 200000,
+  "days": 150,
+  "sow": 9,
+  "t": [
+   20,
+   30
+  ],
+  "ph": [
+   6.0,
+   7.5
+  ],
+  "drain": [
+   3,
+   5
+  ],
+  "ec": 1.5,
+  "h": 0.7
+ },
+ {
+  "id": "brinjal",
+  "name": "Brinjal",
+  "group": "Vegetable",
+  "lmin": 0.4,
+  "lopt": 0.7,
+  "kc": 1.05,
+  "zr": 0.6,
+  "p": 0.45,
+  "ky": 1.0,
+  "ym": 30,
+  "price": 18,
+  "cost": 180000,
+  "days": 150,
+  "sow": 10,
+  "t": [
+   20,
+   30
+  ],
+  "ph": [
+   5.5,
+   6.8
+  ],
+  "drain": [
+   3,
+   5
+  ],
+  "ec": 1.5,
+  "h": 0.9
+ },
+ {
+  "id": "okra",
+  "name": "Okra",
+  "group": "Vegetable",
+  "lmin": 0.5,
+  "lopt": 0.8,
+  "kc": 1.0,
+  "zr": 0.5,
+  "p": 0.5,
+  "ky": 1.0,
+  "ym": 12,
+  "price": 30,
+  "cost": 120000,
+  "days": 110,
+  "sow": 6,
+  "t": [
+   22,
+   35
+  ],
+  "ph": [
+   6.0,
+   7.5
+  ],
+  "drain": [
+   3,
+   5
+  ],
+  "ec": 1.2,
+  "h": 1.2
+ },
+ {
+  "id": "potato",
+  "name": "Potato",
+  "group": "Vegetable",
+  "lmin": 0.55,
+  "lopt": 0.85,
+  "kc": 1.1,
+  "zr": 0.5,
+  "p": 0.35,
+  "ky": 1.1,
+  "ym": 20,
+  "price": 22,
+  "cost": 200000,
+  "days": 100,
+  "sow": 10,
+  "t": [
+   14,
+   22
+  ],
+  "ph": [
+   5.0,
+   6.5
+  ],
+  "drain": [
+   3,
+   5
+  ],
+  "ec": 1.7,
+  "h": 0.5
+ },
+ {
+  "id": "paddy",
+  "name": "Paddy (rice)",
+  "group": "Cereal",
+  "lmin": 0.5,
+  "lopt": 0.85,
+  "kc": 1.2,
+  "zr": 0.3,
+  "p": 0.2,
+  "ky": 1.1,
+  "ym": 6,
+  "price": 22,
+  "cost": 80000,
+  "days": 130,
+  "sow": 10,
+  "t": [
+   20,
+   35
+  ],
+  "ph": [
+   5.5,
+   7.5
+  ],
+  "drain": [
+   1,
+   3
+  ],
+  "ec": 3.0,
+  "h": 0.9
+ },
+ {
+  "id": "maize",
+  "name": "Maize",
+  "group": "Cereal",
+  "lmin": 0.6,
+  "lopt": 0.9,
+  "kc": 1.2,
+  "zr": 0.8,
+  "p": 0.55,
+  "ky": 1.25,
+  "ym": 6,
+  "price": 21,
+  "cost": 70000,
+  "days": 110,
+  "sow": 6,
+  "t": [
+   21,
+   30
+  ],
+  "ph": [
+   5.8,
+   7.5
+  ],
+  "drain": [
+   3,
+   5
+  ],
+  "ec": 1.7,
+  "h": 2
+ },
+ {
+  "id": "wheat",
+  "name": "Wheat",
+  "group": "Cereal",
+  "lmin": 0.6,
+  "lopt": 0.9,
+  "kc": 1.1,
+  "zr": 0.9,
+  "p": 0.55,
+  "ky": 1.15,
+  "ym": 4.5,
+  "price": 24,
+  "cost": 65000,
+  "days": 120,
+  "sow": 11,
+  "t": [
+   12,
+   25
+  ],
+  "ph": [
+   6.0,
+   7.8
+  ],
+  "drain": [
+   3,
+   5
+  ],
+  "ec": 6.0,
+  "h": 0.9
+ },
+ {
+  "id": "barley",
+  "name": "Barley (salt-tolerant)",
+  "group": "Cereal",
+  "lmin": 0.55,
+  "lopt": 0.85,
+  "kc": 1.0,
+  "zr": 0.8,
+  "p": 0.55,
+  "ky": 0.9,
+  "ym": 3.5,
+  "price": 22,
+  "cost": 55000,
+  "days": 110,
+  "sow": 11,
+  "t": [
+   12,
+   25
+  ],
+  "ph": [
+   6.0,
+   8.5
+  ],
+  "drain": [
+   3,
+   5
+  ],
+  "ec": 8.0,
+  "h": 0.8
+ },
+ {
+  "id": "ragi",
+  "name": "Ragi (finger millet)",
+  "group": "Millet",
+  "lmin": 0.55,
+  "lopt": 0.85,
+  "kc": 0.9,
+  "zr": 0.5,
+  "p": 0.5,
+  "ky": 0.8,
+  "ym": 3.2,
+  "price": 32,
+  "cost": 45000,
+  "days": 110,
+  "sow": 7,
+  "t": [
+   20,
+   32
+  ],
+  "ph": [
+   5.0,
+   8.0
+  ],
+  "drain": [
+   3,
+   5
+  ],
+  "ec": 3.0,
+  "h": 0.9
+ },
+ {
+  "id": "cumbu",
+  "name": "Cumbu (pearl millet)",
+  "group": "Millet",
+  "lmin": 0.55,
+  "lopt": 0.85,
+  "kc": 0.85,
+  "zr": 0.8,
+  "p": 0.6,
+  "ky": 0.7,
+  "ym": 3.0,
+  "price": 25,
+  "cost": 40000,
+  "days": 85,
+  "sow": 6,
+  "t": [
+   25,
+   35
+  ],
+  "ph": [
+   5.5,
+   8.0
+  ],
+  "drain": [
+   3,
+   5
+  ],
+  "ec": 4.0,
+  "h": 1.6
+ },
+ {
+  "id": "sorghum",
+  "name": "Sorghum (cholam)",
+  "group": "Millet",
+  "lmin": 0.55,
+  "lopt": 0.85,
+  "kc": 0.9,
+  "zr": 0.8,
+  "p": 0.55,
+  "ky": 0.9,
+  "ym": 3.5,
+  "price": 28,
+  "cost": 45000,
+  "days": 110,
+  "sow": 9,
+  "t": [
+   24,
+   32
+  ],
+  "ph": [
+   5.5,
+   8.0
+  ],
+  "drain": [
+   2,
+   5
+  ],
+  "ec": 4.0,
+  "h": 1.8
+ },
+ {
+  "id": "groundnut",
+  "name": "Groundnut",
+  "group": "Oilseed / pulse",
+  "lmin": 0.5,
+  "lopt": 0.8,
+  "kc": 1.0,
+  "zr": 0.5,
+  "p": 0.5,
+  "ky": 0.8,
+  "ym": 2.5,
+  "price": 65,
+  "cost": 90000,
+  "days": 110,
+  "sow": 6,
+  "t": [
+   24,
+   32
+  ],
+  "ph": [
+   5.5,
+   7.0
+  ],
+  "drain": [
+   4,
+   5
+  ],
+  "ec": 3.0,
+  "h": 0.4
+ },
+ {
+  "id": "greengram",
+  "name": "Green gram",
+  "group": "Oilseed / pulse",
+  "lmin": 0.5,
+  "lopt": 0.8,
+  "kc": 0.95,
+  "zr": 0.5,
+  "p": 0.5,
+  "ky": 1.0,
+  "ym": 1.0,
+  "price": 80,
+  "cost": 40000,
+  "days": 70,
+  "sow": 10,
+  "t": [
+   25,
+   35
+  ],
+  "ph": [
+   6.0,
+   7.5
+  ],
+  "drain": [
+   3,
+   5
+  ],
+  "ec": 2.0,
+  "h": 0.5
+ },
+ {
+  "id": "cowpea",
+  "name": "Cowpea (pulse / cover)",
+  "group": "Oilseed / pulse",
+  "lmin": 0.35,
+  "lopt": 0.65,
+  "kc": 1.0,
+  "zr": 0.5,
+  "p": 0.45,
+  "ky": 0.8,
+  "ym": 1.2,
+  "price": 60,
+  "cost": 35000,
+  "days": 70,
+  "sow": 7,
+  "t": [
+   22,
+   35
+  ],
+  "ph": [
+   5.5,
+   7.5
+  ],
+  "drain": [
+   3,
+   5
+  ],
+  "ec": 2.5,
+  "h": 0.5
+ },
+ {
+  "id": "cotton",
+  "name": "Cotton",
+  "group": "Cash crop",
+  "lmin": 0.7,
+  "lopt": 0.9,
+  "kc": 1.15,
+  "zr": 1.0,
+  "p": 0.65,
+  "ky": 0.85,
+  "ym": 2.2,
+  "price": 65,
+  "cost": 100000,
+  "days": 170,
+  "sow": 8,
+  "t": [
+   21,
+   32
+  ],
+  "ph": [
+   6.0,
+   8.5
+  ],
+  "drain": [
+   2,
+   4
+  ],
+  "ec": 7.0,
+  "h": 1.1
+ },
+ {
+  "id": "sugarcane",
+  "name": "Sugarcane",
+  "group": "Cash crop",
+  "lmin": 0.7,
+  "lopt": 0.9,
+  "kc": 1.1,
+  "zr": 1.2,
+  "p": 0.65,
+  "ky": 1.2,
+  "ym": 90,
+  "price": 3.5,
+  "cost": 160000,
+  "days": 330,
+  "sow": 1,
+  "t": [
+   20,
+   32
+  ],
+  "ph": [
+   6.0,
+   8.0
+  ],
+  "drain": [
+   2,
+   4
+  ],
+  "ec": 1.7,
+  "h": 2.5
+ },
+ {
+  "id": "banana",
+  "name": "Banana",
+  "group": "Cash crop",
+  "lmin": 0.5,
+  "lopt": 0.75,
+  "kc": 1.1,
+  "zr": 0.6,
+  "p": 0.35,
+  "ky": 1.2,
+  "ym": 40,
+  "price": 14,
+  "cost": 300000,
+  "days": 330,
+  "sow": 1,
+  "t": [
+   20,
+   32
+  ],
+  "ph": [
+   5.5,
+   7.5
+  ],
+  "drain": [
+   3,
+   5
+  ],
+  "ec": 1.0,
+  "h": 3
+ }
+]

@@ -1,0 +1,8 @@
+﻿test,reference,reference_value,measured_value,unit,criterion,pass(Y/N),notes
+DHT11 temperature,room thermometer,,,C,within 2 C,,
+DHT11 humidity,reference hygrometer,,,% RH,within 5 % RH,,
+"Soil raw, probe in air (dry)",,,,ADC counts,high value,,
+"Soil raw, probe in water (wet)",,,,ADC counts,clearly lower than dry,,
+Rain detection time,drop on plate,,,s,<= 2 s,,
+Rain clear time,wipe plate,,,s,<= 30 s,,
+End to end: wet plate -> 3 degree mode in MATLAB,,,,s,<= 5 s,,

@@ -1,0 +1,113 @@
+{
+ "site": "TCE Ground, Madurai (plains, semi-arid tropical)",
+ "soil": "Red sandy loam (Alfisol)",
+ "crops": [
+  "Ginger",
+  "Turmeric",
+  "Coriander (leaf)",
+  "Amaranth (keerai)"
+ ],
+ "engine_reference": {
+  "supplied_m3": 4625,
+  "borewell_m3": 302,
+  "demand_m3": 4927
+ },
+ "rows": [
+  {
+   "name": "Timer (every 4 days, fixed depth)",
+   "applied_m3_ha": 5641,
+   "cistern_m3": 4357,
+   "borewell_m3": 1284,
+   "events": 164,
+   "stress_days": 20,
+   "relative_yield_from_water": 0.988,
+   "percolation_loss_mm": 27,
+   "water_saved_vs_timer_m3": 0,
+   "water_saved_vs_timer_pct": 0
+  },
+  {
+   "name": "Soil probe decides (ideal probe)",
+   "applied_m3_ha": 5372,
+   "cistern_m3": 3866,
+   "borewell_m3": 1507,
+   "events": 99,
+   "stress_days": 0,
+   "relative_yield_from_water": 1,
+   "percolation_loss_mm": 0,
+   "water_saved_vs_timer_m3": 268,
+   "water_saved_vs_timer_pct": 4.8
+  },
+  {
+   "name": "Soil probe, noisy (+-3 points)",
+   "applied_m3_ha": 5390,
+   "cistern_m3": 4102,
+   "borewell_m3": 1288,
+   "events": 98,
+   "stress_days": 4,
+   "relative_yield_from_water": 0.999,
+   "percolation_loss_mm": 1,
+   "water_saved_vs_timer_m3": 251,
+   "water_saved_vs_timer_pct": 4.4
+  },
+  {
+   "name": "Probe stuck DRY, no fallback",
+   "applied_m3_ha": 46528,
+   "cistern_m3": 5311,
+   "borewell_m3": 41217,
+   "events": 670,
+   "stress_days": 0,
+   "relative_yield_from_water": 1,
+   "percolation_loss_mm": 3690,
+   "water_saved_vs_timer_m3": -40887,
+   "water_saved_vs_timer_pct": -724.9
+  },
+  {
+   "name": "Probe stuck DRY, with fallback",
+   "applied_m3_ha": 5995,
+   "cistern_m3": 4357,
+   "borewell_m3": 1638,
+   "events": 168,
+   "stress_days": 20,
+   "relative_yield_from_water": 0.988,
+   "percolation_loss_mm": 59,
+   "water_saved_vs_timer_m3": -354,
+   "water_saved_vs_timer_pct": -6.3
+  },
+  {
+   "name": "Probe stuck WET, no fallback",
+   "applied_m3_ha": 0,
+   "cistern_m3": 0,
+   "borewell_m3": 0,
+   "events": 0,
+   "stress_days": 157.5,
+   "relative_yield_from_water": 0.155,
+   "percolation_loss_mm": 0,
+   "water_saved_vs_timer_m3": 5641,
+   "water_saved_vs_timer_pct": 100
+  },
+  {
+   "name": "Probe stuck WET, with fallback",
+   "applied_m3_ha": 5578,
+   "cistern_m3": 4357,
+   "borewell_m3": 1221,
+   "events": 162,
+   "stress_days": 20,
+   "relative_yield_from_water": 0.988,
+   "percolation_loss_mm": 23,
+   "water_saved_vs_timer_m3": 63,
+   "water_saved_vs_timer_pct": 1.1
+  },
+  {
+   "name": "Probe dead (no reading), with fallback",
+   "applied_m3_ha": 5641,
+   "cistern_m3": 4357,
+   "borewell_m3": 1284,
+   "events": 164,
+   "stress_days": 20,
+   "relative_yield_from_water": 0.988,
+   "percolation_loss_mm": 27,
+   "water_saved_vs_timer_m3": 0,
+   "water_saved_vs_timer_pct": 0
+  }
+ ]
+}

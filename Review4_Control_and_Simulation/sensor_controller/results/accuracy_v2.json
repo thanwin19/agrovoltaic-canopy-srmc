@@ -1,0 +1,303 @@
+{
+ "weights": {
+  "energy": 0.5,
+  "crop": 0.5
+ },
+ "readings_per_decision_v2": 5,
+ "main": [
+  {
+   "strategy": "SC v2 ideal sensors",
+   "pv_pct": 81.9,
+   "crop_pct": 98.1,
+   "J_pct": 99.7,
+   "angle_rmse_deg": 5.2
+  },
+  {
+   "strategy": "SC v2 noisy (median of 5 + guard)",
+   "pv_pct": 82.1,
+   "crop_pct": 97.7,
+   "J_pct": 99.6,
+   "angle_rmse_deg": 4.8
+  },
+  {
+   "strategy": "SC v1 noisy (1 reading)",
+   "pv_pct": 81.8,
+   "crop_pct": 97.5,
+   "J_pct": 99.4,
+   "angle_rmse_deg": 5.5
+  },
+  {
+   "strategy": "Monthly schedule (SRMC-DT)",
+   "pv_pct": 82.2,
+   "crop_pct": 96.3,
+   "J_pct": 98.8,
+   "angle_rmse_deg": 9.5
+  },
+  {
+   "strategy": "Fixed 45 deg",
+   "pv_pct": 81,
+   "crop_pct": 84.6,
+   "J_pct": 91.2,
+   "angle_rmse_deg": 16.3
+  },
+  {
+   "strategy": "Fixed 15 deg (PV-max)",
+   "pv_pct": 99.2,
+   "crop_pct": 45.2,
+   "J_pct": 80,
+   "angle_rmse_deg": 34
+  },
+  {
+   "strategy": "Sun tracking (E-W)",
+   "pv_pct": 88.6,
+   "crop_pct": 64.3,
+   "J_pct": 84,
+   "angle_rmse_deg": 25
+  }
+ ],
+ "noise": [
+  {
+   "noise_x": 0.5,
+   "v1": {
+    "strategy": "v1 noise x0.5",
+    "pv_pct": 82,
+    "crop_pct": 97.8,
+    "J_pct": 99.6,
+    "angle_rmse_deg": 5
+   },
+   "v2": {
+    "strategy": "v2 noise x0.5",
+    "pv_pct": 81.8,
+    "crop_pct": 98.1,
+    "J_pct": 99.7,
+    "angle_rmse_deg": 5.2
+   }
+  },
+  {
+   "noise_x": 1,
+   "v1": {
+    "strategy": "SC v1 noisy (1 reading)",
+    "pv_pct": 81.8,
+    "crop_pct": 97.5,
+    "J_pct": 99.4,
+    "angle_rmse_deg": 5.5
+   },
+   "v2": {
+    "strategy": "SC v2 noisy (median of 5 + guard)",
+    "pv_pct": 82.1,
+    "crop_pct": 97.7,
+    "J_pct": 99.6,
+    "angle_rmse_deg": 4.8
+   }
+  },
+  {
+   "noise_x": 2,
+   "v1": {
+    "strategy": "v1 noise x2",
+    "pv_pct": 81.7,
+    "crop_pct": 96.7,
+    "J_pct": 98.8,
+    "angle_rmse_deg": 6.5
+   },
+   "v2": {
+    "strategy": "v2 noise x2",
+    "pv_pct": 81.9,
+    "crop_pct": 97.5,
+    "J_pct": 99.4,
+    "angle_rmse_deg": 5.4
+   }
+  },
+  {
+   "noise_x": 3,
+   "v1": {
+    "strategy": "v1 noise x3",
+    "pv_pct": 82.2,
+    "crop_pct": 95.6,
+    "J_pct": 98.5,
+    "angle_rmse_deg": 7.5
+   },
+   "v2": {
+    "strategy": "v2 noise x3",
+    "pv_pct": 81.9,
+    "crop_pct": 97,
+    "J_pct": 99.1,
+    "angle_rmse_deg": 6
+   }
+  }
+ ],
+ "faults": [
+  {
+   "fault": "PAR dirty (x0.35)",
+   "v1": {
+    "strategy": "v1 fault: PAR dirty (x0.35)",
+    "pv_pct": 79.1,
+    "crop_pct": 98.9,
+    "J_pct": 98.6,
+    "angle_rmse_deg": 6.3
+   },
+   "v2": {
+    "strategy": "v2 fault: PAR dirty (x0.35)",
+    "pv_pct": 81.8,
+    "crop_pct": 98,
+    "J_pct": 99.6,
+    "angle_rmse_deg": 5.2
+   }
+  },
+  {
+   "fault": "PAR reflection (x1.9)",
+   "v1": {
+    "strategy": "v1 fault: PAR reflection (x1.9)",
+    "pv_pct": 84.5,
+    "crop_pct": 91.3,
+    "J_pct": 97.4,
+    "angle_rmse_deg": 6.9
+   },
+   "v2": {
+    "strategy": "v2 fault: PAR reflection (x1.9)",
+    "pv_pct": 81.8,
+    "crop_pct": 97.9,
+    "J_pct": 99.6,
+    "angle_rmse_deg": 5.2
+   }
+  },
+  {
+   "fault": "PAR dead (0)",
+   "v1": {
+    "strategy": "v1 fault: PAR dead (0)",
+    "pv_pct": 79.5,
+    "crop_pct": 98.8,
+    "J_pct": 98.7,
+    "angle_rmse_deg": 6.4
+   },
+   "v2": {
+    "strategy": "v2 fault: PAR dead (0)",
+    "pv_pct": 81.8,
+    "crop_pct": 98,
+    "J_pct": 99.6,
+    "angle_rmse_deg": 5.3
+   }
+  }
+ ],
+ "money": [
+  {
+   "strategy": "Oracle (perfect knowledge)",
+   "pv_kWh_m2": 242,
+   "crop_light_pct": 32.5,
+   "crop_net_lakh": 2.26,
+   "solar_net_lakh": 53.64,
+   "farmer_inr_month": 200174,
+   "total_lakh": 55.9,
+   "total_pct_of_oracle": 100,
+   "pv_pct_of_oracle": 100,
+   "crop_pct_of_oracle": 100
+  },
+  {
+   "strategy": "SC v2 ideal sensors",
+   "pv_kWh_m2": 241.4,
+   "crop_light_pct": 32.5,
+   "crop_net_lakh": 2.2,
+   "solar_net_lakh": 53.44,
+   "farmer_inr_month": 199139,
+   "total_lakh": 55.64,
+   "total_pct_of_oracle": 99.5,
+   "pv_pct_of_oracle": 99.8,
+   "crop_pct_of_oracle": 97.3
+  },
+  {
+   "strategy": "SC v1 noisy (1 reading)",
+   "pv_kWh_m2": 241.1,
+   "crop_light_pct": 32.5,
+   "crop_net_lakh": 2.16,
+   "solar_net_lakh": 53.37,
+   "farmer_inr_month": 198606,
+   "total_lakh": 55.53,
+   "total_pct_of_oracle": 99.3,
+   "pv_pct_of_oracle": 99.6,
+   "crop_pct_of_oracle": 95.6
+  },
+  {
+   "strategy": "SC v2 noisy (median of 5 + guard)",
+   "pv_kWh_m2": 241.6,
+   "crop_light_pct": 32.4,
+   "crop_net_lakh": 2.22,
+   "solar_net_lakh": 53.52,
+   "farmer_inr_month": 199491,
+   "total_lakh": 55.74,
+   "total_pct_of_oracle": 99.7,
+   "pv_pct_of_oracle": 99.8,
+   "crop_pct_of_oracle": 98.2
+  },
+  {
+   "strategy": "SC v2 stress relax 0 (full crop light)",
+   "pv_kWh_m2": 237.3,
+   "crop_light_pct": 33.7,
+   "crop_net_lakh": 2.49,
+   "solar_net_lakh": 52.22,
+   "farmer_inr_month": 198477,
+   "total_lakh": 54.71,
+   "total_pct_of_oracle": 97.9,
+   "pv_pct_of_oracle": 98.1,
+   "crop_pct_of_oracle": 110.2
+  },
+  {
+   "strategy": "SC v2 stress relax 0.15",
+   "pv_kWh_m2": 238.5,
+   "crop_light_pct": 33.3,
+   "crop_net_lakh": 2.37,
+   "solar_net_lakh": 52.59,
+   "farmer_inr_month": 198436,
+   "total_lakh": 54.96,
+   "total_pct_of_oracle": 98.3,
+   "pv_pct_of_oracle": 98.6,
+   "crop_pct_of_oracle": 104.9
+  },
+  {
+   "strategy": "Monthly schedule (SRMC-DT)",
+   "pv_kWh_m2": 238.1,
+   "crop_light_pct": 33.7,
+   "crop_net_lakh": 2.53,
+   "solar_net_lakh": 52.47,
+   "farmer_inr_month": 199449,
+   "total_lakh": 55,
+   "total_pct_of_oracle": 98.4,
+   "pv_pct_of_oracle": 98.4,
+   "crop_pct_of_oracle": 111.9
+  },
+  {
+   "strategy": "Fixed 45 deg",
+   "pv_kWh_m2": 232.6,
+   "crop_light_pct": 32.5,
+   "crop_net_lakh": 1.63,
+   "solar_net_lakh": 50.83,
+   "farmer_inr_month": 187879,
+   "total_lakh": 52.46,
+   "total_pct_of_oracle": 93.8,
+   "pv_pct_of_oracle": 96.1,
+   "crop_pct_of_oracle": 72.1
+  },
+  {
+   "strategy": "Fixed 15 deg (PV-max)",
+   "pv_kWh_m2": 290.7,
+   "crop_light_pct": 13.7,
+   "crop_net_lakh": -0.19,
+   "solar_net_lakh": 68.23,
+   "farmer_inr_month": 216171,
+   "total_lakh": 68.04,
+   "total_pct_of_oracle": 121.7,
+   "pv_pct_of_oracle": 120.1,
+   "crop_pct_of_oracle": -8.4
+  },
+  {
+   "strategy": "Sun tracking (E-W)",
+   "pv_kWh_m2": 258,
+   "crop_light_pct": 21.3,
+   "crop_net_lakh": 0.44,
+   "solar_net_lakh": 58.44,
+   "farmer_inr_month": 196983,
+   "total_lakh": 58.88,
+   "total_pct_of_oracle": 105.3,
+   "pv_pct_of_oracle": 106.6,
+   "crop_pct_of_oracle": 19.5
+  }
+ ]
+}

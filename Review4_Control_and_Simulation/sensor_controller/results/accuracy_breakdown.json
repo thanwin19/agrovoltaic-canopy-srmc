@@ -1,0 +1,212 @@
+[
+ {
+  "group": "Fixed 45 deg",
+  "electricity_pct": 81,
+  "crop_light_pct": 84.6,
+  "combined_pct": 91.2,
+  "tilt_rmse_deg": 16.3
+ },
+ {
+  "group": "Fixed 45 deg|season:Dec-Feb",
+  "electricity_pct": 81,
+  "crop_light_pct": 82,
+  "combined_pct": 91.7,
+  "tilt_rmse_deg": 13.4
+ },
+ {
+  "group": "Fixed 45 deg|season:Jun-Sep",
+  "electricity_pct": 81.3,
+  "crop_light_pct": 80.2,
+  "combined_pct": 91.7,
+  "tilt_rmse_deg": 12.7
+ },
+ {
+  "group": "Fixed 45 deg|season:Mar-May",
+  "electricity_pct": 79.9,
+  "crop_light_pct": 94,
+  "combined_pct": 89.4,
+  "tilt_rmse_deg": 23.6
+ },
+ {
+  "group": "Fixed 45 deg|season:Oct-Nov",
+  "electricity_pct": 82.5,
+  "crop_light_pct": 80.6,
+  "combined_pct": 93.4,
+  "tilt_rmse_deg": 12.7
+ },
+ {
+  "group": "Fixed 45 deg|sky:clear",
+  "electricity_pct": 79.1,
+  "crop_light_pct": 83.5,
+  "combined_pct": 89.5,
+  "tilt_rmse_deg": 16.7
+ },
+ {
+  "group": "Fixed 45 deg|sky:overcast",
+  "electricity_pct": 84.8,
+  "crop_light_pct": 86.8,
+  "combined_pct": 95.3,
+  "tilt_rmse_deg": 15.5
+ },
+ {
+  "group": "Fixed 45 deg|sky:partly cloudy",
+  "electricity_pct": 84.6,
+  "crop_light_pct": 86.6,
+  "combined_pct": 94.3,
+  "tilt_rmse_deg": 16.1
+ },
+ {
+  "group": "Fixed 45 deg|soil:dry soil 15 %",
+  "electricity_pct": 81,
+  "crop_light_pct": 84.7,
+  "combined_pct": 91.3,
+  "tilt_rmse_deg": 16.3
+ },
+ {
+  "group": "Fixed 45 deg|soil:normal soil 26 %",
+  "electricity_pct": 81,
+  "crop_light_pct": 84.5,
+  "combined_pct": 91.2,
+  "tilt_rmse_deg": 16.3
+ },
+ {
+  "group": "Monthly schedule (SRMC-DT)",
+  "electricity_pct": 82.2,
+  "crop_light_pct": 96.3,
+  "combined_pct": 98.8,
+  "tilt_rmse_deg": 9.5
+ },
+ {
+  "group": "Monthly schedule (SRMC-DT)|season:Dec-Feb",
+  "electricity_pct": 79.6,
+  "crop_light_pct": 94.5,
+  "combined_pct": 98.6,
+  "tilt_rmse_deg": 9.5
+ },
+ {
+  "group": "Monthly schedule (SRMC-DT)|season:Jun-Sep",
+  "electricity_pct": 77.5,
+  "crop_light_pct": 95.6,
+  "combined_pct": 98.5,
+  "tilt_rmse_deg": 10.2
+ },
+ {
+  "group": "Monthly schedule (SRMC-DT)|season:Mar-May",
+  "electricity_pct": 93,
+  "crop_light_pct": 98.7,
+  "combined_pct": 99.2,
+  "tilt_rmse_deg": 8.6
+ },
+ {
+  "group": "Monthly schedule (SRMC-DT)|season:Oct-Nov",
+  "electricity_pct": 77.2,
+  "crop_light_pct": 96,
+  "combined_pct": 99.4,
+  "tilt_rmse_deg": 9.2
+ },
+ {
+  "group": "Monthly schedule (SRMC-DT)|sky:clear",
+  "electricity_pct": 81,
+  "crop_light_pct": 98,
+  "combined_pct": 99.2,
+  "tilt_rmse_deg": 3
+ },
+ {
+  "group": "Monthly schedule (SRMC-DT)|sky:overcast",
+  "electricity_pct": 84.4,
+  "crop_light_pct": 90.6,
+  "combined_pct": 97.3,
+  "tilt_rmse_deg": 14.9
+ },
+ {
+  "group": "Monthly schedule (SRMC-DT)|sky:partly cloudy",
+  "electricity_pct": 84.7,
+  "crop_light_pct": 93.7,
+  "combined_pct": 98.4,
+  "tilt_rmse_deg": 11.7
+ },
+ {
+  "group": "Monthly schedule (SRMC-DT)|soil:dry soil 15 %",
+  "electricity_pct": 82.2,
+  "crop_light_pct": 96.3,
+  "combined_pct": 98.8,
+  "tilt_rmse_deg": 9.5
+ },
+ {
+  "group": "Monthly schedule (SRMC-DT)|soil:normal soil 26 %",
+  "electricity_pct": 82.2,
+  "crop_light_pct": 96.3,
+  "combined_pct": 98.9,
+  "tilt_rmse_deg": 9.5
+ },
+ {
+  "group": "SC v2 noisy (median of 5 + guard)",
+  "electricity_pct": 81.9,
+  "crop_light_pct": 97.8,
+  "combined_pct": 99.6,
+  "tilt_rmse_deg": 5.1
+ },
+ {
+  "group": "SC v2 noisy (median of 5 + guard)|season:Dec-Feb",
+  "electricity_pct": 77.8,
+  "crop_light_pct": 98,
+  "combined_pct": 99.6,
+  "tilt_rmse_deg": 6.3
+ },
+ {
+  "group": "SC v2 noisy (median of 5 + guard)|season:Jun-Sep",
+  "electricity_pct": 78.3,
+  "crop_light_pct": 96.4,
+  "combined_pct": 99.5,
+  "tilt_rmse_deg": 4.7
+ },
+ {
+  "group": "SC v2 noisy (median of 5 + guard)|season:Mar-May",
+  "electricity_pct": 93.1,
+  "crop_light_pct": 99.6,
+  "combined_pct": 99.7,
+  "tilt_rmse_deg": 3.1
+ },
+ {
+  "group": "SC v2 noisy (median of 5 + guard)|season:Oct-Nov",
+  "electricity_pct": 75.9,
+  "crop_light_pct": 97.5,
+  "combined_pct": 99.6,
+  "tilt_rmse_deg": 6
+ },
+ {
+  "group": "SC v2 noisy (median of 5 + guard)|sky:clear",
+  "electricity_pct": 82.1,
+  "crop_light_pct": 97.4,
+  "combined_pct": 99.6,
+  "tilt_rmse_deg": 4.3
+ },
+ {
+  "group": "SC v2 noisy (median of 5 + guard)|sky:overcast",
+  "electricity_pct": 81.2,
+  "crop_light_pct": 98.1,
+  "combined_pct": 99.6,
+  "tilt_rmse_deg": 8.1
+ },
+ {
+  "group": "SC v2 noisy (median of 5 + guard)|sky:partly cloudy",
+  "electricity_pct": 81.8,
+  "crop_light_pct": 98.9,
+  "combined_pct": 99.6,
+  "tilt_rmse_deg": 3.3
+ },
+ {
+  "group": "SC v2 noisy (median of 5 + guard)|soil:dry soil 15 %",
+  "electricity_pct": 82,
+  "crop_light_pct": 97.9,
+  "combined_pct": 99.6,
+  "tilt_rmse_deg": 5.6
+ },
+ {
+  "group": "SC v2 noisy (median of 5 + guard)|soil:normal soil 26 %",
+  "electricity_pct": 81.9,
+  "crop_light_pct": 97.8,
+  "combined_pct": 99.6,
+  "tilt_rmse_deg": 4.8
+ }
+]

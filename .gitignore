@@ -1,0 +1,10 @@
+_archive/
+*.zip
+*.mp4
+__pycache__/
+node_modules/
+*.pyc
+*.log
+*.slxc
+slprj/
+*.asv

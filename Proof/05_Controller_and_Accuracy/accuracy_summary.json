@@ -1,0 +1,59 @@
+{
+ "weights": {
+  "energy": 0.5,
+  "crop": 0.5
+ },
+ "noise": "pyranometer 5 %, PAR 5 %, DHT11 +-2 C +-5 % RH, soil +-3 %",
+ "states": 864,
+ "results": [
+  {
+   "strategy": "SRMC-SC (ideal sensors)",
+   "pv_index_pct": 81.9,
+   "crop_index_pct": 98.1,
+   "J_efficiency_pct": 99.7,
+   "angle_rmse_deg": 5.2
+  },
+  {
+   "strategy": "SRMC-SC (noisy sensors)",
+   "pv_index_pct": 82.1,
+   "crop_index_pct": 97.7,
+   "J_efficiency_pct": 99.6,
+   "angle_rmse_deg": 4.8
+  },
+  {
+   "strategy": "SC v1 (one reading, no guard)",
+   "pv_index_pct": 81.8,
+   "crop_index_pct": 97.5,
+   "J_efficiency_pct": 99.4,
+   "angle_rmse_deg": 5.5
+  },
+  {
+   "strategy": "Monthly schedule (SRMC-DT)",
+   "pv_index_pct": 82.2,
+   "crop_index_pct": 96.3,
+   "J_efficiency_pct": 98.8,
+   "angle_rmse_deg": 9.5
+  },
+  {
+   "strategy": "Fixed 45 deg",
+   "pv_index_pct": 81,
+   "crop_index_pct": 84.6,
+   "J_efficiency_pct": 91.2,
+   "angle_rmse_deg": 16.3
+  },
+  {
+   "strategy": "Fixed 15 deg (PV-max)",
+   "pv_index_pct": 99.2,
+   "crop_index_pct": 45.2,
+   "J_efficiency_pct": 80,
+   "angle_rmse_deg": 34
+  },
+  {
+   "strategy": "Sun tracking (E-W)",
+   "pv_index_pct": 88.6,
+   "crop_index_pct": 64.3,
+   "J_efficiency_pct": 84,
+   "angle_rmse_deg": 25
+  }
+ ]
+}

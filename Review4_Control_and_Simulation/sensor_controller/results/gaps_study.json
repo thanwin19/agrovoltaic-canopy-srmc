@@ -1,0 +1,167 @@
+{
+ "weight_sweep": [
+  {
+   "w": 0,
+   "pv": 220.3,
+   "light": 36.8,
+   "crop": 2.82,
+   "solar": 47.14,
+   "total": 49.97,
+   "farmer": 188578,
+   "pv_pct_of_max": 74.9,
+   "crop_pct_of_max": 100
+  },
+  {
+   "w": 0.2,
+   "pv": 229.1,
+   "light": 35.2,
+   "crop": 2.52,
+   "solar": 49.76,
+   "total": 52.28,
+   "farmer": 192616,
+   "pv_pct_of_max": 77.8,
+   "crop_pct_of_max": 89.4
+  },
+  {
+   "w": 0.4,
+   "pv": 233.7,
+   "light": 34.4,
+   "crop": 2.49,
+   "solar": 51.15,
+   "total": 53.64,
+   "farmer": 195795,
+   "pv_pct_of_max": 79.4,
+   "crop_pct_of_max": 88.3
+  },
+  {
+   "w": 0.5,
+   "pv": 241.4,
+   "light": 32.5,
+   "crop": 2.2,
+   "solar": 53.44,
+   "total": 55.64,
+   "farmer": 199139,
+   "pv_pct_of_max": 82,
+   "crop_pct_of_max": 78
+  },
+  {
+   "w": 0.6,
+   "pv": 252.3,
+   "light": 29.6,
+   "crop": 1.79,
+   "solar": 56.73,
+   "total": 58.52,
+   "farmer": 203952,
+   "pv_pct_of_max": 85.7,
+   "crop_pct_of_max": 63.5
+  },
+  {
+   "w": 0.7,
+   "pv": 269,
+   "light": 24.4,
+   "crop": 1.18,
+   "solar": 61.72,
+   "total": 62.9,
+   "farmer": 211310,
+   "pv_pct_of_max": 91.4,
+   "crop_pct_of_max": 41.8
+  },
+  {
+   "w": 0.8,
+   "pv": 285,
+   "light": 19.4,
+   "crop": 0.42,
+   "solar": 66.51,
+   "total": 66.93,
+   "farmer": 216945,
+   "pv_pct_of_max": 96.8,
+   "crop_pct_of_max": 14.9
+  },
+  {
+   "w": 0.9,
+   "pv": 292.8,
+   "light": 16.1,
+   "crop": 0.03,
+   "solar": 68.85,
+   "total": 68.88,
+   "farmer": 219562,
+   "pv_pct_of_max": 99.5,
+   "crop_pct_of_max": 1.1
+  },
+  {
+   "w": 1,
+   "pv": 294.3,
+   "light": 15,
+   "crop": -0.09,
+   "solar": 69.31,
+   "total": 69.22,
+   "farmer": 219715,
+   "pv_pct_of_max": 100,
+   "crop_pct_of_max": -3.2
+  }
+ ],
+ "water": [
+  {
+   "name": "Timer every 2 days",
+   "applied": 5687,
+   "events": 331,
+   "stress": 14.8,
+   "yield_": 0.995,
+   "perc": 25,
+   "saved_vs_this": 5.5
+  },
+  {
+   "name": "Timer every 4 days",
+   "applied": 5641,
+   "events": 164,
+   "stress": 20,
+   "yield_": 0.988,
+   "perc": 27,
+   "saved_vs_this": 4.8
+  },
+  {
+   "name": "Timer every 7 days",
+   "applied": 5655,
+   "events": 94,
+   "stress": 29.3,
+   "yield_": 0.966,
+   "perc": 35,
+   "saved_vs_this": 5
+  },
+  {
+   "name": "Soil probe decides (ideal)",
+   "applied": 5372,
+   "events": 99,
+   "stress": 0,
+   "yield_": 1,
+   "perc": 0,
+   "saved_vs_this": ""
+  }
+ ],
+ "year": [
+  {
+   "case": "With anemometer (storm stow at 15 m/s)",
+   "storm_hours": 16,
+   "storm_hours_not_stowed": 0,
+   "hours_stowed": 16,
+   "hours_rain_flat": 222,
+   "pv_pct": 100.85,
+   "moves": 1862,
+   "travel_deg": 46793,
+   "wire_m": 346,
+   "drum_turns": 918
+  },
+  {
+   "case": "Anemometer missing or dead (never stows)",
+   "storm_hours": 16,
+   "storm_hours_not_stowed": 16,
+   "hours_stowed": 0,
+   "hours_rain_flat": 222,
+   "pv_pct": 100.99,
+   "moves": 1866,
+   "travel_deg": 46516,
+   "wire_m": 344,
+   "drum_turns": 913
+  }
+ ]
+}

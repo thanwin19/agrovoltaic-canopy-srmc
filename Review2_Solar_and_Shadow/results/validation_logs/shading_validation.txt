@@ -1,0 +1,4 @@
+Shading validation: engine 2-D ray cast vs Blender Cycles 3-D (direct light only), TCE 16 Apr, 20 sun/tilt cases x 4 zone strips = 80 comparisons
+mean absolute difference in lit fraction = 0.010
+max difference = 0.22
+share of comparisons within 0.10 = 96 %

@@ -1,0 +1,3 @@
+case,storm hours (wind >= 15 m/s),storm hours NOT stowed,hours stowed,hours flat for rain,electricity % of the same year without storms or rain stops,moves,panel travel deg,drive wire m,drum turns
+With anemometer (storm stow at 15 m/s),16,0,16,222,100.85,1862,46793,346,918
+Anemometer missing or dead (never stows),16,16,0,222,100.99,1866,46516,344,913

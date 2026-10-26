@@ -1,0 +1,9 @@
+strategy,applied water m3/ha/yr,from cistern m3,borewell m3,irrigation events,water-stress days (mean zone),relative yield from water (1 = none lost),percolation loss mm,water saved vs timer m3,water saved vs timer %
+Timer (every 4 days, fixed depth),5641,4357,1284,164,20,0.988,27,0,0
+Soil probe decides (ideal probe),5372,3866,1507,99,0,1,0,268,4.8
+Soil probe, noisy (+-3 points),5390,4102,1288,98,4,0.999,1,251,4.4
+Probe stuck DRY, no fallback,46528,5311,41217,670,0,1,3690,-40887,-724.9
+Probe stuck DRY, with fallback,5995,4357,1638,168,20,0.988,59,-354,-6.3
+Probe stuck WET, no fallback,0,0,0,0,157.5,0.155,0,5641,100
+Probe stuck WET, with fallback,5578,4357,1221,162,20,0.988,23,63,1.1
+Probe dead (no reading), with fallback,5641,4357,1284,164,20,0.988,27,0,0

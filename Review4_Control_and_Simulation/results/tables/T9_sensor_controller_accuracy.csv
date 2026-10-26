@@ -1,0 +1,8 @@
+strategy,PV index % of best,crop index % of best,objective J efficiency %,angle RMSE deg
+SRMC-SC (ideal sensors),81.9,98.1,99.7,5.2
+SRMC-SC (noisy sensors),82.1,97.7,99.6,4.8
+SC v1 (one reading, no guard),81.8,97.5,99.4,5.5
+Monthly schedule (SRMC-DT),82.2,96.3,98.8,9.5
+Fixed 45 deg,81,84.6,91.2,16.3
+Fixed 15 deg (PV-max),99.2,45.2,80,34
+Sun tracking (E-W),88.6,64.3,84,25

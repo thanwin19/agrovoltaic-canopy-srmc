@@ -1,0 +1,25 @@
+﻿Item,Qty,Unit,Note
+"Column, GI RHS 200 x 200 mm, 6.73 m long",36,nos,S355 hot-dip galvanised; pile or pad foundation
+Foundation pad 0.9 x 0.9 m,36,nos,concrete M20
+Carrier wire rope SS316 16 mm 7x19,152.8,m,"catenary, E-W spans"
+Longitudinal wire rope SS316 16 mm,152.8,m,N-S catenaries at column tops
+Stay wire rope SS316 20 mm 7x7,222.9,m,to ground anchors
+Ground anchor (screw/rock anchor or about 1.6 m3 buried concrete; soil test),24,nos,pull-out >= 38 kN each
+Turnbuckle M24 SS316 (>= 72 kN breaking),24,nos,stay pre-tension
+PV panel 2.497 x 25.0 m (pivoting),10,nos,"framed, ~131 kWp total at STC 0.21 efficiency"
+"Pivot tube S355 galv CHS 114.3 x 4.0 mm, 25.0 m",10,nos,one per panel
+"Pivot bearing block, self-aligning, IP65",60,nos,one per carrier line
+"Hanger rod / wire, carrier to bearing",15.0,m,N x carrier lines
+"Lever arm SS316, 0.44 m, fixed 45 deg offset",10,nos,one per panel; keeps a lever at the 90 deg stow
+Drive wire SS316 6 mm 7x19,33.0,m,motor -> tips -> tensioner
+Guide pulley SS316 80 mm,2,nos,column ends
+"Gearmotor winch, IP66, >= 10 kN (about 0.25 kW worm gear), encoder 0.5 deg",1,nos,single motor for run <= 30 m
+EPDM bulb seal 10 mm,500,m,both long edges of every panel
+Rain gutter 0.30 x 0.20 m,23.8,m,"east edge, 1:100 fall"
+Downpipe 75 mm + underground pipe,10.6,m,HDPE / SS316
+First-flush diverter 20 L per 100 m2,6,nos,
+Underground cistern,100,m3,"RCC / HDPE, 4 x 4 m, 3.0 m deep"
+Pump + header + drip laterals,1,set,40 laterals
+"Sensors: pyranometer, PAR (under canopy), DHT11 T/RH, soil moisture, rain sensor",1,set,ESP32 controller
+Cup anemometer on a 3 m mast (wind sensor),1,nos,"storm stow at 15 m/s, resume below 12 m/s"
+Inverter + transformer + overhead line to industry,1,set,sized to ~131 kWp

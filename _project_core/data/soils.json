@@ -1,0 +1,155 @@
+[
+ {
+  "id": "red_sandy_loam",
+  "name": "Red sandy loam (Alfisol)",
+  "drain": 4,
+  "fc": 0.21,
+  "wp": 0.1,
+  "infil": 150,
+  "ph": [
+   5.8,
+   7.0
+  ],
+  "oc0": 0.5,
+  "ocmax": 1.5,
+  "ec": 0.3,
+  "note": "Common around Madurai; drains well, low organic matter",
+  "color": "#8b4a2b"
+ },
+ {
+  "id": "black_cotton",
+  "name": "Black cotton / regur (Vertisol)",
+  "drain": 2,
+  "fc": 0.45,
+  "wp": 0.28,
+  "infil": 25,
+  "ph": [
+   7.5,
+   8.5
+  ],
+  "oc0": 0.6,
+  "ocmax": 1.5,
+  "ec": 0.6,
+  "note": "High water holding, cracks when dry, waterlogs when wet",
+  "color": "#2b2623"
+ },
+ {
+  "id": "alluvial",
+  "name": "Alluvial",
+  "drain": 3,
+  "fc": 0.33,
+  "wp": 0.16,
+  "infil": 60,
+  "ph": [
+   6.5,
+   8.0
+  ],
+  "oc0": 0.7,
+  "ocmax": 1.6,
+  "ec": 0.4,
+  "note": "River plains, fertile, medium drainage",
+  "color": "#8a7355"
+ },
+ {
+  "id": "laterite",
+  "name": "Laterite",
+  "drain": 4,
+  "fc": 0.2,
+  "wp": 0.11,
+  "infil": 120,
+  "ph": [
+   4.8,
+   6.2
+  ],
+  "oc0": 0.4,
+  "ocmax": 1.3,
+  "ec": 0.2,
+  "note": "Acidic, iron-rich, leaches nutrients",
+  "color": "#9a4f33"
+ },
+ {
+  "id": "sandy",
+  "name": "Sandy / coastal sand",
+  "drain": 5,
+  "fc": 0.12,
+  "wp": 0.05,
+  "infil": 400,
+  "ph": [
+   6.0,
+   7.8
+  ],
+  "oc0": 0.3,
+  "ocmax": 1.0,
+  "ec": 1.5,
+  "note": "Very low water holding, needs frequent irrigation; mild salinity near sea",
+  "color": "#cdb98a"
+ },
+ {
+  "id": "clay",
+  "name": "Clay",
+  "drain": 1,
+  "fc": 0.42,
+  "wp": 0.27,
+  "infil": 15,
+  "ph": [
+   6.5,
+   8.0
+  ],
+  "oc0": 0.8,
+  "ocmax": 1.7,
+  "ec": 0.5,
+  "note": "Waterlogging risk, slow infiltration",
+  "color": "#6e5a48"
+ },
+ {
+  "id": "loam",
+  "name": "Loam (reference)",
+  "drain": 3,
+  "fc": 0.31,
+  "wp": 0.14,
+  "infil": 80,
+  "ph": [
+   6.0,
+   7.5
+  ],
+  "oc0": 1.2,
+  "ocmax": 2.0,
+  "ec": 0.3,
+  "note": "Balanced texture, ideal reference soil",
+  "color": "#6b4a2b"
+ },
+ {
+  "id": "saline_alkaline",
+  "name": "Saline / alkaline",
+  "drain": 2,
+  "fc": 0.3,
+  "wp": 0.15,
+  "infil": 20,
+  "ph": [
+   8.5,
+   9.5
+  ],
+  "oc0": 0.3,
+  "ocmax": 1.0,
+  "ec": 6.0,
+  "note": "High salts and pH; needs gypsum and salt-tolerant crops",
+  "color": "#b8a98f"
+ },
+ {
+  "id": "hill_forest",
+  "name": "Hill / forest soil",
+  "drain": 4,
+  "fc": 0.38,
+  "wp": 0.2,
+  "infil": 100,
+  "ph": [
+   5.0,
+   6.5
+  ],
+  "oc0": 3.0,
+  "ocmax": 4.0,
+  "ec": 0.2,
+  "note": "Mountain soil, acidic, high organic matter, erodible on slopes",
+  "color": "#4a3626"
+ }
+]

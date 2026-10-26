@@ -1,0 +1,4 @@
+fault,v1 combined %,v2 combined %,v1 angle RMSE,v2 angle RMSE
+PAR dirty (x0.35),98.6,99.6,6.3,5.2
+PAR reflection (x1.9),97.4,99.6,6.9,5.2
+PAR dead (0),98.7,99.6,6.4,5.3

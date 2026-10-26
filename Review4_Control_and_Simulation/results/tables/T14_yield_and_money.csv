@@ -1,0 +1,11 @@
+strategy,PV kWh/m2,crop light %,crop net INR lakh,solar net INR lakh,total INR lakh,total % of best,PV % of best,crop income % of best
+Oracle (perfect knowledge),242,32.5,2.26,53.64,55.9,100,100,100
+SC v2 ideal sensors,241.4,32.5,2.2,53.44,55.64,99.5,99.8,97.3
+SC v1 noisy (1 reading),241.1,32.5,2.16,53.37,55.53,99.3,99.6,95.6
+SC v2 noisy (median of 5 + guard),241.6,32.4,2.22,53.52,55.74,99.7,99.8,98.2
+SC v2 stress relax 0 (full crop light),237.3,33.7,2.49,52.22,54.71,97.9,98.1,110.2
+SC v2 stress relax 0.15,238.5,33.3,2.37,52.59,54.96,98.3,98.6,104.9
+Monthly schedule (SRMC-DT),238.1,33.7,2.53,52.47,55,98.4,98.4,111.9
+Fixed 45 deg,232.6,32.5,1.63,50.83,52.46,93.8,96.1,72.1
+Fixed 15 deg (PV-max),290.7,13.7,-0.19,68.23,68.04,121.7,120.1,-8.4
+Sun tracking (E-W),258,21.3,0.44,58.44,58.88,105.3,106.6,19.5

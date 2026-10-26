@@ -1,0 +1,23 @@
+$ node tools/crosscheck.js
+quantity                          JS twin         MATLAB diff %
+pv kWh/m2/yr                      238.110        238.110 0.0000
+annual GHI                       2032.896       2032.896 0.0000
+harvested m3                     4650.121       4650.121 0.0000
+demand m3                        4927.018       4927.018 0.0000
+unmet m3                          301.800        301.800 0.0000
+capex                       126548800.000  126548800.000 0.0000
+solar revenue                 7134732.866    7134732.866 0.0000
+crop net                       252964.756     252964.756 0.0000
+payback yr                         23.009         23.009 0.0000
+farmer income/yr              2393384.616    2393384.616 0.0000
+industry net/yr               3106581.006    3106581.006 0.0000
+zone 1 light                        0.341          0.341 0.0000
+zone 2 light                        0.338          0.338 0.0000
+zone 3 light                        0.337          0.337 0.0000
+zone 4 light                        0.330          0.330 0.0000
+zone 1 yield ginger                12.668         12.668 0.0000
+zone 2 yield turmeric              11.987         11.987 0.0000
+zone 3 yield coriander              5.082          5.082 0.0000
+zone 4 yield amaranth               7.717          7.717 0.0000
+crops JS ginger,turmeric,coriander,amaranth | MATLAB ginger,turmeric,coriander,amaranth
+WORST DIFF % 0.0000

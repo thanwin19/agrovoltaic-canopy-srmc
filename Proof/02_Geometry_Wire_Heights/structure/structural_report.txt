@@ -1,0 +1,56 @@
+
+==== preset: recommended  (Recommended: wire-spec mechanism + guideline clearance)
+  panel 2.497 m, pivot height 5.58 m, bay 12.5 m, carrier lines every 12.5 m
+  wind: Vz = 38.2 m/s, pz = 0.88 kN/m2;  ULS down = 1.58 kN/m2, net uplift = 1.53 kN/m2
+  pivot tube CHS 60.3x3.0: M = 77.3 kNm vs capacity 2.62 kNm -> utilisation 29.5  (max support spacing 2.30 m; the preset uses 12.5 m)
+  carrier rope 16 mm: tension 1215 kN vs allowed 77 kN (MBL 154 / 2.0) -> utilisation 15.82;  with sag L/12 -> 5.10
+  stay 12 mm: 1727 kN -> utilisation 39.98;  anchor pull 1233 kN vertical
+  interior column load 248 kN vs 0.6 Pcr (1077 kN) -> utilisation 0.23
+  VERDICT: FAILS - redesign needed
+
+==== preset: wire_spec  (Wire-driven spec as written)
+  panel 3.122 m, pivot height 5.35 m, bay 12.5 m, carrier lines every 12.5 m
+  wind: Vz = 38.2 m/s, pz = 0.88 kN/m2;  ULS down = 1.58 kN/m2, net uplift = 1.53 kN/m2
+  pivot tube CHS 60.3x3.0: M = 96.6 kNm vs capacity 2.62 kNm -> utilisation 36.9  (max support spacing 2.06 m; the preset uses 12.5 m)
+  carrier rope 16 mm: tension 1215 kN vs allowed 77 kN (MBL 154 / 2.0) -> utilisation 15.82;  with sag L/12 -> 5.10
+  stay 12 mm: 1697 kN -> utilisation 39.28;  anchor pull 1191 kN vertical
+  interior column load 248 kN vs 0.6 Pcr (1154 kN) -> utilisation 0.21
+  VERDICT: FAILS - redesign needed
+
+==== preset: smallholder  (Smallholder: SRMC guideline scale (5 m column spacing))
+  panel 2.497 m, pivot height 5.12 m, bay 5.0 m, carrier lines every 5.0 m
+  wind: Vz = 38.2 m/s, pz = 0.88 kN/m2;  ULS down = 1.58 kN/m2, net uplift = 1.53 kN/m2
+  pivot tube CHS 60.3x3.0: M = 12.4 kNm vs capacity 2.62 kNm -> utilisation 4.7  (max support spacing 2.30 m; the preset uses 5.0 m)
+  carrier rope 16 mm: tension 194 kN vs allowed 77 kN (MBL 154 / 2.0) -> utilisation 2.53;  with sag L/12 -> 0.82
+  stay 12 mm: 267 kN -> utilisation 6.18;  anchor pull 184 kN vertical
+  interior column load 40 kN vs 0.6 Pcr (105 kN) -> utilisation 0.38
+  VERDICT: FAILS - redesign needed
+
+==== preset: custom  (Your own values)
+  panel 2.497 m, pivot height 5.58 m, bay 12.5 m, carrier lines every 12.5 m
+  wind: Vz = 38.2 m/s, pz = 0.88 kN/m2;  ULS down = 1.58 kN/m2, net uplift = 1.53 kN/m2
+  pivot tube CHS 60.3x3.0: M = 77.3 kNm vs capacity 2.62 kNm -> utilisation 29.5  (max support spacing 2.30 m; the preset uses 12.5 m)
+  carrier rope 16 mm: tension 1215 kN vs allowed 77 kN (MBL 154 / 2.0) -> utilisation 15.82;  with sag L/12 -> 5.10
+  stay 12 mm: 1727 kN -> utilisation 39.98;  anchor pull 1233 kN vertical
+  interior column load 248 kN vs 0.6 Pcr (1077 kN) -> utilisation 0.23
+  VERDICT: FAILS - redesign needed
+
+==== preset: feasible  (Structurally checked: 5 m rope grid, 114x4 tube, sag L/12, 20 mm stays)
+  panel 2.497 m, pivot height 5.58 m, bay 5.0 m, carrier lines every 5.0 m
+  wind: Vz = 38.2 m/s, pz = 0.88 kN/m2;  ULS down = 1.58 kN/m2, net uplift = 1.53 kN/m2
+  pivot tube CHS 114.3x4.0: M = 12.4 kNm vs capacity 13.11 kNm -> utilisation 0.9  (max support spacing 5.15 m; the preset uses 5.0 m)
+  carrier rope 16 mm: tension 63 kN vs allowed 77 kN (MBL 154 / 2.0) -> utilisation 0.82;  with sag L/12 -> 0.82
+  stay 20 mm: 85 kN -> utilisation 0.71;  anchor pull 61 kN vertical
+  interior column load 40 kN vs 0.6 Pcr (802 kN) -> utilisation 0.05
+  VERDICT: ALL CHECKS PASS (screening level)
+
+---- pivot tube options (S355, wTube = 3.96 kN/m): maximum support spacing ----
+  CHS 60.3x3 (spec)  Z =   7.4 cm3, M_Rd =  2.62 kNm -> bending limit 2.3 m ; deflection(L/200) limit 1.9 m
+  CHS 88.9x4         Z =  21.7 cm3, M_Rd =  7.69 kNm -> bending limit 3.9 m ; deflection(L/200) limit 3.1 m
+  CHS 114.3x4        Z =  36.9 cm3, M_Rd = 13.11 kNm -> bending limit 5.1 m ; deflection(L/200) limit 4.0 m
+  CHS 139.7x5        Z =  68.8 cm3, M_Rd = 24.42 kNm -> bending limit 7.0 m ; deflection(L/200) limit 5.3 m
+
+---- assumptions ----
+  Vb = 39 m/s (IS 875-3, verify), k2 = 0.98, pressure 0.6 Vz^2; held-position net Cp = +1.0 / -1.3 (monopitch roof, conservative); g = 0.20 kN/m2
+  rope MBL = 0.60 d^2 kN (indicative, verify datasheet); ULS rope load limited to MBL/2; Euler column pinned-pinned; tube continuous, M = wL^2/8
+  Not included: dynamic/fatigue wind, snow, seismic, connection design, foundation soil tests, galloping of long ropes.
