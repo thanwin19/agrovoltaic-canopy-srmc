@@ -13,7 +13,7 @@ Everything here is a **draft for the authors**; nothing has been submitted anywh
 | Springer Nature | Energy, Sustainability and Society | one column, Declarations |
 | Taylor and Francis | International Journal of Green Energy | double spacing, disclosure statement |
 
-**The manuscripts are the project paper**: they are based on Reviews 0 to 5 (a table of the six reviews and their results), include the simulated October 2023 month driven by real NASA POWER weather, and the photo of the scaled prototype (captioned as context only; no result comes from it). The abstract has 193 words.
+**The manuscripts are the project paper**: they are based on Reviews 0 to 5 (a table of the six reviews and their results), describe the **digital twin** (with a screenshot of the final twin, Figure 6), include the simulated October 2023 month driven by real NASA POWER weather, and the photo of the scaled prototype (Figure 7) (captioned as context only; no result comes from it). The abstract has 193 words.
 
 ## Before submitting
 
