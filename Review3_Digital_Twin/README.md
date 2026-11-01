@@ -93,3 +93,7 @@ The How it tilts tab now starts with a "Drive it yourself" card (hold-to-tilt bu
 ## Update 2026-11-01: Review 0 sensors and proof in the twin
 
 Sensor panel now names the six real devices (Apogee SP-110, SQ-110, DHT11, DFRobot SEN0193, YL-83/FC-37, Adafruit 1733) and shows each device's output signal; a switch adds datasheet-sized sensor errors; sensor readings and decisions can be recorded and downloaded as CSV. New tab **Sensors and proof**: datasheet table with links to the downloaded files, the 8 x JinkoSolar JKM550M panel with a live I-V / P-V curve and array power, where the sunlight comes from and the NASA POWER / PVGIS check, accuracy against ordinary designs, cost if real, what is still needed. Built by `patch_proof.py` (after `patch_mech.py`). The sensors are software models; the readings are not measured.
+
+## Update 2026-11-01: real-weather replay and monthly sunlight check
+
+Sensor panel: **Replay a real day** (15 days of NASA POWER hourly data for TCE, 2023: the 15th of every month plus the rainiest, windiest and sunniest day) drives the twin's sunlight, temperature, humidity, wind and rain from the data. The Sensors-and-proof tab adds the 12-month check of the sunlight model against NASA POWER 2023 (year +2.0 %, monthly -6.9 to +9.9 %) and PVGIS 2020. Built by `patch_replay.py` (after `patch_proof.py`). Real hourly wind never exceeded 10.9 m/s in 2023, so the 15 m/s storm stow never triggered in that data.

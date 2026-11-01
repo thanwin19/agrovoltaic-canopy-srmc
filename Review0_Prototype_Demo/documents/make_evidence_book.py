@@ -35,7 +35,7 @@ Pp('Status in one line: a validated computer simulation. The sensors are softwar
 
 H('1. The one-minute answer')
 B('The system has six sensors. Each one is simulated after a real device with a published datasheet; the datasheets are downloaded and stored.')
-B('Sunlight is not measured: it is calculated from the sun position and a clearness index from NASA POWER for our site, then checked against NASA POWER and the EU PVGIS datasets (daily energy within about 1 to 3 percent).')
+B('Sunlight is not measured: it is calculated from the sun position and a clearness index from NASA POWER for our site, then checked against NASA POWER and the EU PVGIS datasets (daily energy within about 1 to 3 percent on 15 April and within 10 percent in every month against NASA POWER 2023).')
 B('The solar panel is a real model (JinkoSolar Tiger Pro JKM550M-72HL4-V, 550 Wp); 8 panels give 4.4 kWp. Its datasheet numbers are read from the downloaded official PDF.')
 B('Accuracy of the co-optimisation: 99.6 percent of the best possible score over 864 noisy test cases; ordinary designs reach 80 to 91 percent.')
 B('Everything is simulation; the limits are listed in section 8.')
@@ -85,6 +85,11 @@ B('It is not a perfectly cloudless sky: a truly clear day gives 15 to 25 percent
 B('Shape and timing agree: RMSE 78 W/m2 against NASA actual day, 104 W/m2 against NASA clear-sky.')
 B('PAR share: NASA POWER 0.444, dashboard 0.45.')
 pic(os.path.join(P10, 'TRUST_sunlight_model_vs_NASA_PVGIS.png'), 17.5)
+Pp('Month by month (file MONTHLY_sunlight_model_vs_NASA_PVGIS.csv, full-year NASA POWER hourly data of 2023 and PVGIS-ERA5 hourly data of 2020):', b=True)
+B('Against NASA POWER 2023 the model year average is +2.0 percent; monthly differences range from -6.9 to +9.9 percent; hourly shape RMSE 40 to 91 W/m2 (mean 67).')
+B('Against PVGIS-ERA5 of the single year 2020 the model is +7.9 percent on average, and +16 to +26 percent in June to September and December. One reanalysis year differs from the long-term climate; the earlier multi-year PVGIS comparison gave +5.0 percent. The model is a good typical year, not a prediction of one year.')
+B('Real hourly wind at TCE in 2023 never exceeded 10.9 m/s (hourly means at 10 m, no gusts), so the 15 m/s storm stow never triggered in that data.')
+pic(os.path.join(P10, 'TRUST_monthly_sunlight_model_vs_NASA_PVGIS.png'), 17.5)
 Pp('Other checks already in the project (Proof folder): yearly electricity against PVGIS +5.0 percent (03_Solar_Generation/pv_validation.txt, monthly errors 8 to 11 percent in June to August); shadow model against Blender 3-D ray tracing, mean difference 0.010 in lit fraction (shading_validation.txt); the web twin and the MATLAB model give identical results (crosscheck_js_vs_matlab.txt); Review 0 tests pass (Review0_Prototype_Demo/results/test_results.md).')
 
 H('6. Accuracy of the co-optimisation (the main result)')
@@ -109,7 +114,7 @@ table(['Input', 'Source', 'Real, typical or assumed'], [
 H('8. Limits (say them before a judge does)')
 for x in ['It is a simulation. No field trial and no sensor was wired. Sensor readings are generated or typed, not measured.',
           'NASA POWER and PVGIS are satellite and reanalysis products, not a pyranometer on the TCE roof: this is a check, not a field validation.',
-          'One day (15 April) was compared hour by hour; the year is checked monthly (PVGIS +5 percent; 8 to 11 percent in June to August).',
+          'Hour by hour: 15 April, and the monthly mean day of every month of 2023. Against PVGIS of the single year 2020 the model is 16 to 26 percent high in some months; the long-term PVGIS comparison gives +5 percent.',
           'The dashboard Clear sky is a typical clear April day, below a perfectly cloudless sky (noon 837 against 986 W/m2).',
           'Accuracy is measured against the controller own goal (half electricity, half crop light) in simulation, not against real crop yield.',
           'The rain sensor has no official datasheet, only vendor pages. The Jinko datasheet is the Chinese-language edition.',
@@ -117,7 +122,7 @@ for x in ['It is a simulation. No field trial and no sensor was wired. Sensor re
 
 H('9. Questions a judge may ask')
 for q, a in [('Are the sensors real?', 'No. They are software models of real devices (SP-110, SQ-110, DHT11, SEN0193, YL-83, Adafruit 1733), set from their datasheets. The datasheets are in the proof folder. Hardware is the next step.'),
-             ('Where does the sunlight number come from?', 'It is calculated from the sun position and a clearness index from NASA POWER for our site, and checked against NASA POWER and PVGIS (daily energy within about 1 to 3 percent, PAR share 0.444 against 0.45).'),
+             ('Where does the sunlight number come from?', 'It is calculated from the sun position and a clearness index from NASA POWER for our site, and checked against NASA POWER and PVGIS (daily energy within about 1 to 3 percent on 15 April and within 10 percent in every month against NASA POWER 2023, PAR share 0.444 against 0.45).'),
              ('Why should I trust the accuracy figure?', 'It is the controller score against the best angle found by trying every angle, with datasheet-sized sensor errors added; the data file is T11_accuracy_v2.csv. It measures our own goal in simulation, not crop yield.'),
              ('Which solar panel?', 'JinkoSolar Tiger Pro JKM550M-72HL4-V, 550 Wp, 8 panels = 4.4 kWp; the datasheet is stored.'),
              ('Why is the clear sky 837 W/m2 and not 1000?', 'The dashboard Clear day is a typical clear April day (clearness index 0.62, close to the NASA POWER April mean 0.60). A perfectly cloudless day gives about 986 W/m2.'),

@@ -51,3 +51,13 @@ Other checks already in the project: yearly electricity against PVGIS +5.0 % (`P
 - One day (15 April) was compared hour by hour; the year is checked monthly through PVGIS (+5 %), with the largest monthly errors (8-11 %) in June to August.
 - Clear sky in the dashboard is a typical April clear day, below a perfectly cloudless sky.
 - Sensor readings are generated or typed. Real SP-110 data needs the real sensor and logging, which is the next step.
+
+## 6. Month-by-month check (added later)
+
+Full-year hourly NASA POWER data for 2023 (`NASA_POWER_hourly_2023_full_year_TCE.json`) and PVGIS-ERA5 hourly 2020 against the model's mean day of every month (`MONTHLY_sunlight_model_vs_NASA_PVGIS.csv`, figure `TRUST_monthly_sunlight_model_vs_NASA_PVGIS.png`):
+
+- vs NASA POWER 2023: year average +2.0 %, monthly -6.9 % to +9.9 %, hourly shape RMSE 40-91 W/m2 (mean 67).
+- vs PVGIS 2020: +7.9 % on average; +16 to +26 % in June to September and December. One reanalysis year differs from the long-term climate (the multi-year PVGIS comparison gave +5.0 %).
+- The model is a good *typical* year, not a prediction of one year.
+- Real hourly wind at TCE in 2023 never exceeded 10.9 m/s (hourly means at 10 m, no gusts): the 15 m/s storm stow never triggered in that data.
+- The twin can **replay 15 real days** of this data (the 15th of each month, the rainiest, windiest and sunniest day) in its sensor panel (`NASA_POWER_replay_days_for_twin.json`).
