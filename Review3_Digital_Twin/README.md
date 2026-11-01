@@ -83,3 +83,7 @@ MATLAB: the scripts in `matlab/` run directly from this folder (open MATLAB, `cd
 ## Update 2026-11-01: four new tabs in the one twin
 
 Ground map, Structure, Design explorer, Edge AI (with the anemometer attack test). Built by `Review4_Control_and_Simulation/sensor_controller/patch_wow.py`. See `../WOW_ADDITIONS.md`.
+
+## Update 2026-11-01: manual sensors in the twin
+
+The sensor panel on the Live 3D demo tab has a typed number box beside every slider, a rain toggle, and a **Manual pyranometer and PAR** switch (type W/m2 and umol/m2/s; the controller then reads exactly those numbers). Built by `Review4_Control_and_Simulation/sensor_controller/patch_manual.py`, run after `patch_ux.py`.

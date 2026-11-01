@@ -57,7 +57,17 @@ h.run = U([x0 0.076 w 0.04], 'togglebutton', 'START live loop', @(s, ~) setRun(s
 h.note = uicontrol(fig, 'Style', 'text', 'Units', 'normalized', 'Position', [x0 0.002 w 0.07], 'String', {'SIM = simulated or scroll bar.', 'REAL = from the ESP over USB.', 'DEMO = generated for rehearsal.'}, 'BackgroundColor', [0.97 0.97 0.96], 'ForegroundColor', [0.6 0.1 0.1], 'HorizontalAlignment', 'left', 'FontSize', 9);
 
 h.axC = axes(fig, 'Position', [0.215 0.49 0.40 0.46]); h.axT = axes(fig, 'Position', [0.64 0.79 0.345 0.17]); h.axS = axes(fig, 'Position', [0.64 0.565 0.345 0.17]); h.axR = axes(fig, 'Position', [0.64 0.34 0.345 0.17]); h.axA = axes(fig, 'Position', [0.64 0.115 0.345 0.17]);
-h.txt = uicontrol(fig, 'Style', 'listbox', 'Units', 'normalized', 'Position', [0.215 0.03 0.40 0.40], 'FontName', 'Consolas', 'FontSize', 10, 'BackgroundColor', 'white', 'Max', 1);
+h.txt = uicontrol(fig, 'Style', 'listbox', 'Units', 'normalized', 'Position', [0.215 0.03 0.40 0.30], 'FontName', 'Consolas', 'FontSize', 10, 'BackgroundColor', 'white', 'Max', 1);
+% ---- MANUAL sensor panel: type any value for any of the six sensors (Simulate mode) ----
+U([0.215 0.335 0.40 0.025], 'text', 'MANUAL SENSORS: type a value and press Enter, the panel angle reacts', [], 'FontWeight', 'bold', 'ForegroundColor', [0.1 0.35 0.1]);
+mk = {'mT', 'temp C (DHT11)', @(s, ~) onManual('temp', s); 'mRH', 'humidity %', @(s, ~) onManual('rh', s); 'mSoil', 'soil moist. %', @(s, ~) onManual('soil', s); 'mGHI', 'pyranometer W/m2', @(s, ~) onManual('ghi', s); 'mPAR', 'PAR umol/m2/s', @(s, ~) onManual('par', s); 'mWind', 'wind m/s', @(s, ~) onManual('wind', s)};
+for ii = 1:6
+    xx = 0.215 + (ii - 1) * 0.0675; U([xx 0.425 0.066 0.028], 'text', mk{ii, 2}, [], 'FontSize', 8);
+    h.(mk{ii, 1}) = U([xx 0.395 0.062 0.03], 'edit', '', mk{ii, 3}, 'BackgroundColor', 'white');
+end
+h.preset = U([0.215 0.36 0.17 0.032], 'popupmenu', {'Presets: choose one', 'Clear noon', 'Passing clouds', 'Hot dry afternoon', 'Rain', 'Storm wind 20 m/s', 'Night'}, @(s, ~) onPreset(s.Value));
+h.rain2 = U([0.39 0.36 0.11 0.032], 'togglebutton', 'Rain: dry', @(s, ~) onRain2(s.Value));
+h.release = U([0.505 0.36 0.11 0.032], 'pushbutton', 'Back to AUTO', @(~, ~) onRelease());
 h.log = uicontrol(fig, 'Style', 'text', 'Units', 'normalized', 'Position', [0.64 0.01 0.345 0.07], 'String', '', 'BackgroundColor', [0.97 0.97 0.96], 'HorizontalAlignment', 'left', 'FontSize', 9);
 tm = [];
 if ~headless
@@ -106,6 +116,41 @@ app = struct('fig', fig, 'step', @step, 'set', @setState, 'snapshot', @snapshot,
             mp = struct('pm', st.mppt.pm, 'M', st.mppt.M, 'V', st.mppt.V, 'P', st.mppt.P, 'effRun', st.mppt.effRun);
             st.exFig = review0_explain(st.exFig, dd, lastS, lastV, P, F, cfg, mp, 'Visible', ~headless);
         catch err, st.lastMsg = ['explain window error: ' err.message]; end
+    end
+    function onManual(which, s)
+        v = str2double(s.String); if isnan(v), refreshManual(); return; end
+        switch which
+            case 'temp', st.tempC = min(50, max(-10, v)); st.fixT = true;
+            case 'rh', st.rh = min(100, max(0, v)); st.fixRH = true;
+            case 'soil', st.soilSim = min(100, max(0, v)); st.fixSoil = true;
+            case 'wind', h.wind.Value = min(25, max(0, v));
+            case 'ghi', h.pyr.Value = min(1200, max(0, v)); h.smode.Value = 2; onSensorMode(); return;
+            case 'par', h.par.Value = min(2400, max(0, v)); h.smode.Value = 2; onSensorMode(); return;
+        end
+        step();
+    end
+    function onPreset(k)                    % one click sets all six sensors
+        if k < 2, return; end
+        switch k
+            case 2, setState('day', 105, 'hour', 12, 'sky', 'Clear', 'rain', 0, 'wind', 3, 'temp', 31, 'rh', 55, 'soil', 48);
+            case 3, setState('day', 105, 'hour', 11, 'sky', 'Overcast', 'rain', 0, 'wind', 3, 'temp', 29, 'rh', 70, 'soil', 48);
+            case 4, setState('day', 105, 'hour', 14, 'sky', 'Clear', 'rain', 0, 'wind', 3, 'temp', 40, 'rh', 25, 'soil', 12);
+            case 5, setState('day', 220, 'hour', 14, 'sky', 'Overcast', 'rain', 1, 'wind', 5, 'temp', 26, 'rh', 90, 'soil', 55);
+            case 6, setState('day', 105, 'hour', 15, 'sky', 'Partly cloudy', 'rain', 0, 'wind', 20, 'temp', 30, 'rh', 60, 'soil', 48);
+            case 7, setState('day', 105, 'hour', 19, 'sky', 'Clear', 'rain', 0, 'wind', 2, 'temp', 26, 'rh', 70, 'soil', 48);
+        end
+        h.smode.Value = 1; onSensorMode(); h.preset.Value = 1;
+    end
+    function onRain2(v), st.simRain = logical(v); h.rain.Value = logical(v); step(); end
+    function onRelease()                    % hand control back to the generated day and the sun/sky model
+        st.fixT = false; st.fixRH = false; st.fixSoil = false; h.smode.Value = 1; onSensorMode();
+    end
+    function refreshManual()
+        try
+            h.mT.String = sprintf('%.1f', st.tempC); h.mRH.String = sprintf('%.0f', st.rh); h.mSoil.String = sprintf('%.0f', st.soilPct);
+            h.mGHI.String = sprintf('%.0f', h.pyr.Value); h.mPAR.String = sprintf('%.0f', h.par.Value); h.mWind.String = sprintf('%.1f', h.wind.Value);
+            h.rain2.Value = logical(st.rain); h.rain2.String = ternary(st.rain, 'Rain: WET', 'Rain: dry');
+        catch, end
     end
     function setPlay(v), st.play = logical(v); end
     function setSimRain(v), st.simRain = logical(v); end
@@ -185,7 +230,7 @@ app = struct('fig', fig, 'step', @step, 'set', @setState, 'snapshot', @snapshot,
         st.mppt = mt;
         st.n = st.n + 1; hr = [toc(st.t0), st.tempC, st.rh, d.vpd, st.soilPct, st.rain, d.ghi, d.parOpen, d.angle, d.pv, double(st.pump), st.tank, d.crop, h.wind.Value];
         st.hist = [st.hist; hr]; if size(st.hist, 1) > 300, st.hist(1, :) = []; end
-        draw(d, S, V, skyName); drawnow limitrate;
+        draw(d, S, V, skyName); refreshManual(); drawnow limitrate;
         if ~headless && ~isempty(st.exFig) && isvalid(st.exFig) && mod(st.n, 4) == 0, openExplain(); end
     end
 

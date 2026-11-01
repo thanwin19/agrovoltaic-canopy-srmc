@@ -39,3 +39,7 @@ Project title: **Agrovoltaic Canopy for Protection and Sustainable Farming**.
 ## Update 2026-10-25: real-data logging
 
 `data_logging/` logs the sensors for a week and scores the week with the six-sensor controller: fake week for rehearsal now (`run_fake_week.bat`), real ESP32 data later (`run_real_week.bat`, firmware `SRMC_ESP32_six_sensors`). See `data_logging/README.md`. Not tested on hardware.
+
+## Update 2026-11-01: manual sensors
+
+The dashboard has a **MANUAL SENSORS** row under the canopy drawing: type a value for DHT11 temperature, humidity, soil moisture, pyranometer, PAR and wind (press Enter), a rain toggle, six one-click presets (clear noon, passing clouds, hot dry afternoon, rain, storm, night) and **Back to AUTO**. Typed values act in Simulate mode; with a real ESP connected the real readings win. See `results/dashboard_manual_sensors.png`.
