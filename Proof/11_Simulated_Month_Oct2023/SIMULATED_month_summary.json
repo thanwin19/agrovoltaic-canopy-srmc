@@ -1,0 +1,22 @@
+{
+ "days": 31,
+ "daylight_hours": 340,
+ "electricity_ctrl_vs_fixed45_pct": -1.0,
+ "crop_score_ctrl": 0.535,
+ "crop_score_fixed45": 0.528,
+ "crop_ctrl_vs_fixed45_pct": 1.2,
+ "DLI_open_mean": 37.3,
+ "DLI_ctrl_mean": 10.0,
+ "DLI_fixed45_mean": 9.8,
+ "shade_ctrl_pct_of_open": 73.3,
+ "shade_fixed45_pct_of_open": 73.6,
+ "modes": {
+  "OPTIMISED": 300,
+  "RAIN HARVEST": 40
+ },
+ "rain_total_mm": 63.2,
+ "angle_min": 3.0,
+ "angle_max": 60.0,
+ "angle_mean": 47.8,
+ "pump_hours": 0
+}

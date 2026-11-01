@@ -127,6 +127,27 @@ REFDB = {
  'is875': '<i>Code of Practice for Design Loads (Other Than Earthquake) for Buildings and Structures, Part 3: Wind Loads</i>, IS 875 (Part 3): 2015, Bureau of Indian Standards, New Delhi, India, 2015.',
 }
 
+# ---- added 2026-11-01: a trace-driven month with real weather (both papers) and project context with the prototype photo (project paper only)
+import os as _os
+PROJECT = _os.environ.get('PROJECT') == '1'
+MONTH_ITEMS = [
+('h1', 'Trace-Driven Month with Real Weather'),
+('p', "To see the controller outside the typical-day test, we ran it for October 2023 at the reference site, driven by hourly NASA POWER data [@nasa] for sunlight, photosynthetically active radiation, air temperature, humidity, wind, and rain. The six sensors read these true values plus random errors of the size of the datasheet accuracies, a simple water balance gave the soil moisture, the controller chose the tilt from the noisy readings, and each choice was scored under the true weather against a fixed 45° tilt. This is a simulation, not a field measurement."),
+('p', "The 340 daylight hours included 40 hours of rain, in which the panels lay flat, and 300 optimized hours; the largest hourly mean wind was 7.3 m/s, so the storm limit was never reached. Over the month the controller produced 1.0 percent less electricity than the fixed 45° tilt and a crop light score 1.2 percent higher (0.535 against 0.528). The mean daily light integral at the crop was 10.0 mol m⁻² day⁻¹ with the controller and 9.8 with the fixed tilt, against 37.3 in the open, so both designs shade about 73 percent of the open-field light in this month (Fig. 5). The mean tilt of the controller was 47.8°, close to 45°, probably because in this cloudy month (63 mm of rain) the best angle varies little. The gain of the controller over a fixed 45° tilt is therefore small in this month; the larger gains in Table 2 are measured against the best angle, over all months, skies, and soil states."),
+('fig', 'fig6_month.png', 3.25, 'Simulated month with real weather', "October 2023 at the reference site: electricity per square meter of panel and daily light integral at the crop for the controller and a fixed 45° tilt. Weather is NASA POWER data; the sensors and the soil are simulated."),
+]
+PROJECT_ITEMS = [
+('h1', 'Project Context and Prototype'),
+('p', "The work was carried out as a final-year project at the Thiagarajar College of Engineering, Madurai (9.88° N, 78.08° E), in six reviews: the prototype and sensors, the structure and drawings, the solar and shadow model, the digital twin, the control and simulation, and the economics. A scaled model of the canopy with eight small panels on a wire frame was built in an earlier phase (Fig. 6). It carries a DHT11, a soil probe, and a rain sensor on a microcontroller board that feeds the MATLAB dashboard; the pyranometer, the PAR sensor, and the anemometer are simulated, and no measurements from the model are reported in this paper."),
+('fig', 'proto28.jpg', 3.25, 'Scaled prototype', "Scaled model of the canopy (eight panels on a wire frame above a tray) with the breadboard and sensors of the earlier phase. It is shown for context; no results in this paper come from it."),
+('p', "<b>Planned crop light measurement.</b> The light under the canopy in this paper is calculated. To test it, the daily light integral should be measured with a quantum sensor at several points under the panels and in the open, and compared with the calculation, for example over one month; a protocol and a table for the readings are given in the supplementary files."),
+]
+_i = next(k for k, it in enumerate(BODY) if it[0] == 'h1' and it[1] == 'Limitations')
+BODY[_i:_i] = MONTH_ITEMS + (PROJECT_ITEMS if PROJECT else [])
+if PROJECT:
+    TITLE = "Sensor-Driven Tilting Agrovoltaic Canopy for Sustainable Farming: Design, Simulation, and Prototype at TCE Madurai"
+    ABSTRACT = ABSTRACT.rstrip() + " A month-long simulation driven by real hourly weather and a scaled prototype are also reported."
+
 # ---- number the citations by first appearance and build REFS in that order
 import re as _re
 _order = []

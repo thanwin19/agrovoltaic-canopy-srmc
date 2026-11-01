@@ -53,6 +53,7 @@ cells1 = []; seen1 = set()
 for c in row1.cells:
     if id(c._tc) not in seen1: seen1.add(id(c._tc)); cells1.append(c)
 CAMERA = os.environ.get('CAMERA') == '1'
+if os.environ.get('PROJECT') == '1': OUT = os.path.join(HERE, 'SRMC_FinalYear_Project_Paper.docx')
 if CAMERA: OUT = os.path.join(HERE, 'SRMC_Research_Paper_CAMERA_READY_SAMPLE.docx')
 def author_cell(cell, a):
     p = cell.paragraphs[0]
