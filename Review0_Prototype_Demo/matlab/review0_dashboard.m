@@ -19,7 +19,7 @@ cfg = struct('wEnergy', 0.5, 'windStow', 15, 'vpdHigh', 2.5, 'soilDry', 35, 'soi
 KEYS = {'ghi', 'par', 'temp', 'rh', 'soil', 'wind'};
 st = struct('tempC', 31, 'rh', 55, 'soilPct', 48, 'soilSim', 48, 'rain', 0, 'simRain', false, 'tank', 120, 'pump', false, 'play', false, 'hist', zeros(0, 14), 'n', 0, ...
     't0', tic, 'lat', 9.88, 'lastMsg', 'ready', 'exFig', [], 'mppt', [], 'man', struct('ghi', false, 'par', false, 'temp', false, 'rh', false, 'soil', false, 'wind', false), ...
-    'lastKey', [], 'staleDay', true, 'DA', [], 'busy', false);
+    'lastKey', [], 'same', 0, 'curveKey', [], 'cKey', [], 'mKey', [], 'staleDay', true, 'DA', [], 'busy', false);
 NMOD = 8; MODAREA = 2.278 * 1.134;                    % 8 modules, area of one module (m2)
 % sensor catalogue: key, heading, real device, unit, slider min, max, value format, spec line
 SEN = struct('key', {'ghi', 'par', 'temp', 'rh', 'soil', 'wind'}, ...
@@ -89,7 +89,7 @@ h.log = T(fig, [cx 0.003 0.24 0.022], '', 'FontSize', 8, 'ForegroundColor', GREY
 tg = uitabgroup(fig, 'Units', 'normalized', 'Position', [0.608 0.03 0.388 0.895], 'FontSize', 10);
 tb = {uitab(tg, 'Title', 'Sensors through a day'), uitab(tg, 'Title', 'Panel angle and output'), uitab(tg, 'Title', 'Accuracy'), uitab(tg, 'Title', 'Sensors and panels')};
 for q = 1:4, tb{q}.BackgroundColor = BG; end
-G = struct(); NOW = gobjects(0);
+G = struct(); NOW = gobjects(0); DYN = gobjects(0);
 cap1 = {'WHAT IT SHOWS: how strong the sun is from sunrise to sunset on the chosen day and sky. Orange = all sunlight (pyranometer, W/m2). Green = only the light plants can use (PAR sensor). The dots are the values you hold right now.', ...
         'WHAT IT SHOWS: the DHT11 chip reads air temperature (red) and humidity (blue). Hot, dry air stresses plants, so the controller lets the panels shade them more.', ...
         'WHAT IT SHOWS: soil moisture (green) falls as the sun dries the soil; below 35 % the irrigation valve opens with water from the roof tank. The blue band appears when the rain sensor is wet.', ...
@@ -114,12 +114,12 @@ st.mppt = struct('M', MP, 'pm', pm, 'st', MP.init(pm, 36), 'V', 36, 'P', 0, 'Pmp
 WD = review0_words(); lastD = []; lastS = []; lastV = [];
 tm = [];
 if ~headless
-    tm = timer('ExecutionMode', 'fixedSpacing', 'Period', 1.0, 'TimerFcn', @(~, ~) step(), 'BusyMode', 'drop');
+    tm = timer('ExecutionMode', 'fixedSpacing', 'Period', 0.5, 'TimerFcn', @(~, ~) step(), 'BusyMode', 'drop');
     fig.CloseRequestFcn = @onClose;
 end
 for q = 1:6, setSensor(SEN(q).key, 0); end
 A0 = autoVals(h.hour.Value, 105, SKYKT(1)); for q = 1:6, setSensor(SEN(q).key, A0.(SEN(q).key)); end
-onWeight(); drawSensorDay(); step();
+initCanopy(); onWeight(); drawSensorDay(); step();
 if ~headless, start(tm); end
 
 app = struct('fig', fig, 'step', @step, 'set', @setState, 'snapshot', @snapshot, 'state', @getState, 'last', @getLast, 'trust', @runTrust, 'explain', @openExplain, 'day', @computeDay, 'tab', @(k) set(tg, 'SelectedTab', tb{k}), 'close', @() delete(fig));
@@ -207,7 +207,7 @@ app = struct('fig', fig, 'step', @step, 'set', @setState, 'snapshot', @snapshot,
                 case 'par', st.man.par = true; setSensor('par', v);
             end
         end
-        st.staleDay = true;
+        st.staleDay = true; drawSensorDay();
     end
     function setPlay(v), st.play = logical(v); end
     function setRun(v)
@@ -246,10 +246,15 @@ app = struct('fig', fig, 'step', @step, 'set', @setState, 'snapshot', @snapshot,
         st.tempC = h.sl.temp.Value; st.rh = h.sl.rh.Value; st.soilPct = h.sl.soil.Value; st.rain = double(st.simRain);
         S = struct('tempC', st.tempC, 'rh', st.rh, 'soilPct', st.soilPct, 'rain', st.rain);
         V = struct('lat', st.lat, 'day', day, 'hour', hr, 'kt', kt, 'windMS', h.sl.wind.Value, 'ghiOverride', h.sl.ghi.Value, 'parOverride', h.sl.par.Value);
-        key = [hr day kt S.tempC S.rh S.soilPct S.rain V.windMS V.ghiOverride V.parOverride cfg.wEnergy];
-        if isempty(st.lastKey) || ~isequal(key, st.lastKey) || isempty(lastD)
-            c2 = cfg; c2.wantCurve = true; d = review0_controller(S, V, P, F, c2); st.lastKey = key; d.gTag = ternary(st.man.ghi || st.man.par, 'SIM-MANUAL', 'SIM'); lastD = d; lastS = S; lastV = V;
-        else, d = lastD; end
+        key = round([hr * 20 day kt * 100 S.tempC * 2 S.rh S.soilPct S.rain V.windMS * 2 V.ghiOverride V.parOverride cfg.wEnergy * 100]);
+        if isempty(st.lastKey) || ~isequal(key, st.lastKey) || isempty(lastD)       % something changed: one fast decision (about 0.1 s)
+            d = review0_controller(S, V, P, F, cfg); st.lastKey = key; st.same = 0; st.curveKey = []; d.gTag = ternary(st.man.ghi || st.man.par, 'SIM-MANUAL', 'SIM'); lastD = d; lastS = S; lastV = V;
+        else
+            st.same = st.same + 1; d = lastD;
+            if st.same >= 3 && isempty(st.curveKey) && ~st.play                      % idle for 3 steps: do the slow check against the best angle once
+                c2 = cfg; c2.wantCurve = true; d = review0_controller(S, V, P, F, c2); st.curveKey = key; d.gTag = lastD.gTag; lastD = d;
+            end
+        end
         [st.pump, st.tank] = review0_irrigation(st.pump, st.soilPct, st.tank, st.rain, cfg);
         mt = st.mppt;
         if d.gpoa > 20 && ~strcmp(d.mode, 'NIGHT PARK')
@@ -269,7 +274,7 @@ app = struct('fig', fig, 'step', @step, 'set', @setState, 'snapshot', @snapshot,
         h.kpiT{1}.String = sprintf('%.1f deg', d.angle); h.kpiT{1}.ForegroundColor = c;
         h.kpiT{2}.String = sprintf('%.0f W/m2', d.pv); gain = d.pvGainVs45; h.kpiT{2}.TooltipString = sprintf('%+.1f %% against a fixed 45 deg panel', gain);
         h.kpiT{3}.String = ternary(d.crop > 0 || d.ghi > 20, sprintf('%.2f', d.crop), '-');
-        if isfield(d, 'brute') && d.ghi > 20, h.kpiT{4}.String = sprintf('%.1f %%', 100 - d.brute.gapJpct); else, h.kpiT{4}.String = '-'; end
+        if isfield(d, 'brute') && d.ghi > 20, h.kpiT{4}.String = sprintf('%.1f %%', 100 - d.brute.gapJpct); elseif d.ghi > 20, h.kpiT{4}.String = '...'; else, h.kpiT{4}.String = '-'; end
         h.mode.String = {['DECISION: ' d.mode], d.reason}; h.mode.ForegroundColor = c;
         words = WD.wrap(WD.now(d, S, V), 72); h.words.String = ['IN SIMPLE WORDS:  ' strjoin(words, ' ')];
         % ---- sensor and array readout ----
@@ -287,41 +292,52 @@ app = struct('fig', fig, 'step', @step, 'set', @setState, 'snapshot', @snapshot,
             sprintf('  all %d modules: %.2f kW DC now', NMOD, NMOD * mt.P / 1000), ...
             sprintf('  vs fixed 45 deg: electricity %+.1f %%, crop light %.2f -> %.2f', d.pvGainVs45, d.cropFixed45, d.crop)};
         h.read.String = L; h.read.Value = 1;
-        % ---- canopy drawing ----
-        ax = h.axC; cla(ax); hold(ax, 'on'); axis(ax, 'equal'); ax.XLim = [-9 9]; ax.YLim = [-1.0 12]; ax.XTick = []; ax.YTick = []; ax.Box = 'on'; ax.Color = skyColor(d, skyName);
+        % ---- canopy drawing (only when something visible changed; few graphics objects, so it is fast) ----
+        ck = [round(d.angle * 2) round(V.hour * 4) round(V.day) round(V.windMS >= 8) S.rain ~strcmp(skyName, 'Clear') double(d.sunEl > 0) length(d.mode)];
+        if ~isequal(ck, st.cKey) || S.rain, st.cKey = ck; drawCanopy(d, S, V, skyName); end
+        % ---- "now" markers on the day graphs ----
+        mk2 = round([V.hour * 20 d.ghi d.parOpen]);
+        if ~isequal(mk2, st.mKey), st.mKey = mk2; updateMarkers(d); end
+        h.log.String = ['status: ' st.lastMsg '   |   samples: ' num2str(st.n)];
+    end
+
+    function updateMarkers(d)
+        hr = h.hour.Value;
+        if numel(NOW) ~= 9 || ~all(isvalid(NOW))                      % (re)create the markers after a graph was redrawn
+            delete(NOW(isvalid(NOW))); NOW = gobjects(1, 9); axs = [G.a1 G.a2 G.a3(1) G.a3(3)];
+            for q = 1:numel(axs), NOW(q) = xline(axs(q), hr, '--', 'Color', [0.3 0.3 0.3], 'LineWidth', 1, 'HandleVisibility', 'off'); end
+            yyaxis(G.a1(1), 'left'); hold(G.a1(1), 'on'); NOW(8) = plot(G.a1(1), hr, d.ghi, 'o', 'MarkerFaceColor', AMBER, 'MarkerEdgeColor', 'k', 'MarkerSize', 8, 'HandleVisibility', 'off'); NOW(9) = plot(G.a1(1), hr, d.parOpen / 2, 's', 'MarkerFaceColor', GREEN, 'MarkerEdgeColor', 'k', 'MarkerSize', 7, 'HandleVisibility', 'off');
+        else
+            for q = 1:7, NOW(q).Value = hr; end
+            NOW(8).XData = hr; NOW(8).YData = d.ghi; NOW(9).XData = hr; NOW(9).YData = d.parOpen / 2;
+        end
+    end
+
+    function initCanopy()
+        ax = h.axC; hold(ax, 'on'); axis(ax, 'equal'); ax.XLim = [-9 9]; ax.YLim = [-1.0 12]; ax.XTick = []; ax.YTick = []; ax.Box = 'on';
         rectangle(ax, 'Position', [-9 -1 18 1], 'FaceColor', [0.55 0.33 0.20], 'EdgeColor', 'none');
         zc = [0.45 0.72 0.19; 0.17 0.77 0.77; 0.94 0.69 0.19; 0.75 0.52 0.98];
         for k = -3:3, for z = 1:4, rectangle(ax, 'Position', [k * P.pitch + (z - 1) * P.pitch / 4 - P.pitch / 2, 0, P.pitch / 4, 0.55], 'FaceColor', zc(z, :) * 0.85, 'EdgeColor', 'none'); end, end
-        a = deg2rad(d.angle);
-        for k = -3:3
-            xc = k * P.pitch; dx = P.panelW / 2 * cos(a); dz = P.panelW / 2 * sin(a);
-            plot(ax, [xc - dx xc + dx], [P.height + dz P.height - dz], '-', 'LineWidth', 5, 'Color', [0.10 0.20 0.55]);
-        end
         for xx = [-8 8], plot(ax, [xx xx], [0 P.height + 0.7], '-', 'LineWidth', 3, 'Color', [0.45 0.47 0.5]); end
         plot(ax, [-8 8], [P.height + 0.6 P.height + 0.6], '-', 'Color', [0.7 0.72 0.75], 'LineWidth', 1);
+    end
+    function drawCanopy(d, S, V, skyName)
+        ax = h.axC; delete(DYN(isvalid(DYN))); DYN = gobjects(0); ax.Color = skyColor(d, skyName);
+        a = deg2rad(d.angle); xs = (-3:3) * P.pitch; dx = P.panelW / 2 * cos(a); dz = P.panelW / 2 * sin(a); nn = nan(size(xs));
+        X = [xs - dx; xs + dx; nn]; Zp = [P.height + dz + 0 * xs; P.height - dz + 0 * xs; nn];
+        DYN(end + 1) = plot(ax, X(:), Zp(:), '-', 'LineWidth', 5, 'Color', [0.10 0.20 0.55]);
         if d.sunEl > 0
             sx = cosd(d.sunEl) * sind(d.sunAz); sz = sind(d.sunEl); R = 9.5; px = max(-7.5, min(7.5, R * sx / hypot(sx, sz))); py = max(8.2, min(11.3, R * sz / hypot(sx, sz) + 4));
             drawSun(ax, px, py, 0.7, ~strcmp(skyName, 'Overcast'));
             if strcmp(skyName, 'Partly cloudy'), drawCloud(ax, px - 0.9, py - 0.5, 0.9, [0.93 0.93 0.95]); end
             if strcmp(skyName, 'Overcast'), drawCloud(ax, px, py, 1.4, [0.62 0.64 0.68]); drawCloud(ax, px + 1.6, py - 0.3, 1.0, [0.7 0.72 0.76]); end
             if strcmp(skyName, 'Hazy'), drawCloud(ax, px + 1.7, py - 0.7, 0.8, [0.9 0.9 0.88]); end
-        else, text(ax, -8.5, 10.5, 'night', 'Color', 'w', 'FontSize', 12); end
-        if S.rain, for i = 1:30, xr = -8.5 + 17 * rand; yr2 = 3 + 7 * rand; plot(ax, [xr xr - 0.25], [yr2 yr2 - 0.9], '-', 'Color', [0.2 0.45 0.9]); end, end
-        if V.windMS >= 8, for i = 1:4, plot(ax, [-8.5 -6.5] + 1.2 * i, [10.8 - 0.5 * i, 10.8 - 0.5 * i], '-', 'Color', [1 1 1] * 0.95, 'LineWidth', 1.5); end, text(ax, 4.8, 11.5, sprintf('wind %.0f m/s', V.windMS), 'FontSize', 10, 'FontWeight', 'bold', 'Color', [0.7 0.1 0.1]); end
-        text(ax, -8.8, -0.45, sprintf('panel angle %.1f deg   |   %s', d.angle, d.mode), 'FontWeight', 'bold', 'Color', 'w', 'FontSize', 11);
-        text(ax, -8.8, 11.6, 'Side view: blue bars = solar panels, coloured strip = 4 crop zones', 'FontSize', 9);
+        else, DYN(end + 1) = text(ax, -8.5, 10.5, 'night', 'Color', 'w', 'FontSize', 12); end
+        if S.rain, xr = -8.5 + 17 * rand(1, 30); yr2 = 3 + 7 * rand(1, 30); XR = [xr; xr - 0.25; nan(1, 30)]; YR = [yr2; yr2 - 0.9; nan(1, 30)]; DYN(end + 1) = plot(ax, XR(:), YR(:), '-', 'Color', [0.2 0.45 0.9]); end
+        if V.windMS >= 8, x1 = -8.5 + 1.2 * (1:4); y1 = 10.8 - 0.5 * (1:4); XW = [x1; x1 + 2; nan(1, 4)]; YW = [y1; y1; nan(1, 4)]; DYN(end + 1) = plot(ax, XW(:), YW(:), '-', 'Color', [0.95 0.95 0.95], 'LineWidth', 1.5); DYN(end + 1) = text(ax, 4.8, 11.5, sprintf('wind %.0f m/s', V.windMS), 'FontSize', 10, 'FontWeight', 'bold', 'Color', [0.7 0.1 0.1]); end
+        DYN(end + 1) = text(ax, -8.8, -0.45, sprintf('panel angle %.1f deg   |   %s', d.angle, d.mode), 'FontWeight', 'bold', 'Color', 'w', 'FontSize', 11);
+        DYN(end + 1) = text(ax, -8.8, 11.6, 'Side view: blue bars = solar panels, coloured strip = 4 crop zones', 'FontSize', 9);
         title(ax, sprintf('Live canopy: day %d, solar hour %.1f, %s sky', V.day, V.hour, lower(skyName)), 'FontSize', 11);
-        % ---- "now" markers on the day graphs ----
-        updateMarkers(d);
-        h.log.String = ['status: ' st.lastMsg '   |   samples: ' num2str(st.n)];
-    end
-
-    function updateMarkers(d)
-        for q = 1:numel(NOW), try, delete(NOW(q)); catch, end, end
-        NOW = gobjects(0);
-        for q = 1:4, NOW(end + 1) = xline(G.a1(q), h.hour.Value, '--', 'Color', [0.3 0.3 0.3], 'LineWidth', 1, 'HandleVisibility', 'off'); end %#ok<AGROW>
-        for q = 1:3, NOW(end + 1) = xline(G.a2(q), h.hour.Value, '--', 'Color', [0.3 0.3 0.3], 'LineWidth', 1, 'HandleVisibility', 'off'); if q ~= 2, NOW(end + 1) = xline(G.a3(q), h.hour.Value, '--', 'Color', [0.3 0.3 0.3], 'LineWidth', 1, 'HandleVisibility', 'off'); end, end %#ok<AGROW>
-        hr = h.hour.Value; yyaxis(G.a1(1), 'left'); hold(G.a1(1), 'on'); NOW(end + 1) = plot(G.a1(1), hr, d.ghi, 'o', 'MarkerFaceColor', AMBER, 'MarkerEdgeColor', 'k', 'MarkerSize', 8, 'HandleVisibility', 'off'); NOW(end + 1) = plot(G.a1(1), hr, d.parOpen / 2, 's', 'MarkerFaceColor', GREEN, 'MarkerEdgeColor', 'k', 'MarkerSize', 7, 'HandleVisibility', 'off'); %#ok<AGROW>
     end
 
     function dm = dayModel(hrs)
@@ -343,7 +359,7 @@ app = struct('fig', fig, 'step', @step, 'set', @setState, 'snapshot', @snapshot,
         a = G.a1(2); cla(a); hold(a, 'on'); yyaxis(a, 'left'); plot(a, hrs, dm.T, '-', 'Color', [0.85 0.2 0.15], 'LineWidth', 2); ylabel(a, 'temperature C'); ylim(a, [0 50]); yyaxis(a, 'right'); plot(a, hrs, dm.RH, '-', 'Color', [0.15 0.4 0.85], 'LineWidth', 2); ylabel(a, 'humidity %'); ylim(a, [0 100]); a.XLim = [5 19]; a.YAxis(1).Color = [0.85 0.2 0.15]; a.YAxis(2).Color = [0.15 0.4 0.85];
         a = G.a1(3); cla(a); hold(a, 'on'); yyaxis(a, 'left'); if st.simRain, patch(a, [5 19 19 5], [0 0 100 100], [0.6 0.8 1], 'FaceAlpha', 0.35, 'EdgeColor', 'none'); end
         plot(a, hrs, dm.soil, '-', 'Color', GREEN, 'LineWidth', 2); yline(a, cfg.soilDry, ':', 'valve opens below 35 %', 'Color', [0.2 0.2 0.2]); ylabel(a, 'soil water %'); ylim(a, [0 100]); a.XLim = [5 19]; yyaxis(a, 'right'); ylim(a, [0 100]); a.YAxis(2).Visible = 'off';
-        a = G.a1(4); cla(a); hold(a, 'on'); wv = h.sl.wind.Value; plot(a, [5 19], [wv wv], '-', 'Color', [0.3 0.3 0.4], 'LineWidth', 2); yline(a, cfg.windStow, '--', 'storm limit 15 m/s', 'Color', [0.8 0.15 0.15], 'LineWidth', 1.5); ylabel(a, 'wind m/s'); ylim(a, [0 26]); a.XLim = [5 19];
+        st.mKey = []; a = G.a1(4); cla(a); hold(a, 'on'); wv = h.sl.wind.Value; plot(a, [5 19], [wv wv], '-', 'Color', [0.3 0.3 0.4], 'LineWidth', 2); yline(a, cfg.windStow, '--', 'storm limit 15 m/s', 'Color', [0.8 0.15 0.15], 'LineWidth', 1.5); ylabel(a, 'wind m/s'); ylim(a, [0 26]); a.XLim = [5 19];
         text(a, 5.3, wv + 1.6, 'the value you hold (drag the wind slider to change it)', 'FontSize', 8, 'Color', GREY);
     end
 
@@ -377,7 +393,7 @@ app = struct('fig', fig, 'step', @step, 'set', @setState, 'snapshot', @snapshot,
         legend(a, {'fixed 45 deg', 'controller'}, 'Location', 'northeast', 'Box', 'off');
         a = G.a2(2); cla(a); hold(a, 'on'); plot(a, hrs, R.pv45, '-', 'Color', [0.6 0.6 0.6], 'LineWidth', 2); plot(a, hrs, R.pv, '-o', 'Color', AMBER, 'LineWidth', 2, 'MarkerFaceColor', AMBER); ylabel(a, 'W per m2 of panel'); a.XLim = [5.5 18.5]; legend(a, {'fixed 45 deg', 'controller'}, 'Location', 'north', 'Box', 'off');
         a = G.a2(3); cla(a); hold(a, 'on'); plot(a, hrs, R.crop45, '-', 'Color', [0.6 0.6 0.6], 'LineWidth', 2); plot(a, hrs, R.crop, '-o', 'Color', GREEN, 'LineWidth', 2, 'MarkerFaceColor', GREEN); ylabel(a, 'crop-light score'); ylim(a, [0 1.05]); a.XLim = [5.5 18.5]; legend(a, {'fixed 45 deg', 'controller'}, 'Location', 'south', 'Box', 'off');
-        eg = 100 * (sum(R.pv, 'omitnan') / max(sum(R.pv45, 'omitnan'), eps) - 1); cg = 100 * (sum(R.crop, 'omitnan') / max(sum(R.crop45, 'omitnan'), eps) - 1);
+        st.mKey = []; eg = 100 * (sum(R.pv, 'omitnan') / max(sum(R.pv45, 'omitnan'), eps) - 1); cg = 100 * (sum(R.crop, 'omitnan') / max(sum(R.crop45, 'omitnan'), eps) - 1);
         G.c2(1).String = sprintf('WHAT IT SHOWS: the tilt the controller picks each hour (blue) against a fixed 45 deg panel (grey). It follows the sun, plant stress, rain and wind. Over today the controller makes %+.1f %% electricity and %+.1f %% crop light compared with the fixed panel.', eg, cg);
         a = G.a3(1); cla(a); hold(a, 'on'); plot(a, hrs, R.acc45, '-', 'Color', [0.6 0.6 0.6], 'LineWidth', 1.5); plot(a, hrs, R.accT, '-', 'Color', AMBER, 'LineWidth', 1.5); plot(a, hrs, R.accP, '--', 'Color', GREEN, 'LineWidth', 2); plot(a, hrs, R.accS, '-o', 'Color', [0.1 0.25 0.7], 'LineWidth', 2.2, 'MarkerFaceColor', [0.1 0.25 0.7]);
         ylabel(a, 'accuracy %'); a.XLim = [5.5 18.5]; ylim(a, [min(70, floor(min([R.acc45 R.accT R.accS], [], 'omitnan')) - 2) 101]); legend(a, {'fixed 45 deg', 'sun tracking', 'controller, perfect sensors', 'controller, real sensor errors'}, 'Location', 'southwest', 'Box', 'off', 'FontSize', 7);
@@ -400,8 +416,8 @@ app = struct('fig', fig, 'step', @step, 'set', @setState, 'snapshot', @snapshot,
              '7', 'Wind', 'Adafruit 1733 anemometer', '0.5-32.4 m/s', '+-1 m/s worst', 'analog 0.4-2.0 V'};
         uitable(par, 'Units', 'normalized', 'Position', [0.02 0.62 0.96 0.33], 'Data', D, 'ColumnName', {'#', 'Role', 'Real device', 'Range', 'Accuracy', 'Signal'}, 'RowName', [], 'FontSize', 9, 'ColumnWidth', {20, 70, 150, 105, 95, 100}, 'ColumnEditable', false);
         T(par, [0.02 0.575 0.96 0.04], 'THE SOLAR PANELS: 8 modules of one real type (datasheet numbers)', 'FontWeight', 'bold', 'FontSize', 10, 'ForegroundColor', GREEN);
-        M = {'Model', 'JinkoSolar Tiger Pro JKM550M-72HL4-V'; 'Type', 'monocrystalline silicon'; 'Number of panels', '8  (2 rows x 4, landscape) = 4.4 kWp'; 'Size / weight', '2278 x 1134 x 35 mm / about 28 kg'; ...
-             'Pmax (test conditions)', '550 Wp'; 'Vmp / Imp', '40.90 V / 13.45 A'; 'Voc / Isc', '49.62 V / 14.03 A'; 'Efficiency', '21.29 %'; 'Tilt used here', '15-60 deg, rain 3 deg, storm 90 deg'};
+        M = {'Model', 'JinkoSolar Tiger Pro JKM550M-72HL4-V'; 'Type', 'monocrystalline silicon'; 'Number of panels', '8  (2 rows x 4, landscape) = 4.4 kWp'; 'Size / weight', '2274 x 1134 x 35 mm / 28.9 kg'; ...
+             'Pmax (test conditions)', '550 Wp'; 'Vmp / Imp', '40.90 V / 13.45 A'; 'Voc / Isc', '49.62 V / 14.03 A'; 'Efficiency', '21.33 %'; 'Tilt used here', '15-60 deg, rain 3 deg, storm 90 deg'};
         uitable(par, 'Units', 'normalized', 'Position', [0.02 0.22 0.96 0.35], 'Data', M, 'ColumnName', {'Item', 'Value'}, 'RowName', [], 'FontSize', 9, 'ColumnWidth', {140, 380});
         uicontrol(par, 'Style', 'text', 'Units', 'normalized', 'Position', [0.02 0.01 0.96 0.2], 'BackgroundColor', [1 1 0.93], 'ForegroundColor', INK, 'FontSize', 9, 'HorizontalAlignment', 'left', 'String', ...
             ['PROOF: every number above, its source link and the way each sensor is simulated is in documents/SENSOR_AND_PANEL_PROOF.md (and Proof/10_Review0_Sensors_and_Panels). ' ...
@@ -437,12 +453,13 @@ app = struct('fig', fig, 'step', @step, 'set', @setState, 'snapshot', @snapshot,
         switch skyName, case 'Clear', c = [0.55 0.78 0.98]; case 'Hazy', c = [0.72 0.82 0.9]; case 'Partly cloudy', c = [0.62 0.8 0.95]; otherwise, c = [0.66 0.7 0.75]; end
     end
     function drawSun(ax, x, y, r, bright)
-        col = ternary(bright, [1 0.82 0.1], [0.95 0.85 0.5]);
-        for k = 0:7, an = k * pi / 4; plot(ax, [x + 1.25 * r * cos(an) x + 1.9 * r * cos(an)], [y + 1.25 * r * sin(an) y + 1.9 * r * sin(an)], '-', 'Color', col, 'LineWidth', 2); end
-        rectangle(ax, 'Position', [x - r y - r 2 * r 2 * r], 'Curvature', [1 1], 'FaceColor', col, 'EdgeColor', [0.9 0.6 0]);
+        col = ternary(bright, [1 0.82 0.1], [0.95 0.85 0.5]); an = (0:7) * pi / 4;
+        XR = [x + 1.25 * r * cos(an); x + 1.9 * r * cos(an); nan(1, 8)]; YR = [y + 1.25 * r * sin(an); y + 1.9 * r * sin(an); nan(1, 8)];
+        DYN(end + 1) = plot(ax, XR(:), YR(:), '-', 'Color', col, 'LineWidth', 2);
+        DYN(end + 1) = rectangle(ax, 'Position', [x - r y - r 2 * r 2 * r], 'Curvature', [1 1], 'FaceColor', col, 'EdgeColor', [0.9 0.6 0]);
     end
     function drawCloud(ax, x, y, s, col)
-        for q = [-0.7 0 0.7 0.35 -0.35], rectangle(ax, 'Position', [x + q * s - 0.55 * s, y + 0.1 * abs(q) * s - 0.35 * s, 1.1 * s, 0.8 * s], 'Curvature', [1 1], 'FaceColor', col, 'EdgeColor', 'none'); end
+        for q = [-0.7 0 0.7 0.35 -0.35], DYN(end + 1) = rectangle(ax, 'Position', [x + q * s - 0.55 * s, y + 0.1 * abs(q) * s - 0.35 * s, 1.1 * s, 0.8 * s], 'Curvature', [1 1], 'FaceColor', col, 'EdgeColor', 'none'); end
     end
 end
 

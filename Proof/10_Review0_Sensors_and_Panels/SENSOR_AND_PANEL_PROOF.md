@@ -24,11 +24,11 @@ How a reading is "simulated" in the dashboard: the slider value is the physical 
 |---|---|
 | Make and model | **JinkoSolar Tiger Pro JKM550M-72HL4-V**, monocrystalline silicon |
 | Number of panels | **8** (2 rows x 4, landscape across the tube) = **4.4 kWp** (from the hardware pack, `Review1_Design_and_CAD/code_reference/build_hardware_docs.py`) |
-| Size and weight | 2278 x 1134 x 35 mm, about 28 kg (27.5 kg is used in the structure calculation) |
+| Size and weight | 2274 x 1134 x 35 mm, 28.9 kg (official JinkoSolar datasheet; the structure calculation used 2278 mm and 27.5 kg from retailer listings, a small difference) |
 | Maximum power at test conditions (STC) | 550 Wp |
 | Voltage and current at maximum power | Vmp 40.90 V, Imp 13.45 A (40.90 x 13.45 = 550 W) |
 | Open-circuit voltage, short-circuit current | Voc 49.62 V, Isc 14.03 A |
-| Module efficiency | 21.29 % |
+| Module efficiency | 21.33 % (550 W column of the datasheet) |
 
 What is used where: the dashboard's I-V curve and maximum-power-point tracker use these five numbers (single-diode model, perturb-and-observe tracker). The energy model used by the controller uses a module efficiency of 21 % with the PVGIS-style temperature model. The temperature coefficients in the I-V model are typical values, **not** read from this datasheet.
 
@@ -40,8 +40,12 @@ What is used where: the dashboard's I-V curve and maximum-power-point tracker us
 - DFRobot SEN0193 capacitive soil moisture sensor (output 1.2-2.5 V, 3.3-5.5 V supply): https://www.dfrobot.com/product-1385.html
 - Adafruit 1733 analog anemometer (0.4 V at 0 m/s, 2.0 V at 32.4 m/s, worst-case accuracy 1 m/s, start speed 0.2 m/s): https://www.adafruit.com/product/1733
 - YL-83 / FC-37 rain sensor: no official datasheet exists; vendor pages (5 V supply, LM393 comparator, digital output LOW when wet) e.g. https://botland.com.pl/en/weather-sensors/1732-rain-sensor-module-yl-83.html
-- JinkoSolar Tiger Pro JKM550M-72HL4-V (550 Wp, 40.90 V, 13.45 A, 49.62 V, 14.03 A, 21.29 %, 2278 x 1134 x 35 mm): JinkoSolar series datasheet https://www.jinkosolar.com/uploads/JKM530-550M-72HL4-(V)-F1-CN.pdf and a retailer listing https://sun.store/en/product/jinko-jkm550m-72hl4-v-silver-frame-1500v-1644 . I did not open the official English PDF for exactly this variant; the numbers agree across the series datasheet and the listing. **Check the official datasheet before a real purchase.**
+- JinkoSolar Tiger Pro JKM550M-72HL4-V (550 Wp, 40.90 V, 13.45 A, 49.62 V, 14.03 A, 21.29 %, 2278 x 1134 x 35 mm): the official JinkoSolar datasheet for the JKM530-550M-72HL4-(V) series (downloaded, Chinese-language edition; Vmp 40.90 V, Imp 13.45 A, Voc 49.62 V, Isc 14.03 A, 2274 x 1134 x 35 mm, 28.9 kg, 21.33 % all read from the file): https://www.jinkosolar.com/uploads/JKM530-550M-72HL4-(V)-F1-CN.pdf . A retailer listing (https://sun.store/en/product/jinko-jkm550m-72hl4-v-silver-frame-1500v-1644) gave 21.29 % and 2278 mm; the datasheet figures are used.
 
 ## What the day graphs show (tab "Accuracy")
 
 "Accuracy" is how close the controller's angle gets to the best possible angle on the combined score (half electricity, half crop light), found by trying every angle from 15 to 60 deg in 0.5 deg steps. The "real sensor errors" line gives the controller sensor values that are wrong by realistic amounts (random, sigma = half of the +- limit: sunlight and PAR 2.5 %, DHT11 1 deg C and 2.5 % RH, soil 1.5 %) and scores the angle it picks under the true conditions. One fixed random draw is used, so the picture is repeatable. Rain, storm and night hours follow the safety rules and are not counted. All of this is measured against the controller's own goal in simulation, not against real crop yield.
+
+## Downloaded copies (proof files)
+
+In `Proof/10_Review0_Sensors_and_Panels/sensor_datasheets/`: 01 pyranometer (SP-110 manual PDF), 02 PAR (SQ-110 manual PDF), 03-04 DHT11 datasheet PDF, 05 soil (DFRobot wiki and product page, saved HTML), 06 rain (vendor page, saved HTML; no official datasheet exists), 07 wind (Adafruit 1733 datasheet C2192 PDF and product page), P1 panel (JinkoSolar datasheet PDF). Checked against the files: SP-110 and SQ-110 sensitivity 0.2 mV per unit and +-5 %; DHT11 +-5 %RH and +-2 C at 25 C; Adafruit wind formula (V - 0.4) / 1.6 x 32.4; Jinko Vmp, Imp, Voc, Isc, size, weight.
