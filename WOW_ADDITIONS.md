@@ -25,3 +25,6 @@ NSGA-III (pymoo) on the twin's own engine: ground coverage, clearance, upper til
 - The finite element model is 2-D linear elastic with a fixed root; no weld, clamp or fatigue detail.
 - The distilled network does not beat the monthly plan in closed loop; the design explorer front is approximate.
 - Ideas from a pasted list that were deliberately skipped: reinforcement learning (the exhaustive search is already optimal), physics-informed CFD surrogates, flow-structure coupling, dust CFD and frost (need CFD tools, or do not apply at Madurai), quantum optimisation, satellite mapping and robot vision (off topic).
+
+## Judge-friendly layout (Review 3)
+Built by `patch_ux.py` (run after `patch_wow.py`): the twin opens on a **Start here** tab (what it is in plain words, live panel tilt and what the system is doing, eight one-click scenarios, a map of every tab, how far to trust it). The sensors are on the **Live 3D demo** tab, in a **Sensor panel** beside the 3D view (cloud, temperature, humidity, soil moisture, wind sliders; the rain sensor is the Rain mode button; a fault and attack selector), and a status bar under the title shows the panel angle on every tab. Design controls are hidden until "Show design controls" is pressed. Tabs have plain names, and a bar at the top says it is a simulation study.

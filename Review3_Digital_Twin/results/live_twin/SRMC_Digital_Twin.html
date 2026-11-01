@@ -55,13 +55,36 @@ th{color:var(--mute);font-weight:600;font-size:11px;letter-spacing:.04em}tr.hl t
 .warn{border-left:3px solid var(--a);background:rgba(240,176,48,.07);padding:8px 12px;border-radius:6px;font-size:12px;color:#e8d9b0;margin:8px 0}
 @media(max-width:1000px){.wrap{grid-template-columns:1fr}aside{position:static;max-height:none;border-right:none;border-bottom:1px solid var(--line)}#kpis{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}#three{height:420px}}
 .hb{display:inline-block;width:44px;height:7px;background:rgba(255,255,255,.15);border-radius:4px;vertical-align:middle;overflow:hidden}.hb i{display:block;height:100%}.pulse{display:inline-block;width:9px;height:9px;border-radius:50%;background:#4fd1ff;margin-right:5px;animation:hudp 1s infinite}@keyframes hudp{0%{box-shadow:0 0 0 0 rgba(79,209,255,.8)}100%{box-shadow:0 0 0 9px rgba(79,209,255,0)}}
+
+/*UX_PATCHED*/
+body:not(.adv) aside{display:none}body:not(.adv) .wrap{grid-template-columns:1fr}
+#honest{background:#2a2410;color:#f0d98a;font-size:12px;padding:6px 24px;border-bottom:1px solid var(--line)}
+#ux-strip{position:sticky;top:0;z-index:20;background:rgba(14,11,8,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:7px 24px;font-size:13px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}#ux-strip span{color:var(--mute)}
+#ux-toggle{margin-left:auto}body.tab-guide #kpis,body.tab-guide #checks{display:none}
+.tabs{gap:6px}.tab{min-width:0}.tab small{font-size:10px}
+.hero .lead{font-size:15px;line-height:1.7;max-width:980px}
+.flow{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap;margin-top:12px}.flow div{flex:1;min-width:170px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 12px}.flow b{display:block;color:var(--g);margin-bottom:3px}.flow span{font-size:12px;color:var(--mute)}.flow i{align-self:center;font-style:normal;color:var(--mute);font-size:22px}
+.live{display:flex;gap:10px;flex-wrap:wrap;align-items:stretch}.big{background:var(--panel2);border:2px solid var(--line);border-radius:12px;padding:8px 18px;min-width:150px}.big span{display:block;font-size:11px;color:var(--mute);text-transform:uppercase;letter-spacing:.06em}.big b{font-size:30px}
+.say{flex:1;min-width:260px;background:var(--panel2);border-left:5px solid var(--g);border-radius:8px;padding:10px 14px;font-size:15px}.say span{font-size:12px;color:var(--mute)}
+.rd{width:100%;margin-top:10px;font-size:13px;border-collapse:collapse}.rd td{padding:4px 8px;border-bottom:1px solid var(--line)}.rd td:first-child{color:var(--mute);width:42%}
+.scen{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-top:10px}
+.sc{text-align:left;background:var(--panel2);color:var(--tx);border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;font:inherit}.sc:hover{border-color:var(--g);background:#1f2a14}.sc i{font-style:normal;font-size:22px;float:right}.sc b{display:block;font-size:14px;margin-bottom:2px}.sc span{font-size:12px;color:var(--mute)}
+.plain{margin:8px 0 0 18px;line-height:1.7;font-size:13px}
+.watch{background:#17240f;border:1px solid #2e4a1a;border-radius:10px;padding:9px 14px;margin-bottom:12px;font-size:13px}.watch span{display:block;color:#b8d9a0;margin-top:2px}
+#pane-twin{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(330px,1fr);gap:14px;align-items:start}
+#pane-twin>#ux-watch{grid-column:1/3}#pane-twin>#three,#pane-twin>.bar{grid-column:1}
+#pane-twin>#sens-card{grid-column:2;grid-row:2 / span 3;position:sticky;top:48px;max-height:calc(100vh - 60px);overflow:auto}
+#pane-twin>.note{grid-column:1/3}
+@media(max-width:1100px){#pane-twin{display:block}#pane-twin>#sens-card{position:static;max-height:none}}
 </style>
 </head>
 <body>
 <header>
   <h1>Agrovoltaic Canopy for Protection and Sustainable Farming <span>Digital Twin</span></h1>
   <div class="sub">Six sensors (pyranometer, PAR, DHT11, soil moisture, rain, anemometer) tilt the panels to optimise both crop light and electricity · rain-harvesting gutter · wire-tension canopy · ground visual: Thiagarajar College of Engineering, Madurai</div>
-</header>
+<button class="b" id="ux-toggle">Show design controls</button></header>
+<div id="honest"><b>Simulation study.</b> Sensor values are simulated unless a real board is connected; prices, farmer share and crop values are assumptions; accuracy is measured against the controller's own goal, not against a field trial. Start with the first tab.</div>
+<div id="ux-strip"><span>starting...</span></div>
 <div class="wrap">
 <aside>
   <h3>Canopy site (visual)</h3><select id="s-site"><option value="trotters" selected>Ground near the Main Building (Trotters Ground)</option><option value="main_ground">Large sports ground (south-west)</option></select><div class="hint">Applies to the TCE site. Picking another climate below also swaps the 3D landscape (illustrative) and the sun, rain and temperature.</div>
@@ -98,22 +121,38 @@ th{color:var(--mute);font-weight:600;font-size:11px;letter-spacing:.04em}tr.hl t
   <div id="kpis"></div>
   <div id="checks"></div>
   <div class="tabs">
-    <button class="tab on" data-t="twin">3D twin<small>design · R3 / R5</small></button>
-    <button class="tab" data-t="light">Sun &amp; light<small>solar + shadow · R4</small></button>
-    <button class="tab" data-t="mech">Mechanism<small>how the motor tilts it</small></button>
-    <button class="tab" data-t="tilt">Tilt trade-off<small>control · R6</small></button>
-    <button class="tab" data-t="water">Rain &amp; water<small>harvest · R5 / R6</small></button>
-    <button class="tab" data-t="crops">Crops &amp; soil<small>universal matrix</small></button>
-    <button class="tab" data-t="eco">Economics<small>R7</small></button>
-    <button class="tab" data-t="acc">Accuracy<small>both goals · test</small></button>
-    <button class="tab" data-t="gmap">Ground map<small>shade · red/yellow/green</small></button>
-    <button class="tab" data-t="struct">Structure<small>3 goals · stress</small></button>
-    <button class="tab" data-t="dex">Design explorer<small>NSGA-III</small></button>
-    <button class="tab" data-t="edge">Edge AI<small>ESP32 · attack test</small></button>
-    <button class="tab" data-t="method">Method<small>models · limits</small></button>
+    <button class="tab on" data-t="guide">Start here<small>1-minute tour</small></button>
+    <button class="tab" data-t="twin">Live 3D demo<small>move the sensors</small></button>
+    <button class="tab" data-t="light">Sun and shade<small>through the day</small></button>
+    <button class="tab" data-t="gmap">Shade map<small>red / yellow / green</small></button>
+    <button class="tab" data-t="mech">How it tilts<small>motor and wire</small></button>
+    <button class="tab" data-t="tilt">Best angle<small>electricity or crop?</small></button>
+    <button class="tab" data-t="water">Rain and water<small>tank, irrigation</small></button>
+    <button class="tab" data-t="crops">Crops and soil<small>what grows where</small></button>
+    <button class="tab" data-t="eco">Money<small>farmer and investor</small></button>
+    <button class="tab" data-t="acc">How accurate<small>score vs the best</small></button>
+    <button class="tab" data-t="struct">Strength<small>wind, stress</small></button>
+    <button class="tab" data-t="dex">Design explorer<small>computer search</small></button>
+    <button class="tab" data-t="edge">ESP32 and attack<small>cheap board, hacked sensor</small></button>
+    <button class="tab" data-t="method">Limits<small>read this</small></button>
   </div>
 
-  <section class="pane" id="pane-twin">
+  <section class="pane" id="pane-guide">
+    <div class="card hero"><h4>What you are looking at</h4>
+      <p class="lead">Crops and solar panels both need the sun. This is a <b>computer model of one farm canopy</b>: solar panels on wires, 4.5 m above crops, that <b>tilt by themselves</b> so the plants get enough light and the panels still make electricity. In rain the panels lie flat and the water runs into a tank for irrigation. In a storm they stand edge-on so the wind passes through.</p>
+      <div class="flow"><div><b>1 Sense</b><span>6 sensors: sunlight, light under the panels, temperature and humidity, soil moisture, rain, wind</span></div><i>&rarr;</i><div><b>2 Decide</b><span>a controller picks the best tilt every few minutes</span></div><i>&rarr;</i><div><b>3 Tilt</b><span>one motor and one wire turn every row together</span></div><i>&rarr;</i><div><b>4 Harvest</b><span>electricity for sale, crop under the shade, rainwater for the crop</span></div></div></div>
+    <div class="card"><h4>Right now (live)</h4><div id="ux-live"></div></div>
+    <div class="card"><h4>Try it yourself: press a button, the model changes at once</h4>
+      <div class="note" style="margin-top:0">Each button sets the sensors like a real day would, and takes you to the live 3D view. The panel angle, the shadows and the numbers change. Nothing is pre-recorded.</div>
+      <div id="ux-scen" class="scen"></div></div>
+    <div class="card"><h4>Where to find things</h4><div id="ux-map" class="scen map"></div></div>
+    <div class="card"><h4>How far to trust it (please read)</h4><ul class="plain"><li><b>It is a simulation study.</b> No field data yet. The sensor values you see are simulated unless a real board is plugged in.</li>
+      <li><b>Checked against other tools:</b> the solar output is within about 5 % of the PVGIS data service, the shadow model agrees with a 3-D ray tracer, and the web model and the MATLAB model give the same answers.</li>
+      <li><b>Assumed, not measured:</b> electricity price, farmer share, costs, crop prices, soil and crop values.</li>
+      <li><b>Accuracy is measured against the controller's own goal</b> (half electricity, half crop light), not against real crop yield in a field.</li></ul></div>
+  </section>
+  <section class="pane" id="pane-twin" style="display:none">
+    <div id="ux-watch" class="watch">Press a scenario on the <b>Start here</b> tab, or move a slider in the sensor panel on the right: the panels, shadows and numbers change at once.</div>
     <div id="three"><div id="hud"></div><div id="sensors"></div>
       <div class="legend"><i style="background:#72B830"></i>Z1 <i style="background:#2AC4C4;margin-left:6px"></i>Z2 <i style="background:#F0B030;margin-left:6px"></i>Z3 <i style="background:#C084FC;margin-left:6px"></i>Z4 &nbsp;· drag to orbit · scroll to zoom</div></div>
     <div class="bar">
@@ -124,7 +163,7 @@ th{color:var(--mute);font-weight:600;font-size:11px;letter-spacing:.04em}tr.hl t
       <div style="min-width:0;flex:2"><span class="hint">View:</span> <button class="b" data-view="canopy">Canopy</button> <button class="b" data-view="under">Under canopy</button> <button class="b" data-view="top">Top</button> <button class="b" data-view="mech">Mechanism close-up</button> <button class="b" data-view="campus">Surroundings</button>
       <label style="display:inline;margin-left:8px"><input type="checkbox" id="c-labels" checked> labels</label> <label style="display:inline;margin-left:8px"><input type="checkbox" id="c-overlay"> zones</label> <label style="display:inline;margin-left:8px"><input type="checkbox" id="c-grid" checked> industry &amp; grid</label> <label style="display:inline;margin-left:8px"><input type="checkbox" id="c-auto" checked> auto rain trigger</label></div>
     </div>
-    <div class="card" id="sens-card"><h4>SIX-SENSOR CONTROLLER: pyranometer, PAR, DHT11, soil moisture, rain sensor and anemometer decide the panel angle</h4>
+    <div class="card" id="sens-card"><h4>SENSOR PANEL: change the six sensors like a real day would, and watch the panels react</h4><div class="hint" style="margin:-4px 0 8px">Sunlight (pyranometer) and light under the panels (PAR) follow the cloud slider; the rain sensor is the "Rain mode" button under the 3D view.</div>
       <label style="display:inline;font-size:14px"><input type="checkbox" id="sens-on" checked> <b>Six-sensor controller ON</b> (untick to see the hourly plan only)</label>
       <div class="note"><b>How it decides (every step):</b> anemometer at or above 15 m/s (54 km/h) &rarr; storm stow, panels edge-on at 90&deg; rain sensor wet &rarr; flat roof (3&deg;) to the gutter; pyranometer below 20 W/m&sup2; &rarr; night park; otherwise it tries every tilt from 15&deg; to 60&deg; in 0.5&deg; steps and picks the one with the best <b>combined score = 50 % electricity + 50 % crop light value</b>. The PAR sensor corrects the model (PAR &divide; pyranometer against what the model predicts). DHT11 (hot, dry air) and soil moisture (dry soil) lower the light the crop needs, so the panels accept more shade. <b>Year-long test (864 cases, noisy sensors): 99.6 % of the best possible combined score, 82 % of the best electricity, 98 % of the best crop light value, tilt error 4.8&deg;. See the Accuracy tab, including a live test.</b></div>
       <div id="sens-box"><div class="grid2"><div>
@@ -2192,7 +2231,7 @@ const GROUP_COLOR = { 'Shade-tolerant spice': 0x9a7b1a, 'Leafy / herb': 0x4f9d2f
 const ZCOL = ['#72B830', '#2AC4C4', '#F0B030', '#C084FC'];
 
 const st = { climId: 'tce_madurai', soilId: 'red_sandy_loam', p: {}, zoneSel: [null, null, null, null], zoneSow: [null, null, null, null],
-  day: 105, hour: 9.5, tab: 'twin', rain: false, playing: false, siteId: 'trotters', labels: true, overlay: false, grid: true, auto: true };
+  day: 105, hour: 9.5, tab: 'guide', rain: false, playing: false, siteId: 'trotters', labels: true, overlay: false, grid: true, auto: true };
 let R = null, clim, soil;
 
 /* ---------------- compute ---------------- */
@@ -2290,7 +2329,7 @@ function updateZoneCards() {
 /* ---------------- tabs ---------------- */
 function renderTab() {
   $$('.pane').forEach(p => p.style.display = p.id === 'pane-' + st.tab ? '' : 'none');
-  if (st.tab === 'twin') { scene3d.resize(); hud(); }
+  document.body.classList.toggle('tab-guide', st.tab === 'guide' || st.tab === 'twin'); if (st.tab === 'guide') uxLive(); else if (st.tab === 'twin') { scene3d.resize(); hud(); }
   else if (st.tab === 'light') tabLight(); else if (st.tab === 'tilt') tabTilt(); else if (st.tab === 'water') { tabWater(); tabWaterLink(); }
   else if (st.tab === 'mech') tabMech(); else if (st.tab === 'crops') tabCrops(); else if (st.tab === 'eco') tabEco(); else if (st.tab === 'method') tabMethod(); else if (st.tab === 'acc') tabAcc(); else if (st.tab === 'gmap') tabGmap(); else if (st.tab === 'struct') tabStruct(); else if (st.tab === 'dex') tabDex(); else if (st.tab === 'edge') tabEdge();
 }
@@ -2479,7 +2518,7 @@ function senseDecide(apply) {
   if (SENS.useNN === undefined) SENS.useNN = false; SENS.useNN = !!($('#ed-use') && $('#ed-use').checked); if (SENS.useNN && d.mode === 'OPTIMISE' && WOW.nn) { const a0 = wowNN(sun, irr, T, RH, SENS.soil, parUm, SENS.cmd, n); d.angle = Math.max(SENS.cmd - 6, Math.min(SENS.cmd + 6, a0)); d.reason = 'DISTILLED NETWORK (ESP32 model) picks ' + a0.toFixed(1) + '°; ' + d.reason; } if (apply) SENS.cmd = d.angle;
   const why = []; if (sr.vpd > 1.6) why.push('VPD ' + sr.vpd.toFixed(1) + ' kPa'); if (SENS.soil < 20) why.push('soil dry ' + SENS.soil + ' %');
   const dry = SENS.soil < 20, wet = SENS.soil > 35, tag = lv ? ' <span style="color:#9ad0ff">(real board)</span>' : '';
-  SENS.last = { lsr, target: d.target, vpd: sr.vpd, T, RH, par: parUm, ghi: irr.ghi, rain, night, action: d.mode + ': ' + d.reason, pvRel: d.pvRel == null ? 0 : d.pvRel, cropRel: d.cropRel == null ? 0 : d.cropRel };
+  SENS.last = { lsr, angle: d.angle, mode: d.mode, target: d.target, vpd: sr.vpd, T, RH, par: parUm, ghi: irr.ghi, rain, night, action: d.mode + ': ' + d.reason, pvRel: d.pvRel == null ? 0 : d.pvRel, cropRel: d.cropRel == null ? 0 : d.cropRel };
   const el = $('#sens-trace'); if (el) el.innerHTML =
     `<div><b>1 Pyranometer (GHI):</b> ${irr.ghi.toFixed(0)} W/m² ${night ? '(night)' : ''}${lv && lv.ghi != null ? tag : ''}</div>
      <div><b>2 PAR sensor under the canopy:</b> ${parUm.toFixed(0)} µmol/m²/s → ${(lsr * 100).toFixed(0)} % of the sun reaches the crop${d.mode === 'OPTIMISE' ? ' (model correction ×' + d.corr.toFixed(2) + ')' : ''}${lv && lv.par != null ? tag : ''}</div>
@@ -2650,6 +2689,47 @@ function tabEdge() {
   $('#ed-run').onclick = () => { if (!R || !SENS.last) { $('#ed-live').textContent = 'Open the 3D twin tab once so the controller has a state.'; return; } const n = st.day + 1, m = monthOf(st.day), sun = S.sunVec(clim.lat, n, st.hour), irr = senseIrr(S.irradiance(sun.sz, n, clim.kt[m]), sun); if (irr.ghi < 20) { $('#ed-live').textContent = 'Night: no decision needed.'; return; }
     const a = wowNN(sun, irr, SENS.temp, SENS.rh, SENS.soil, SENS.last.par, SENS.cmd, n); $('#ed-live').innerHTML = `At the twin's current hour: distilled network <b>${a.toFixed(1)}°</b>, full optimiser target <b>${SENS.last.target != null ? SENS.last.target.toFixed(1) : 'n/a'}°</b>, angle now in use ${SENS.cmd.toFixed(1)}°.`; };
   if (A) { $('#ed-atk').innerHTML = '<tr><th>Attack on the anemometer</th><th>Tension monitor</th><th>Storm minutes without stow</th><th>Minutes wire force above the winch limit</th><th>Peak wire force kN</th><th>Detected after (min of the day)</th></tr>' + A.rows.map(x => `<tr><td>${x.attack.replace('_', ' ')}</td><td>${x.monitor}</td><td>${x.storm_minutes_unprotected} of ${x.storm_minutes}</td><td>${x.minutes_wire_force_above_winch_limit}</td><td>${x.peak_wire_force_kN}</td><td>${x.mean_detection_minute == null ? '' : x.mean_detection_minute}</td></tr>`).join(''); }
+}
+
+/* ---------------- Judge-friendly layer: start page, one-click scenarios, live plain-language status, simple view ---------------- */
+function uxSet(id, v) { const el = $(id); if (!el) return; el.value = v; el.dispatchEvent(new Event('input')); }
+function uxFault(v) { const f = $('#sens-fault'); if (f) { f.value = v; f.dispatchEvent(new Event('change')); } }
+function uxRain(on) { const U = window.SRMC_UI; if (U && !!U.st.rain !== on) $('#b-rain').click(); }
+function uxGo(tab) { const b = document.querySelector('[data-t="' + tab + '"]'); if (b) b.click(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+const UX_SCEN = [
+  { id: 'clear', icon: '☀', name: 'Clear noon', what: 'Strong sun, nothing wrong.', watch: 'The panels settle on the angle that gives the best mix of electricity and crop light. See the shadow stripes on the crop.', set: () => { uxSet('#t-day', 105); uxSet('#t-hour', 12); uxSet('#sens-cloud', 0); uxSet('#sens-wind', 3); } },
+  { id: 'cloud', icon: '⛅', name: 'Passing clouds', what: 'Cloud cover 70 %.', watch: 'Sunlight drops, so the sensors tell the controller less shade is needed: the angle changes.', set: () => { uxSet('#t-day', 105); uxSet('#t-hour', 11); uxSet('#sens-cloud', 70); uxSet('#sens-wind', 3); } },
+  { id: 'hot', icon: '🔥', name: 'Hot dry afternoon', what: '40 °C, 25 % humidity, dry soil.', watch: 'The crop is stressed, so the panels give it more shade. Compare the angle with the clear-noon case.', set: () => { uxSet('#t-day', 105); uxSet('#t-hour', 14); uxSet('#sens-cloud', 0); uxSet('#sens-temp', 40); uxSet('#sens-rh', 25); uxSet('#sens-soil', 12); uxSet('#sens-wind', 3); } },
+  { id: 'rain', icon: '🌧', name: 'Rain', what: 'The rain sensor gets wet.', watch: 'Panels go flat (3°) and the roof drains into the gutter and tank. Watch the cistern level in the 3D view.', set: () => { uxSet('#t-day', 220); uxSet('#t-hour', 14); uxSet('#sens-cloud', 70); uxSet('#sens-wind', 5); uxRain(true); } },
+  { id: 'storm', icon: '🌪', name: 'Storm wind', what: 'Wind 20 m/s (72 km/h).', watch: 'The wind sensor passes 15 m/s, so the panels turn edge-on (90°) and the wind passes through.', set: () => { uxSet('#t-day', 105); uxSet('#t-hour', 15); uxSet('#sens-cloud', 30); uxSet('#sens-wind', 20); } },
+  { id: 'night', icon: '🌙', name: 'Night', what: 'No sunlight.', watch: 'The sunlight sensor reads nearly zero, so the panels park and nothing moves.', set: () => { uxSet('#t-day', 105); uxSet('#t-hour', 19); uxSet('#sens-wind', 2); } },
+  { id: 'fault', icon: '⚠', name: 'Broken rain sensor', what: 'The rain sensor is stuck on "wet" in dry sun.', watch: 'The safety layer notices the rain reading makes no sense and ignores it, so the panels keep tracking the sun. Read the "Safety" line in the sensor panel.', set: () => { uxSet('#t-day', 105); uxSet('#t-hour', 11); uxSet('#sens-wind', 3); uxFault('rainWet'); } },
+  { id: 'attack', icon: '🛡', name: 'Fake wind reading', what: 'A hacked wind sensor says 0 during a 22 m/s storm.', watch: 'A load cell on the drive wire feels the real wind, flags the wind sensor as faulty and stows the panels. Untick the monitor on the "ESP32 and attack" tab to see what happens without it.', set: () => { uxSet('#t-day', 105); uxSet('#t-hour', 15); uxSet('#sens-wind', 22); uxFault('windZero'); } }
+];
+const UX_MAP = [['twin', 'Live 3D demo', 'Move the sensors, watch the panels'], ['light', 'Sun and shade', 'How the sun and shadow move through the day'], ['gmap', 'Shade map', 'Red = heavy shade, green = well lit, on the whole field'], ['mech', 'How it tilts', 'Motor, drum, wire and lever arm explained'], ['tilt', 'Best angle', 'Why one angle cannot serve both electricity and crops'], ['water', 'Rain and water', 'Rain harvest, tank, irrigation by the soil sensor'], ['crops', 'Crops and soil', 'Which crop suits which soil and light'], ['eco', 'Money', 'Income for the farmer and the investor, with uncertainty'], ['acc', 'How accurate', 'Score against the best possible angle, 864 noisy cases'], ['struct', 'Strength', 'Wind load, stress in the lever arm, the 3-goal trade-off'], ['dex', 'Design explorer', 'Many designs compared by computer search'], ['edge', 'ESP32 and attack test', 'Small neural network for a cheap board, hacked wind sensor'], ['method', 'Limits', 'What is modelled and what is not']];
+function uxScenario(id) {
+  const sc = UX_SCEN.find(s => s.id === id); const U = window.SRMC_UI; if (!U) return;
+  $('#sens-reset') && $('#sens-reset').click(); uxFault('none'); uxRain(false); uxSet('#sens-wind', 3); $('#sens-on').checked = true; $('#sens-on').dispatchEvent(new Event('change'));
+  sc.set(); window.UXW = sc; const w = $('#ux-watch'); if (w) w.innerHTML = `<b>${sc.icon} ${sc.name}:</b> ${sc.what} <span>What to watch: ${sc.watch}</span>`; uxGo('twin'); setTimeout(uxLive, 400);
+}
+function uxLive() {
+  const el = $('#ux-live'), el2 = $('#ux-strip'); const U = window.SRMC_UI; if (!U) return; const S0 = U.SENS, L = S0.last;
+  const mode = L ? L.action.split(':')[0] : '', say = { OPTIMISE: 'Tracking the sun: picking the best mix of electricity and crop light', RAIN: 'Rain: panels flat, rainwater runs to the gutter and tank', STOW: 'Storm: panels edge-on so the wind passes through', NIGHT: 'Night: panels parked' }[mode] || (L ? mode : 'starting...');
+  const col = { OPTIMISE: '#72B830', RAIN: '#4B9EE8', STOW: '#FF8080', NIGHT: '#9a9484' }[mode] || '#9a9484';
+  const ang = L && L.angle != null && ['STOW', 'RAIN', 'NIGHT'].includes(L.mode) ? L.angle.toFixed(1) : (S0.cmd != null ? S0.cmd.toFixed(1) : '-'), pv = L && L.pvRel ? Math.round(100 * L.pvRel) + ' %' : '-', cr = L && L.cropRel > 0 ? Math.round(100 * L.cropRel) + ' %' : (L && L.pvRel ? 'no crop in season' : '-');
+  const hh = U.st.hour, hm = Math.floor(hh) + ':' + String(Math.round((hh % 1) * 60)).padStart(2, '0');
+  const rows = [['Sunlight (pyranometer)', L ? Math.round(L.ghi) + ' W/m²' : '-'], ['Light under the panels (PAR)', L ? Math.round(L.par) + ' µmol/m²/s' : '-'], ['Air (DHT11)', S0.temp + ' °C, ' + S0.rh + ' % humidity'], ['Soil moisture', S0.soil + ' % of plant-available water'], ['Rain sensor', U.st.rain ? 'WET' : 'dry'], ['Wind (anemometer)', S0.wind + ' m/s' + (S0.fault && S0.fault.startsWith('wind') ? ' (attacked)' : '')]];
+  const html = `<div class="live"><div class="big" style="border-color:${col}"><span>Panel tilt</span><b>${ang}°</b></div><div class="big"><span>Electricity vs best</span><b>${pv}</b></div><div class="big"><span>Crop light vs best</span><b>${cr}</b></div>
+    <div class="say" style="border-left-color:${col}"><b>${say}</b><br><span>Day ${U.st.day + 1}, ${hm} solar time${S0.fault && S0.fault !== 'none' ? ' · <b style="color:#FF8080">a sensor fault is injected</b>' : ''}</span></div></div>
+    <table class="rd">${rows.map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</table>`;
+  if (el && el.offsetParent !== null) el.innerHTML = html;
+  if (el2) el2.innerHTML = `<b style="color:${col}">${ang}°</b> <span>${say}</span> · electricity <b>${pv}</b> · crop light <b>${cr}</b>`;
+}
+function uxInit() {
+  const sc = $('#ux-scen'); if (!sc) return; sc.innerHTML = UX_SCEN.map(s => `<button class="sc" data-s="${s.id}"><i>${s.icon}</i><b>${s.name}</b><span>${s.what}</span></button>`).join(''); $$('.sc').forEach(b => b.onclick = () => uxScenario(b.dataset.s));
+  $('#ux-map').innerHTML = UX_MAP.map(m => `<button class="sc" data-g="${m[0]}"><b>${m[1]}</b><span>${m[2]}</span></button>`).join(''); $$('[data-g]').forEach(b => b.onclick = () => uxGo(b.dataset.g));
+  setInterval(uxLive, 600); uxLive();
+  const tg = $('#ux-toggle'); if (tg) tg.onclick = () => { document.body.classList.toggle('adv'); tg.textContent = document.body.classList.contains('adv') ? 'Hide design controls' : 'Show design controls'; setTimeout(() => { try { scene3d.resize(); } catch (e) { } }, 100); };
 }
 
 /* ---------------- Tab: mechanism (how the motor tilts the panels) ---------------- */
@@ -3191,7 +3271,7 @@ document.addEventListener('DOMContentLoaded', () => {
   $('#sens-on').onchange = e => { SENS.on = e.target.checked; SENS.timer = 0; SENS.cmd = 27; $('#sens-box').style.display = SENS.on ? '' : 'none'; scene3d.refresh(true); };
   [['cloud', 'cloud', v => Math.round(v * 100) + ' %', v => v / 100], ['temp', 'temp', v => v + ' °C', v => +v], ['rh', 'rh', v => v + ' %', v => +v], ['soil', 'soil', v => v + ' %', v => +v], ['wind', 'wind', v => v + ' m/s', v => +v]].forEach(([id, key, lab, cv_]) => { const el = $('#sens-' + id); el.oninput = () => { SENS[key] = cv_(+el.value); if (id === 'temp' || id === 'rh') SENS.manualTH = true; if (id === 'soil') SENS.manualSoil = true; $('#v-sens-' + id).textContent = lab(+el.value); scene3d.refresh(true); }; });
   $('#sens-reset').onclick = () => { SENS.manualTH = false; SENS.manualSoil = false; SENS.cloud = 0; $('#sens-cloud').value = 0; $('#v-sens-cloud').textContent = '0 %'; scene3d.refresh(true); };
-  $('#live-connect').onclick = liveConnect; (function () { const q = new URLSearchParams(location.search), set = (id, v) => { const el = $(id); if (el && v != null) { el.value = v; el.dispatchEvent(new Event('input')); } }; set('#t-day', q.get('day')); set('#t-hour', q.get('hour')); if (q.get('tab')) setTimeout(() => { const b = document.querySelector('[data-t="' + q.get('tab') + '"]'); if (b) b.click(); }, 700); })(); $('#sens-fault').onchange = e => { SENS.fault = e.target.value; SENS.ctlR = null; scene3d.refresh(true); }; $('#acc-run').onclick = runLiveAcc; $('#acc-noise-in').oninput = e => { $('#v-acc-noise-in').textContent = 'x' + e.target.value; }; window.SRMC_UI = { st, SENS, liveLine, liveConnect, get R() { return R; }, compute };
+  $('#live-connect').onclick = liveConnect; uxInit(); (function () { const q = new URLSearchParams(location.search), set = (id, v) => { const el = $(id); if (el && v != null) { el.value = v; el.dispatchEvent(new Event('input')); } }; set('#t-day', q.get('day')); set('#t-hour', q.get('hour')); if (q.get('tab')) setTimeout(() => { const b = document.querySelector('[data-t="' + q.get('tab') + '"]'); if (b) b.click(); }, 700); })(); $('#sens-fault').onchange = e => { SENS.fault = e.target.value; SENS.ctlR = null; scene3d.refresh(true); }; $('#acc-run').onclick = runLiveAcc; $('#acc-noise-in').oninput = e => { $('#v-acc-noise-in').textContent = 'x' + e.target.value; }; window.SRMC_UI = { st, SENS, liveLine, liveConnect, get R() { return R; }, compute };
 });
 })();
 </script>

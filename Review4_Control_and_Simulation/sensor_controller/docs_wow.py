@@ -17,7 +17,7 @@ mp = 'Proof/MANIFEST.csv'; rows = list(csv.reader(open(mp, encoding='utf8'))); h
 files = []
 for dp, dn, fn in os.walk(A):
     for f in fn: files.append(os.path.join(dp, f).replace(chr(92), '/'))
-files += ['Proof/07_Live_Twin_and_Screenshots/screens/' + f for f in os.listdir('Proof/07_Live_Twin_and_Screenshots/screens') if f[:3] in ('11_', '12_', '13_', '14_')] + ['Proof/07_Live_Twin_and_Screenshots/SRMC_Digital_Twin.html']
+files += ['Proof/07_Live_Twin_and_Screenshots/screens/' + f for f in os.listdir('Proof/07_Live_Twin_and_Screenshots/screens') if f[:3] in ('11_', '12_', '13_', '14_', '00_', '00b')] + ['Proof/07_Live_Twin_and_Screenshots/SRMC_Digital_Twin.html']
 new = []
 for p in files:
     rel = p[len('Proof/'):]; sha = hashlib.sha256(open(p, 'rb').read()).hexdigest()

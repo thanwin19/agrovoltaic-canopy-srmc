@@ -1,0 +1,14 @@
+  <section class="pane" id="pane-guide">
+    <div class="card hero"><h4>What you are looking at</h4>
+      <p class="lead">Crops and solar panels both need the sun. This is a <b>computer model of one farm canopy</b>: solar panels on wires, 4.5 m above crops, that <b>tilt by themselves</b> so the plants get enough light and the panels still make electricity. In rain the panels lie flat and the water runs into a tank for irrigation. In a storm they stand edge-on so the wind passes through.</p>
+      <div class="flow"><div><b>1 Sense</b><span>6 sensors: sunlight, light under the panels, temperature and humidity, soil moisture, rain, wind</span></div><i>&rarr;</i><div><b>2 Decide</b><span>a controller picks the best tilt every few minutes</span></div><i>&rarr;</i><div><b>3 Tilt</b><span>one motor and one wire turn every row together</span></div><i>&rarr;</i><div><b>4 Harvest</b><span>electricity for sale, crop under the shade, rainwater for the crop</span></div></div></div>
+    <div class="card"><h4>Right now (live)</h4><div id="ux-live"></div></div>
+    <div class="card"><h4>Try it yourself: press a button, the model changes at once</h4>
+      <div class="note" style="margin-top:0">Each button sets the sensors like a real day would, and takes you to the live 3D view. The panel angle, the shadows and the numbers change. Nothing is pre-recorded.</div>
+      <div id="ux-scen" class="scen"></div></div>
+    <div class="card"><h4>Where to find things</h4><div id="ux-map" class="scen map"></div></div>
+    <div class="card"><h4>How far to trust it (please read)</h4><ul class="plain"><li><b>It is a simulation study.</b> No field data yet. The sensor values you see are simulated unless a real board is plugged in.</li>
+      <li><b>Checked against other tools:</b> the solar output is within about 5 % of the PVGIS data service, the shadow model agrees with a 3-D ray tracer, and the web model and the MATLAB model give the same answers.</li>
+      <li><b>Assumed, not measured:</b> electricity price, farmer share, costs, crop prices, soil and crop values.</li>
+      <li><b>Accuracy is measured against the controller's own goal</b> (half electricity, half crop light), not against real crop yield in a field.</li></ul></div>
+  </section>
