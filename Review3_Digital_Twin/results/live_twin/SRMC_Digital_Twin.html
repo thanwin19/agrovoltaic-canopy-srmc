@@ -212,7 +212,7 @@ body:not(.adv) aside{display:none}body:not(.adv) .wrap{grid-template-columns:1fr
       <div id="mc-chain"></div></div>
     <div class="card"><h4>STEP A. Close-up of ONE panel: where the movement comes from</h4>
       <canvas id="mechcv2"></canvas>
-      <div class="note" style="font-size:14px"><b>Read it like this:</b> the <b style="color:#ff5a4a">red wire</b> slides sideways. It is clamped to the tip of the <b style="color:#f0b030">yellow lever arm</b>. The arm is rigid with the panel's pivot tube, so when the tip is pulled sideways by <b style="color:#7CFFB2">d</b>, the arm swings by angle <b style="color:#ffd36a">θ</b> and the panel tilts by the <b>same</b> θ. One wire is clamped to all the arms, so they all move together.</div></div>
+      <div class="note" style="font-size:14px"><b>Read it like this:</b> the <b style="color:#ff5a4a">red wire</b> slides sideways. It is clamped to the tip of the <b style="color:#f0b030">yellow lever arm</b>. The arm is rigid with the panel's pivot tube, so when the tip is pulled sideways by <b style="color:#7CFFB2">d</b>, the arm swings by angle <b style="color:#ffd36a">θ</b> and the panel tilts by the <b>same</b> θ. One wire is clamped to all the arms, so they all move together.<br><b>Why it works with a straight wire:</b> the wire stays at one height and only slides sideways. A small carriage is clamped to it, and the arm's tip pin rides in a vertical slot in that carriage (a slotted link, like a Scotch yoke). The tip must also rise and fall a little as it swings on its arc (about 113 mm over the whole range); the slot absorbs that, so only the sideways part of the motion, d = arm x [sin 45&deg; + sin(&theta; - 45&deg;)], is carried by the wire. The animation moves at about 22&deg; per second so you can watch it; the real drive speed depends on the motor and gearbox, which this model does not simulate.</div></div>
     <div class="card"><h4>STEP B. The whole row: every tip moves by the same d (green arrows). Side view looking north; 4 of the 10 panels shown, arms drawn 2x bigger</h4>
       <canvas id="mechcv"></canvas>
       <div class="bar" style="margin-top:8px"><div style="flex:3"><label>Panel angle <b id="mech-v"></b></label><input type="range" id="mech-slider" min="0" max="90" step="0.5" value="3"></div>
@@ -2849,7 +2849,7 @@ function drawMech(cvEl, th, target) {
   if (rain) { g.fillStyle = 'rgba(60,160,230,.95)'; g.fillRect(X(gx + .03), Z(H - .13), .4 * s, .08 * s); }
   // drive wire path
   const OFF = 45 * D2R /*MECH_OFFSET_PATCHED*/, tips = xs.map(xc => [xc - L * Math.sin(tr - OFF), H - L * Math.cos(tr - OFF)]), xE = xs[nPan - 1] + PITCH / 2 + .75, xW = xs[0] - PITCH / 2 - .75;
-  const path = [[xE, zp]].concat(tips.slice().reverse()).concat([[xW, zp]]);
+  const path = [[xE, zp], [xW, zp]];
   line(xW, zp, xW, retZ, '#b84a3c', 2.4); line(xW, retZ, xE, retZ, '#b84a3c', 2.4, [7, 5]);
   g.strokeStyle = '#ff5a4a'; g.lineWidth = 3.2; g.beginPath(); path.forEach((p, i) => i ? g.lineTo(X(p[0]), Z(p[1])) : g.moveTo(X(p[0]), Z(p[1]))); g.stroke();
   // panels, pivots, lever arms
@@ -2858,6 +2858,7 @@ function drawMech(cvEl, th, target) {
     g.strokeStyle = '#8fb0ee'; g.lineWidth = 1.2; for (let c = 1; c < 8; c++) { const u = c / 8 - .5, px = X(xc + 2 * dx * u), pz = Z(H - 2 * dz * u); g.beginPath(); g.moveTo(px, pz - .07 * s); g.lineTo(px, pz + .07 * s); g.stroke(); }
     g.fillStyle = '#05080c'; [-1, 1].forEach(sg => { g.beginPath(); g.arc(X(xc + sg * dx), Z(H - sg * dz), .055 * s, 0, 7); g.fill(); });
     g.fillStyle = '#c9d0d6'; g.beginPath(); g.arc(X(xc), Z(H), .14 * s, 0, 7); g.fill(); g.strokeStyle = '#222'; g.lineWidth = 1; g.stroke();
+    g.fillStyle = '#6b7480'; g.fillRect(X(tips[k][0]) - .09 * s, Z(H - .5), .18 * s, Z(zp - .08) - Z(H - .5)); line(tips[k][0], H - .58, tips[k][0], H - .93, '#0d1117', 5);
     line(xc, H, tips[k][0], tips[k][1], '#f0b030', 4); g.fillStyle = '#ff5a4a'; g.beginPath(); g.arc(X(tips[k][0]), Z(tips[k][1]), .1 * s, 0, 7); g.fill();
   });
   // rest positions of the tips and the identical shift d of every tip
@@ -2898,7 +2899,8 @@ function drawClose(cvEl, th, target) {
   const OFF = 45 * D2R, tip = [-L * Math.sin(tr - OFF), -L * Math.cos(tr - OFF)], rest = [L * Math.sin(OFF), -L * Math.cos(OFF)], pit = 2.5;
   [-1, 1].forEach(sg => { const cx = sg * pit; g.globalAlpha = .45; const dx = a * Math.cos(tr), dz = a * Math.sin(tr); Ln(cx - dx, dz, cx + dx, -dz, '#4f6fb8', .12 * s); Ln(cx, 0, cx + tip[0], tip[1], '#f0b030', 3); g.fillStyle = '#ff5a4a'; g.beginPath(); g.arc(X(cx + tip[0]), Z(tip[1]), 6, 0, 7); g.fill(); g.fillStyle = '#c9d0d6'; g.beginPath(); g.arc(X(cx), Z(0), 8, 0, 7); g.fill(); g.globalAlpha = 1; });
   Ln(-4, 1.35, 4, 1.35, '#8f99a3', 2, [2, 5]); T('carrier rope above (carries the weight)', X(-3.9), Z(1.35) - 6, '#98a4ae', 11);
-  const wz = tip[1]; Ln(-4, wz, 4, wz, '#ff5a4a', 3.4); const spd = (Math.abs(target - th) > .3 ? Math.sign(-(target - th)) : 0);
+  const wz = -L * 1.12; Ln(-4, wz, 4, wz, '#ff5a4a', 3.4);
+  const car = (cx, al) => { g.globalAlpha = al; g.fillStyle = '#6b7480'; g.fillRect(X(cx) - .11 * s, Z(-L * .55), .22 * s, Z(wz - .1) - Z(-L * .55)); Ln(cx, -L * .66, cx, -L * 1.03, '#0d1117', 6); g.globalAlpha = 1; }; car(tip[0] - 2.5, .45); car(tip[0] + 2.5, .45); car(tip[0], 1); const spd = (Math.abs(target - th) > .3 ? Math.sign(-(target - th)) : 0);
   const ph = (MECH.t * 70) % 30; g.fillStyle = '#ffe3dd'; for (let xx = -4 * s; xx < 4 * s; xx += 30) { let px = xx + ph * spd; px = ((px + 4 * s) % (8 * s) + 8 * s) % (8 * s) - 4 * s; g.beginPath(); g.arc(x0 + px, Z(wz), 2.4, 0, 7); g.fill(); }
   Ln(0, 0, rest[0], rest[1], 'rgba(255,255,255,.6)', 1.6, [5, 4]); g.strokeStyle = 'rgba(255,255,255,.35)'; g.lineWidth = 1.2; g.setLineDash([2, 4]); g.beginPath(); g.arc(X(0), Z(0), L * s, Math.PI / 2, Math.PI / 2 + Math.PI, false); g.stroke(); g.setLineDash([]);
   g.strokeStyle = 'rgba(255,255,255,.9)'; g.lineWidth = 1.4; g.setLineDash([3, 3]); g.beginPath(); g.arc(X(rest[0]), Z(rest[1]), 7, 0, 7); g.stroke(); g.setLineDash([]); T('rest position of the tip (panel flat)', X(rest[0]) + 12, Z(rest[1]) + 4, '#cfd8e0', 11);
@@ -2906,10 +2908,10 @@ function drawClose(cvEl, th, target) {
   Ln(0, 0, tip[0], tip[1], '#f0b030', 6); g.fillStyle = '#c9d0d6'; g.beginPath(); g.arc(X(0), Z(0), 13, 0, 7); g.fill(); g.strokeStyle = '#222'; g.lineWidth = 2; g.stroke(); g.fillStyle = '#ff5a4a'; g.beginPath(); g.arc(X(tip[0]), Z(tip[1]), 9, 0, 7); g.fill(); g.strokeStyle = '#fff'; g.lineWidth = 2; g.stroke();
   g.strokeStyle = '#ffd36a'; g.lineWidth = 2.5; g.beginPath(); g.arc(X(0), Z(0), .55 * s, Math.PI / 2 - OFF, Math.PI / 2 - OFF + tr, false); g.stroke(); T('θ', X(-.42 * Math.sin(tr / 2)) - 4, Z(-.62 * Math.cos(tr / 2)) + 12, '#ffd36a', 16, 'center');
   g.strokeStyle = '#8fb6ff'; g.beginPath(); g.arc(X(0), Z(0), .85 * s, 0, tr, false); g.stroke(); T('θ', X(.98), Z(-.18 * tr) + (tr > .1 ? 18 : -2), '#8fb6ff', 16);
-  const dd = Math.abs(tip[0] - rest[0]); if (dd > .03) { const zb = -L - .38; Ln(rest[0], rest[1] - .12, rest[0], zb - .1, '#7CFFB2', 1.3); Ln(tip[0], wz - .12, tip[0], zb - .1, '#7CFFB2', 1.3); Ln(rest[0], zb, tip[0], zb, '#7CFFB2', 3); g.fillStyle = '#7CFFB2'; g.beginPath(); g.moveTo(X(tip[0]), Z(zb)); g.lineTo(X(tip[0]) + 9, Z(zb) - 5); g.lineTo(X(tip[0]) + 9, Z(zb) + 5); g.fill(); T('wire slid d = ' + (Lreal * (Math.sin(tr - OFF) + Math.sin(OFF)) * 1000).toFixed(0) + ' mm   (d = arm x [sin 45° + sin(θ - 45°)], arm 0.44 m)', X((tip[0] + rest[0]) / 2) - 20, Z(zb) + 22, '#7CFFB2', 13, 'left'); }
+  const dd = Math.abs(tip[0] - rest[0]); if (dd > .03) { const zb = -L * 1.12 - .42; Ln(rest[0], rest[1] - .12, rest[0], zb - .1, '#7CFFB2', 1.3); Ln(tip[0], wz - .12, tip[0], zb - .1, '#7CFFB2', 1.3); Ln(rest[0], zb, tip[0], zb, '#7CFFB2', 3); g.fillStyle = '#7CFFB2'; g.beginPath(); g.moveTo(X(tip[0]), Z(zb)); g.lineTo(X(tip[0]) + 9, Z(zb) - 5); g.lineTo(X(tip[0]) + 9, Z(zb) + 5); g.fill(); T('wire slid d = ' + (Lreal * (Math.sin(tr - OFF) + Math.sin(OFF)) * 1000).toFixed(0) + ' mm   (d = arm x [sin 45° + sin(θ - 45°)], arm 0.44 m)', X((tip[0] + rest[0]) / 2) - 20, Z(zb) + 22, '#7CFFB2', 13, 'left'); }
   T('PIVOT TUBE (panel turns about this point)', X(0) + 18, Z(0) - 20, '#e6edf3', 13); Ln(0, 0, .45, .22, 'rgba(255,255,255,.6)', 1);
   T('LEVER ARM (rigid with the tube, fixed 45° offset, drawn 2.3x real)', 8, Z(-.35) - 6, '#ffd36a', 13); Ln(-1.2, -.35, tip[0] / 2, tip[1] / 2, 'rgba(255,211,106,.7)', 1);
-  T('DRIVE WIRE clamped to the arm tip', 8, Z(wz) + 24, '#ff9a8c', 13);
+  T('DRIVE WIRE: straight, always at the same height', 8, Z(wz) + 24, '#ff9a8c', 13); T('GREY CARRIAGE clamped to the wire: the red tip pin slides up/down in its slot', 8, Z(wz) + 44, '#b9c2cc', 12); T('slot travel needed: ' + (Lreal * (Math.cos(0) - Math.min(Math.cos(tr - OFF), 1)) * 1000 + 0).toFixed(0) + ' mm now, 113 mm over the whole range', 8, Z(wz) + 62, '#b9c2cc', 11);
   T('PANEL', X(a * Math.cos(tr)) + 6, Z(-a * Math.sin(tr)) - 8, '#9fbcf5', 13);
   const mx = w - 64, my = 74; g.fillStyle = '#252a30'; g.fillRect(mx - 52, my - 50, 104, 100); g.fillStyle = '#c9d0d6'; g.beginPath(); g.arc(mx, my, 34, 0, 7); g.fill(); const ang = -Math.sin(tr) * 3.1;
   for (let q = 0; q < 6; q++) { const aa = ang + q * Math.PI / 3; g.strokeStyle = q === 0 ? '#b02020' : '#555'; g.lineWidth = q === 0 ? 3 : 1.5; g.beginPath(); g.moveTo(mx, my); g.lineTo(mx + 31 * Math.cos(aa), my + 31 * Math.sin(aa)); g.stroke(); }

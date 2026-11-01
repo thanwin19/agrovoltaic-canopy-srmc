@@ -64,4 +64,12 @@ function mechCtlInit() {
 """
 k = s.index('/* ---------------- Tab: mechanism'); s = s[:k] + js + '\n' + s[k:]
 rep("uxInit(); manInit();", "uxInit(); manInit(); mechCtlInit();")
+
+# ---- physical correctness: the wire is straight and stays at one height; each arm tip rides in a vertical slot of a carriage clamped to the wire ----
+rep("const path = [[xE, zp]].concat(tips.slice().reverse()).concat([[xW, zp]]);", "const path = [[xE, zp], [xW, zp]];")
+rep("    line(xc, H, tips[k][0], tips[k][1], '#f0b030', 4);", "    g.fillStyle = '#6b7480'; g.fillRect(X(tips[k][0]) - .09 * s, Z(H - .5), .18 * s, Z(zp - .08) - Z(H - .5)); line(tips[k][0], H - .58, tips[k][0], H - .93, '#0d1117', 5);\n    line(xc, H, tips[k][0], tips[k][1], '#f0b030', 4);")
+rep("const wz = tip[1]; Ln(-4, wz, 4, wz, '#ff5a4a', 3.4);", "const wz = -L * 1.12; Ln(-4, wz, 4, wz, '#ff5a4a', 3.4);\n  const car = (cx, al) => { g.globalAlpha = al; g.fillStyle = '#6b7480'; g.fillRect(X(cx) - .11 * s, Z(-L * .55), .22 * s, Z(wz - .1) - Z(-L * .55)); Ln(cx, -L * .66, cx, -L * 1.03, '#0d1117', 6); g.globalAlpha = 1; }; car(tip[0] - 2.5, .45); car(tip[0] + 2.5, .45); car(tip[0], 1);")
+rep("const zb = -L - .38;", "const zb = -L * 1.12 - .42;")
+rep("T('DRIVE WIRE clamped to the arm tip', 8, Z(wz) + 24, '#ff9a8c', 13);", "T('DRIVE WIRE: straight, always at the same height', 8, Z(wz) + 24, '#ff9a8c', 13); T('GREY CARRIAGE clamped to the wire: the red tip pin slides up/down in its slot', 8, Z(wz) + 44, '#b9c2cc', 12); T('slot travel needed: ' + (Lreal * (Math.cos(0) - Math.min(Math.cos(tr - OFF), 1)) * 1000 + 0).toFixed(0) + ' mm now, 113 mm over the whole range', 8, Z(wz) + 62, '#b9c2cc', 11);")
+rep("One wire is clamped to all the arms, so they all move together.</div></div>", "One wire is clamped to all the arms, so they all move together.<br><b>Why it works with a straight wire:</b> the wire stays at one height and only slides sideways. A small carriage is clamped to it, and the arm's tip pin rides in a vertical slot in that carriage (a slotted link, like a Scotch yoke). The tip must also rise and fall a little as it swings on its arc (about 113 mm over the whole range); the slot absorbs that, so only the sideways part of the motion, d = arm x [sin 45&deg; + sin(&theta; - 45&deg;)], is carried by the wire. The animation moves at about 22&deg; per second so you can watch it; the real drive speed depends on the motor and gearbox, which this model does not simulate.</div></div>")
 open(tw, 'w', encoding='utf8').write(s); print('mech patched', len(s) // 1024, 'KB')
