@@ -41,3 +41,7 @@ Project title: **Agrovoltaic Canopy for Protection and Sustainable Farming**.
 ## Update 2026-11-01: manual sensors
 
 The dashboard has a **MANUAL SENSORS** row under the canopy drawing: type a value for DHT11 temperature, humidity, soil moisture, pyranometer, PAR and wind (press Enter), a rain toggle, six one-click presets (clear noon, passing clouds, hot dry afternoon, rain, storm, night) and **Back to AUTO**. Typed values act in Simulate mode; with a real ESP connected the real readings win. See `results/dashboard_manual_sensors.png`.
+
+## Update 2026-11-01: Review 0 poster and presentation
+
+`ppt/Review0_Poster_A3.pptx` (+ PDF) and `ppt/Review0_Presentation.pptx` (+ PDF, 17 slides: problem, sensors, panels, controller, dashboard, graphs, accuracy, validation, proof, cost estimate, feasibility, status and remaining work). Built by `ppt/build_review0_poster.py` and `ppt/build_review0_deck_final.py` (helpers in `review0_ppt_common.py`, large-print figures from `make_poster_figs.py`). The older `Project_III_*` files are the Phase II originals and were not changed.
