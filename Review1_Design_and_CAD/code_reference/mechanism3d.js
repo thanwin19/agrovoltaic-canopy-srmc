@@ -122,9 +122,10 @@ P.ZS.forEach(z => {
 
 /* ---------------- torque tubes + panels + lever arms ---------------- */
 const rowsG = [];
-const armShape = new THREE.Shape(); armShape.moveTo(0, -0.045); armShape.lineTo(P.L, -0.024); armShape.lineTo(P.L, 0.024); armShape.lineTo(0, 0.045); armShape.lineTo(-0.02, 0); armShape.closePath();
-{ const hole = new THREE.Path(); hole.absarc(P.L - 0.003, 0, 0.011, 0, Math.PI * 2, true); armShape.holes.push(hole); }
-const armGeo = new THREE.ExtrudeGeometry(armShape, { depth: 0.014, bevelEnabled: false });
+/* lever arm after the finite element check (Review1 fea/): plate 120 mm wide at the root, 70 mm at the pin, 16 mm thick, pin hole 22 mm with 30 mm of plate beyond it */
+const armShape = new THREE.Shape(); { const xe = P.L + 0.03, wt = 0.12 + (0.07 - 0.12) * xe / P.L; armShape.moveTo(0, -0.06); armShape.lineTo(xe, -wt / 2); armShape.lineTo(xe, wt / 2); armShape.lineTo(0, 0.06); armShape.closePath(); }
+{ const hole = new THREE.Path(); hole.absarc(P.L, 0, 0.011, 0, Math.PI * 2, true); armShape.holes.push(hole); }
+const armGeo = new THREE.ExtrudeGeometry(armShape, { depth: 0.016, bevelEnabled: false });
 const ZA = 10.36;
 P.ROWS.forEach((xc, i) => {
   const H = pivotY(xc), g = new THREE.Group(); g.position.set(xc, H, 0); scene.add(g);

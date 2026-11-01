@@ -62,3 +62,7 @@ MATLAB: the scripts in `matlab/` run directly from this folder (open MATLAB, `cd
 
 
 Project title: **Agrovoltaic Canopy for Protection and Sustainable Farming**.
+
+## Update 2026-11-01: ground light map
+
+`code_reference/shade3d.py`, results in `results/ground_heatmap/`: 3-D ray cast, any day, hour and tilt, red / yellow / green. Checked against the 2-D engine (mean difference 0.046). Shown in the twin's Ground map tab. See `../WOW_ADDITIONS.md`.

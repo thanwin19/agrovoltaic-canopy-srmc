@@ -1,0 +1,67 @@
+{
+ "reference_site": {
+  "Distilled network (single readings)": {
+   "elec": 78.91214607074372,
+   "crop": 96.80176645186752,
+   "J": 97.33337897155344,
+   "rmse": 7.315014349371212
+  },
+  "Optimiser, single readings, no hysteresis": {
+   "elec": 82.6604985612681,
+   "crop": 97.2298814763035,
+   "J": 99.63878039974476,
+   "rmse": 5.235295944847527
+  },
+  "Full controller (median of 5, guard, hysteresis)": {
+   "elec": 81.70070823237091,
+   "crop": 97.95368945373426,
+   "J": 99.54467143861808,
+   "rmse": 5.5898728144915575
+  },
+  "Monthly plan": {
+   "elec": 82.22509095765948,
+   "crop": 96.29341796140599,
+   "J": 98.84623247029842,
+   "rmse": 9.47553407489869
+  },
+  "Fixed 45 deg": {
+   "elec": 80.99031740394216,
+   "crop": 84.55072767071577,
+   "J": 91.22020224375241,
+   "rmse": 16.301913021197375
+  }
+ },
+ "mean_over_sites_note": "the network was trained at the reference site only; other sites use the same weights with the site latitude not changed, so only the reference site is a fair test",
+ "mean_all_sites": {
+  "Distilled network (single readings)": {
+   "J": 96.96694405644885,
+   "elec": 80.91808611074633,
+   "crop": 95.21118203067267,
+   "rmse": 8.09063231327499
+  },
+  "Optimiser, single readings, no hysteresis": {
+   "J": 99.70570155129654,
+   "elec": 83.51260135202381,
+   "crop": 97.56841202882093,
+   "rmse": 5.294894704999982
+  },
+  "Full controller (median of 5, guard, hysteresis)": {
+   "J": 99.6148810890896,
+   "elec": 82.5740939101597,
+   "crop": 98.29106149980885,
+   "rmse": 5.560769344295501
+  },
+  "Monthly plan": {
+   "J": 98.7868543053688,
+   "elec": 83.0370478119025,
+   "crop": 96.39982133178287,
+   "rmse": 9.775680263552802
+  },
+  "Fixed 45 deg": {
+   "J": 90.69659457562554,
+   "elec": 80.63070279216095,
+   "crop": 85.20409808756698,
+   "rmse": 16.725397820264437
+  }
+ }
+}

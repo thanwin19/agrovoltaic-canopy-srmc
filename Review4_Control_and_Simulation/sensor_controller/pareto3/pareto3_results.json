@@ -1,0 +1,150 @@
+{
+ "stow_sweep": {
+  "A": {
+   "best_angle": 3,
+   "best_index": 0.378,
+   "governing": "pad",
+   "at_90": 0.76,
+   "at_3": 0.378,
+   "at_60": 0.76,
+   "at_45": 0.976
+  },
+  "B": {
+   "best_angle": 57,
+   "best_index": 0.76,
+   "governing": "tube",
+   "at_90": 0.76,
+   "at_3": 1.378,
+   "at_60": 0.76,
+   "at_45": 0.976
+  }
+ },
+ "A": {
+  "n_designs": 16,
+  "n_front": 9,
+  "front": [
+   [
+    "Controller with stow 3 deg",
+    241.6,
+    2.22,
+    0.378
+   ],
+   [
+    "Fixed 60 deg",
+    196.53,
+    2.369,
+    0.76
+   ],
+   [
+    "Fixed 55 deg",
+    208.79,
+    2.283,
+    0.792
+   ],
+   [
+    "Fixed 40 deg",
+    243.48,
+    1.354,
+    1.057
+   ],
+   [
+    "Fixed 35 deg",
+    252.66,
+    0.956,
+    1.13
+   ],
+   [
+    "Fixed 30 deg",
+    262.31,
+    0.693,
+    1.195
+   ],
+   [
+    "Fixed 25 deg",
+    272.17,
+    0.434,
+    1.251
+   ],
+   [
+    "Fixed 20 deg",
+    282.8,
+    0.132,
+    1.297
+   ],
+   [
+    "Fixed 15 deg",
+    290.71,
+    -0.192,
+    1.333
+   ]
+  ],
+  "knee": "Controller with stow 3 deg"
+ },
+ "B": {
+  "n_designs": 16,
+  "n_front": 10,
+  "front": [
+   [
+    "Fixed 60 deg",
+    196.53,
+    2.369,
+    0.76
+   ],
+   [
+    "Controller with stow 60 deg",
+    241.6,
+    2.22,
+    0.76
+   ],
+   [
+    "Controller with stow 90 deg",
+    241.6,
+    2.22,
+    0.76
+   ],
+   [
+    "Fixed 55 deg",
+    208.79,
+    2.283,
+    0.792
+   ],
+   [
+    "Fixed 40 deg",
+    243.48,
+    1.354,
+    1.057
+   ],
+   [
+    "Fixed 35 deg",
+    252.66,
+    0.956,
+    1.13
+   ],
+   [
+    "Fixed 30 deg",
+    262.31,
+    0.693,
+    1.195
+   ],
+   [
+    "Fixed 25 deg",
+    272.17,
+    0.434,
+    1.251
+   ],
+   [
+    "Fixed 20 deg",
+    282.8,
+    0.132,
+    1.297
+   ],
+   [
+    "Fixed 15 deg",
+    290.71,
+    -0.192,
+    1.333
+   ]
+  ],
+  "knee": "Controller with stow 60 deg"
+ }
+}

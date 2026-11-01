@@ -8,3 +8,7 @@ node_modules/
 *.slxc
 slprj/
 *.asv
+*.exe
+*.pdb
+.claude/
+esp32_model/*.bin

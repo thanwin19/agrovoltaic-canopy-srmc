@@ -1,0 +1,248 @@
+{
+ "validation": [
+  {
+   "d_over_W": 0.2,
+   "elements": 1056,
+   "Ktn_FE": 2.534,
+   "Ktn_reference": 2.506,
+   "error_pct": 1.1
+  },
+  {
+   "d_over_W": 0.2,
+   "elements": 2420,
+   "Ktn_FE": 2.528,
+   "Ktn_reference": 2.506,
+   "error_pct": 0.8
+  },
+  {
+   "d_over_W": 0.2,
+   "elements": 4917,
+   "Ktn_FE": 2.526,
+   "Ktn_reference": 2.506,
+   "error_pct": 0.8
+  },
+  {
+   "d_over_W": 0.4,
+   "elements": 1348,
+   "Ktn_FE": 2.28,
+   "Ktn_reference": 2.233,
+   "error_pct": 2.1
+  },
+  {
+   "d_over_W": 0.4,
+   "elements": 2834,
+   "Ktn_FE": 2.25,
+   "Ktn_reference": 2.233,
+   "error_pct": 0.8
+  },
+  {
+   "d_over_W": 0.4,
+   "elements": 5659,
+   "Ktn_FE": 2.25,
+   "Ktn_reference": 2.233,
+   "error_pct": 0.7
+  }
+ ],
+ "material": {
+  "E_GPa": 193,
+  "yield_MPa": 205,
+  "note": "SS316 annealed, minimum values"
+ },
+ "cases": [
+  {
+   "arm": "drawn in the 3D model",
+   "wire_force_kN": 4.1,
+   "arm_angle_phi_deg": 15.0,
+   "tilt_deg": 60.0,
+   "sigma_hole_MPa": 50.8,
+   "sigma_shank_MPa": 88.7,
+   "factor_of_safety": 2.31,
+   "elements": 1171,
+   "axial_share": -0.26,
+   "transverse_share": 0.97
+  },
+  {
+   "arm": "drawn in the 3D model",
+   "wire_force_kN": 4.1,
+   "arm_angle_phi_deg": -42.0,
+   "tilt_deg": 3.0,
+   "sigma_hole_MPa": 46.4,
+   "sigma_shank_MPa": 69.9,
+   "factor_of_safety": 2.93,
+   "elements": 1171,
+   "axial_share": 0.67,
+   "transverse_share": 0.74
+  },
+  {
+   "arm": "drawn in the 3D model",
+   "wire_force_kN": 4.1,
+   "arm_angle_phi_deg": 45.0,
+   "tilt_deg": 90.0,
+   "sigma_hole_MPa": 39.6,
+   "sigma_shank_MPa": 66.7,
+   "factor_of_safety": 3.07,
+   "elements": 1171,
+   "axial_share": -0.71,
+   "transverse_share": 0.71
+  },
+  {
+   "arm": "drawn in the 3D model",
+   "wire_force_kN": 10.2,
+   "arm_angle_phi_deg": 15.0,
+   "tilt_deg": 60.0,
+   "sigma_hole_MPa": 126.4,
+   "sigma_shank_MPa": 220.7,
+   "factor_of_safety": 0.93,
+   "elements": 1171,
+   "axial_share": -0.26,
+   "transverse_share": 0.97
+  },
+  {
+   "arm": "drawn in the 3D model",
+   "wire_force_kN": 10.2,
+   "arm_angle_phi_deg": -42.0,
+   "tilt_deg": 3.0,
+   "sigma_hole_MPa": 115.5,
+   "sigma_shank_MPa": 173.9,
+   "factor_of_safety": 1.18,
+   "elements": 1171,
+   "axial_share": 0.67,
+   "transverse_share": 0.74
+  },
+  {
+   "arm": "drawn in the 3D model",
+   "wire_force_kN": 10.2,
+   "arm_angle_phi_deg": 45.0,
+   "tilt_deg": 90.0,
+   "sigma_hole_MPa": 98.6,
+   "sigma_shank_MPa": 166.0,
+   "factor_of_safety": 1.23,
+   "elements": 1171,
+   "axial_share": -0.71,
+   "transverse_share": 0.71
+  },
+  {
+   "arm": "revised 120/70 x 16 mm",
+   "wire_force_kN": 4.1,
+   "arm_angle_phi_deg": 15.0,
+   "tilt_deg": 60.0,
+   "sigma_hole_MPa": 29.8,
+   "sigma_shank_MPa": 43.5,
+   "factor_of_safety": 4.71,
+   "elements": 1485,
+   "axial_share": -0.26,
+   "transverse_share": 0.97
+  },
+  {
+   "arm": "revised 120/70 x 16 mm",
+   "wire_force_kN": 4.1,
+   "arm_angle_phi_deg": -42.0,
+   "tilt_deg": 3.0,
+   "sigma_hole_MPa": 26.2,
+   "sigma_shank_MPa": 34.5,
+   "factor_of_safety": 5.94,
+   "elements": 1485,
+   "axial_share": 0.67,
+   "transverse_share": 0.74
+  },
+  {
+   "arm": "revised 120/70 x 16 mm",
+   "wire_force_kN": 4.1,
+   "arm_angle_phi_deg": 45.0,
+   "tilt_deg": 90.0,
+   "sigma_hole_MPa": 25.8,
+   "sigma_shank_MPa": 33.0,
+   "factor_of_safety": 6.21,
+   "elements": 1485,
+   "axial_share": -0.71,
+   "transverse_share": 0.71
+  },
+  {
+   "arm": "revised 120/70 x 16 mm",
+   "wire_force_kN": 10.2,
+   "arm_angle_phi_deg": 15.0,
+   "tilt_deg": 60.0,
+   "sigma_hole_MPa": 74.0,
+   "sigma_shank_MPa": 108.3,
+   "factor_of_safety": 1.89,
+   "elements": 1485,
+   "axial_share": -0.26,
+   "transverse_share": 0.97
+  },
+  {
+   "arm": "revised 120/70 x 16 mm",
+   "wire_force_kN": 10.2,
+   "arm_angle_phi_deg": -42.0,
+   "tilt_deg": 3.0,
+   "sigma_hole_MPa": 65.2,
+   "sigma_shank_MPa": 85.9,
+   "factor_of_safety": 2.39,
+   "elements": 1485,
+   "axial_share": 0.67,
+   "transverse_share": 0.74
+  },
+  {
+   "arm": "revised 120/70 x 16 mm",
+   "wire_force_kN": 10.2,
+   "arm_angle_phi_deg": 45.0,
+   "tilt_deg": 90.0,
+   "sigma_hole_MPa": 64.3,
+   "sigma_shank_MPa": 82.1,
+   "factor_of_safety": 2.5,
+   "elements": 1485,
+   "axial_share": -0.71,
+   "transverse_share": 0.71
+  }
+ ],
+ "convergence_governing_case": [
+  {
+   "h_far_mm": 14.0,
+   "h_near_mm": 3.0,
+   "elements": 605,
+   "sigma_hole_MPa": 49.7,
+   "sigma_shank_MPa": 85.2
+  },
+  {
+   "h_far_mm": 10.0,
+   "h_near_mm": 1.6,
+   "elements": 1171,
+   "sigma_hole_MPa": 50.8,
+   "sigma_shank_MPa": 88.7
+  },
+  {
+   "h_far_mm": 7.0,
+   "h_near_mm": 1.0,
+   "elements": 2184,
+   "sigma_hole_MPa": 50.8,
+   "sigma_shank_MPa": 90.4
+  },
+  {
+   "h_far_mm": 5.0,
+   "h_near_mm": 0.7,
+   "elements": 3809,
+   "sigma_hole_MPa": 50.8,
+   "sigma_shank_MPa": 90.9
+  }
+ ],
+ "hand_check": {
+  "governing_phi_deg": 15.0,
+  "net_section_MPa": 2.9,
+  "root_bending_MPa": 92.2,
+  "net_section_with_Kt3_MPa": 8.7
+ },
+ "tube": {
+  "span_m": 4.7,
+  "line_load_kN_per_m": 3.62,
+  "M_hogging_FE_kNm": 10.0,
+  "M_sagging_FE_kNm": 8.775,
+  "reaction_middle_FE_kN": 21.28,
+  "max_deflection_FE_mm": 21.59,
+  "utilisation_bending": 0.763,
+  "hand_calc": {
+   "M_hog_kNm": 10.0,
+   "R_mid_kN": 21.28,
+   "deflection_mm_L_over_200_limit": 23.5
+  },
+  "note": "the hogging moment at the middle bearing equals w L^2 / 8, as in the strength table (0.76 of 13.11 kNm)"
+ }
+}

@@ -1,0 +1,17 @@
+{
+ "validation": {
+  "cases": 80,
+  "mean_abs_diff_of_light_fraction": 0.046,
+  "mean_of_means_engine": 0.277,
+  "mean_of_means_3d": 0.32,
+  "worst": {
+   "day": "21 Dec",
+   "hour": 16.0,
+   "tilt": 45,
+   "engine_mean": 0.308625,
+   "mine_mean": 0.5394527586262712,
+   "mean_abs_diff": 0.2319955805237294
+  },
+  "note": "profile difference is the smallest over circular shifts across the pitch, because the two models place the row at different positions inside the pitch"
+ }
+}

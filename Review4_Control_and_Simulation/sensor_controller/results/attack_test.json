@@ -1,0 +1,202 @@
+{
+ "rows": [
+  {
+   "attack": "none",
+   "monitor": "off",
+   "storm_minutes_unprotected": 0.2,
+   "storm_minutes": 132.5,
+   "minutes_wire_force_above_winch_limit": 0,
+   "peak_wire_force_kN": 3.82,
+   "needless_stow_minutes": 6.5,
+   "runs_flagged_pct": 0,
+   "mean_detection_minute": null
+  },
+  {
+   "attack": "none",
+   "monitor": "on",
+   "storm_minutes_unprotected": 0.2,
+   "storm_minutes": 132.5,
+   "minutes_wire_force_above_winch_limit": 0,
+   "peak_wire_force_kN": 3.82,
+   "needless_stow_minutes": 6.5,
+   "runs_flagged_pct": 0,
+   "mean_detection_minute": null
+  },
+  {
+   "attack": "stealth_zero",
+   "monitor": "off",
+   "storm_minutes_unprotected": 132.5,
+   "storm_minutes": 132.5,
+   "minutes_wire_force_above_winch_limit": 40.3,
+   "peak_wire_force_kN": 10.59,
+   "needless_stow_minutes": 0,
+   "runs_flagged_pct": 0,
+   "mean_detection_minute": null
+  },
+  {
+   "attack": "stealth_zero",
+   "monitor": "on",
+   "storm_minutes_unprotected": 0,
+   "storm_minutes": 132.5,
+   "minutes_wire_force_above_winch_limit": 0,
+   "peak_wire_force_kN": 2.56,
+   "needless_stow_minutes": 346.8,
+   "runs_flagged_pct": 100,
+   "mean_detection_minute": 241
+  },
+  {
+   "attack": "ramp_down",
+   "monitor": "off",
+   "storm_minutes_unprotected": 48.8,
+   "storm_minutes": 132.5,
+   "minutes_wire_force_above_winch_limit": 0,
+   "peak_wire_force_kN": 6.95,
+   "needless_stow_minutes": 0,
+   "runs_flagged_pct": 0,
+   "mean_detection_minute": null
+  },
+  {
+   "attack": "ramp_down",
+   "monitor": "on",
+   "storm_minutes_unprotected": 7.5,
+   "storm_minutes": 132.5,
+   "minutes_wire_force_above_winch_limit": 0,
+   "peak_wire_force_kN": 5.39,
+   "needless_stow_minutes": 323.2,
+   "runs_flagged_pct": 100,
+   "mean_detection_minute": 283
+  },
+  {
+   "attack": "replay_calm",
+   "monitor": "off",
+   "storm_minutes_unprotected": 132.5,
+   "storm_minutes": 132.5,
+   "minutes_wire_force_above_winch_limit": 40.3,
+   "peak_wire_force_kN": 10.59,
+   "needless_stow_minutes": 0,
+   "runs_flagged_pct": 0,
+   "mean_detection_minute": null
+  },
+  {
+   "attack": "replay_calm",
+   "monitor": "on",
+   "storm_minutes_unprotected": 0,
+   "storm_minutes": 132.5,
+   "minutes_wire_force_above_winch_limit": 0,
+   "peak_wire_force_kN": 2.58,
+   "needless_stow_minutes": 335.9,
+   "runs_flagged_pct": 100,
+   "mean_detection_minute": 252
+  },
+  {
+   "attack": "spoof_high",
+   "monitor": "off",
+   "storm_minutes_unprotected": 0.2,
+   "storm_minutes": 132.5,
+   "minutes_wire_force_above_winch_limit": 0,
+   "peak_wire_force_kN": 3.82,
+   "needless_stow_minutes": 126.5,
+   "runs_flagged_pct": 0,
+   "mean_detection_minute": null
+  },
+  {
+   "attack": "spoof_high",
+   "monitor": "on",
+   "storm_minutes_unprotected": 0.2,
+   "storm_minutes": 132.5,
+   "minutes_wire_force_above_winch_limit": 0,
+   "peak_wire_force_kN": 3.82,
+   "needless_stow_minutes": 126.5,
+   "runs_flagged_pct": 0,
+   "mean_detection_minute": null
+  }
+ ],
+ "tradeoff": [
+  {
+   "margin_m_s": 2,
+   "hold_min": 2,
+   "false_alarm_pct": 5.6,
+   "detection_pct": 100,
+   "mean_delay_after_storm_start_min": -35
+  },
+  {
+   "margin_m_s": 2,
+   "hold_min": 3,
+   "false_alarm_pct": 0,
+   "detection_pct": 100,
+   "mean_delay_after_storm_start_min": -31
+  },
+  {
+   "margin_m_s": 2,
+   "hold_min": 5,
+   "false_alarm_pct": 0,
+   "detection_pct": 100,
+   "mean_delay_after_storm_start_min": -27
+  },
+  {
+   "margin_m_s": 3,
+   "hold_min": 2,
+   "false_alarm_pct": 0,
+   "detection_pct": 100,
+   "mean_delay_after_storm_start_min": -23
+  },
+  {
+   "margin_m_s": 3,
+   "hold_min": 3,
+   "false_alarm_pct": 0,
+   "detection_pct": 100,
+   "mean_delay_after_storm_start_min": -20
+  },
+  {
+   "margin_m_s": 3,
+   "hold_min": 5,
+   "false_alarm_pct": 0,
+   "detection_pct": 100,
+   "mean_delay_after_storm_start_min": -10
+  },
+  {
+   "margin_m_s": 4,
+   "hold_min": 2,
+   "false_alarm_pct": 0,
+   "detection_pct": 100,
+   "mean_delay_after_storm_start_min": -1
+  },
+  {
+   "margin_m_s": 4,
+   "hold_min": 3,
+   "false_alarm_pct": 0,
+   "detection_pct": 100,
+   "mean_delay_after_storm_start_min": 1
+  },
+  {
+   "margin_m_s": 4,
+   "hold_min": 5,
+   "false_alarm_pct": 0,
+   "detection_pct": 100,
+   "mean_delay_after_storm_start_min": 5
+  },
+  {
+   "margin_m_s": 6,
+   "hold_min": 2,
+   "false_alarm_pct": 0,
+   "detection_pct": 100,
+   "mean_delay_after_storm_start_min": 9
+  },
+  {
+   "margin_m_s": 6,
+   "hold_min": 3,
+   "false_alarm_pct": 0,
+   "detection_pct": 100,
+   "mean_delay_after_storm_start_min": 10
+  },
+  {
+   "margin_m_s": 6,
+   "hold_min": 5,
+   "false_alarm_pct": 0,
+   "detection_pct": 100,
+   "mean_delay_after_storm_start_min": 12
+  }
+ ],
+ "assumptions": "simulated wire tension from the strength-table wire force (4.1 kN at 15 m/s, 60 deg), calm load 0.4 kN, 5 % load cell noise, 3 % anemometer noise; storms of 18, 24 and 32 m/s; 30 seeds each",
+ "winch_limit_kN": 10
+}

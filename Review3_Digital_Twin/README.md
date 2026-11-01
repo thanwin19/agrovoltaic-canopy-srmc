@@ -79,3 +79,7 @@ MATLAB: the scripts in `matlab/` run directly from this folder (open MATLAB, `cd
 - Year-long test with noisy sensors (864 cases): 99.6 % of the best possible combined score (50 % electricity + 50 % crop light value); electricity 82 % and crop light 98 % of the best. Monthly plan 98.8 %, fixed 45 deg 91.2 %. MATLAB and the web twin make identical decisions (40 of 40).
 - Original twin (before this update) is kept in `results/live_twin/_old/`.
 - Accuracy scorecard (`documents/SRMC_Accuracy_Scorecard.html`) now includes the controller test. The sensor values are simulated.
+
+## Update 2026-11-01: four new tabs in the one twin
+
+Ground map, Structure, Design explorer, Edge AI (with the anemometer attack test). Built by `Review4_Control_and_Simulation/sensor_controller/patch_wow.py`. See `../WOW_ADDITIONS.md`.

@@ -82,3 +82,7 @@ MATLAB: the scripts in `matlab/` run directly from this folder (open MATLAB, `cd
 **Reproduce.** `node sensor_controller/eval_sensor_controller.js` (about 25 s); `node sensor_controller/make_crosscheck_cases.js` then MATLAB `srmc_sc_crosscheck`; MATLAB `build_simulink_sensor_controller`; `python sensor_controller/patch_twin.py` rebuilds the twin from the saved original.
 
 **Honest limits.** Simulated sensors; noise model assumed (pyranometer 5 %, PAR 5 %, DHT11 +-2 C / +-5 % RH, soil +-3 %); wind stow needs the 45 deg offset lever arm (design change; the twin mechanism animation still shows the original arm); the combined score is the controller own objective.
+
+## Update 2026-11-01: trade-off, design explorer, edge AI, attack test
+
+`sensor_controller/pareto3/` (energy, crop, structural demand and the storm stow angle), `design_explorer/` (NSGA-III), `esp32_model/` (small network, C code, closed-loop score 97.3 %, below the monthly plan 98.8 %), `attack_test.js` (spoofed anemometer and a wire-tension monitor). See `../WOW_ADDITIONS.md`.

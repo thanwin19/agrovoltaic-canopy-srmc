@@ -1,0 +1,33 @@
+load model,design,energy kWh/m2/yr,crop net INR lakh/ha/yr,structural demand index at 140 km/h,governing part,on Pareto front
+A,Fixed 15 deg,290.7,-0.19,1.33,pad,yes
+A,Fixed 20 deg,282.8,0.13,1.30,pad,yes
+A,Fixed 25 deg,272.2,0.43,1.25,pad,yes
+A,Fixed 30 deg,262.3,0.69,1.20,pad,yes
+A,Fixed 35 deg,252.7,0.96,1.13,pad,yes
+A,Fixed 40 deg,243.5,1.35,1.06,pad,yes
+A,Fixed 45 deg,232.6,1.63,0.98,pad,no
+A,Fixed 50 deg,220.3,1.97,0.89,pad,no
+A,Fixed 55 deg,208.8,2.28,0.79,pad,yes
+A,Fixed 60 deg,196.5,2.37,0.76,tube,yes
+A,Controller with stow 3 deg,241.6,2.22,0.38,pad,yes
+A,Controller with stow 15 deg,241.6,2.22,1.33,pad,no
+A,Controller with stow 30 deg,241.6,2.22,1.20,pad,no
+A,Controller with stow 45 deg,241.6,2.22,0.98,pad,no
+A,Controller with stow 60 deg,241.6,2.22,0.76,tube,no
+A,Controller with stow 90 deg,241.6,2.22,0.76,tube,no
+B,Fixed 15 deg,290.7,-0.19,1.33,pad,yes
+B,Fixed 20 deg,282.8,0.13,1.30,pad,yes
+B,Fixed 25 deg,272.2,0.43,1.25,pad,yes
+B,Fixed 30 deg,262.3,0.69,1.20,pad,yes
+B,Fixed 35 deg,252.7,0.96,1.13,pad,yes
+B,Fixed 40 deg,243.5,1.35,1.06,pad,yes
+B,Fixed 45 deg,232.6,1.63,0.98,pad,no
+B,Fixed 50 deg,220.3,1.97,0.89,pad,no
+B,Fixed 55 deg,208.8,2.28,0.79,pad,yes
+B,Fixed 60 deg,196.5,2.37,0.76,tube,yes
+B,Controller with stow 3 deg,241.6,2.22,1.38,pad,no
+B,Controller with stow 15 deg,241.6,2.22,1.33,pad,no
+B,Controller with stow 30 deg,241.6,2.22,1.20,pad,no
+B,Controller with stow 45 deg,241.6,2.22,0.98,pad,no
+B,Controller with stow 60 deg,241.6,2.22,0.76,tube,yes
+B,Controller with stow 90 deg,241.6,2.22,0.76,tube,yes

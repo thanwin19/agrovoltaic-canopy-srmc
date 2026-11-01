@@ -1,0 +1,25 @@
+attack,monitor,storm_minutes,storm_minutes_unprotected,minutes_wire_force_above_winch_limit,peak_wire_force_kN,needless_stow_minutes,runs_flagged_pct,mean_detection_minute
+none,off,132.5,0.2,0,3.82,6.5,0,
+none,on,132.5,0.2,0,3.82,6.5,0,
+stealth_zero,off,132.5,132.5,40.3,10.59,0,0,
+stealth_zero,on,132.5,0,0,2.56,346.8,100,241
+ramp_down,off,132.5,48.8,0,6.95,0,0,
+ramp_down,on,132.5,7.5,0,5.39,323.2,100,283
+replay_calm,off,132.5,132.5,40.3,10.59,0,0,
+replay_calm,on,132.5,0,0,2.58,335.9,100,252
+spoof_high,off,132.5,0.2,0,3.82,126.5,0,
+spoof_high,on,132.5,0.2,0,3.82,126.5,0,
+
+margin,hold,false alarm %,detection %,delay min
+2,2,5.6,100,-35
+2,3,0,100,-31
+2,5,0,100,-27
+3,2,0,100,-23
+3,3,0,100,-20
+3,5,0,100,-10
+4,2,0,100,-1
+4,3,0,100,1
+4,5,0,100,5
+6,2,0,100,9
+6,3,0,100,10
+6,5,0,100,12

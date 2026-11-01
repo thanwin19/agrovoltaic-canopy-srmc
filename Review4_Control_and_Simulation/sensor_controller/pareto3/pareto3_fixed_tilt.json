@@ -1,0 +1,83 @@
+{
+ "site": "TCE Ground, Madurai (plains, semi-arid tropical)",
+ "note": "one year, per hectare, assumed prices (tariff INR 3/kWh); fixed tilt held all year",
+ "rows": [
+  {
+   "tilt": 3,
+   "pv_kWh_m2": 310.19,
+   "mean_light_pct": 4.92,
+   "crop_net_lakh": -0.857,
+   "solar_net_lakh": 74.069
+  },
+  {
+   "tilt": 15,
+   "pv_kWh_m2": 290.71,
+   "mean_light_pct": 13.71,
+   "crop_net_lakh": -0.192,
+   "solar_net_lakh": 68.231
+  },
+  {
+   "tilt": 20,
+   "pv_kWh_m2": 282.8,
+   "mean_light_pct": 17.74,
+   "crop_net_lakh": 0.132,
+   "solar_net_lakh": 65.862
+  },
+  {
+   "tilt": 25,
+   "pv_kWh_m2": 272.17,
+   "mean_light_pct": 21.2,
+   "crop_net_lakh": 0.434,
+   "solar_net_lakh": 62.676
+  },
+  {
+   "tilt": 30,
+   "pv_kWh_m2": 262.31,
+   "mean_light_pct": 24.58,
+   "crop_net_lakh": 0.693,
+   "solar_net_lakh": 59.722
+  },
+  {
+   "tilt": 35,
+   "pv_kWh_m2": 252.66,
+   "mean_light_pct": 27.79,
+   "crop_net_lakh": 0.956,
+   "solar_net_lakh": 56.829
+  },
+  {
+   "tilt": 40,
+   "pv_kWh_m2": 243.48,
+   "mean_light_pct": 30.28,
+   "crop_net_lakh": 1.354,
+   "solar_net_lakh": 54.078
+  },
+  {
+   "tilt": 45,
+   "pv_kWh_m2": 232.63,
+   "mean_light_pct": 32.5,
+   "crop_net_lakh": 1.634,
+   "solar_net_lakh": 50.829
+  },
+  {
+   "tilt": 50,
+   "pv_kWh_m2": 220.34,
+   "mean_light_pct": 34.79,
+   "crop_net_lakh": 1.972,
+   "solar_net_lakh": 47.146
+  },
+  {
+   "tilt": 55,
+   "pv_kWh_m2": 208.79,
+   "mean_light_pct": 36.77,
+   "crop_net_lakh": 2.283,
+   "solar_net_lakh": 43.685
+  },
+  {
+   "tilt": 60,
+   "pv_kWh_m2": 196.53,
+   "mean_light_pct": 38.27,
+   "crop_net_lakh": 2.369,
+   "solar_net_lakh": 40.011
+  }
+ ]
+}

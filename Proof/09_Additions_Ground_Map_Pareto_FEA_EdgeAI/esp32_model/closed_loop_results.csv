@@ -1,0 +1,36 @@
+site,strategy,electricity %,crop light %,combined %,tilt RMSE deg
+tce_madurai,Distilled network (single readings),78.9,96.8,97.3,7.3
+tce_madurai,Optimiser, single readings, no hysteresis,82.7,97.2,99.6,5.2
+tce_madurai,Full controller (median of 5, guard, hysteresis),81.7,98.0,99.5,5.6
+tce_madurai,Monthly plan,82.2,96.3,98.8,9.5
+tce_madurai,Fixed 45 deg,81.0,84.6,91.2,16.3
+coastal_chennai,Distilled network (single readings),79.8,96.5,97.4,7.3
+coastal_chennai,Optimiser, single readings, no hysteresis,82.7,97.6,99.7,6.3
+coastal_chennai,Full controller (median of 5, guard, hysteresis),81.7,98.5,99.6,5.9
+coastal_chennai,Monthly plan,82.3,96.9,99.1,10.2
+coastal_chennai,Fixed 45 deg,81.4,84.9,91.5,16.2
+hill_ooty,Distilled network (single readings),79.6,96.4,97.5,7.1
+hill_ooty,Optimiser, single readings, no hysteresis,82.2,97.8,99.8,4.8
+hill_ooty,Full controller (median of 5, guard, hysteresis),81.1,98.6,99.7,5.0
+hill_ooty,Monthly plan,82.6,96.3,99.2,9.3
+hill_ooty,Fixed 45 deg,81.5,84.0,91.2,16.2
+humid_kerala,Distilled network (single readings),79.2,96.9,97.7,7.5
+humid_kerala,Optimiser, single readings, no hysteresis,81.9,98.0,99.8,4.6
+humid_kerala,Full controller (median of 5, guard, hysteresis),80.9,98.7,99.6,5.1
+humid_kerala,Monthly plan,82.4,96.4,99.2,9.7
+humid_kerala,Fixed 45 deg,81.5,83.5,91.1,16.5
+arid_rajasthan,Distilled network (single readings),83.9,90.7,95.5,9.5
+arid_rajasthan,Optimiser, single readings, no hysteresis,85.2,97.2,99.7,4.8
+arid_rajasthan,Full controller (median of 5, guard, hysteresis),84.5,97.6,99.6,5.5
+arid_rajasthan,Monthly plan,83.9,95.8,98.2,10.0
+arid_rajasthan,Fixed 45 deg,78.5,86.3,89.1,17.5
+plains_punjab,Distilled network (single readings),82.8,93.9,96.5,9.9
+plains_punjab,Optimiser, single readings, no hysteresis,85.1,97.3,99.6,5.8
+plains_punjab,Full controller (median of 5, guard, hysteresis),84.4,98.1,99.6,5.9
+plains_punjab,Monthly plan,83.7,96.4,98.3,10.6
+plains_punjab,Fixed 45 deg,80.3,86.9,90.7,17.1
+deccan_vidarbha,Distilled network (single readings),82.2,95.3,96.9,8.0
+deccan_vidarbha,Optimiser, single readings, no hysteresis,84.9,97.8,99.8,5.5
+deccan_vidarbha,Full controller (median of 5, guard, hysteresis),83.7,98.6,99.7,5.9
+deccan_vidarbha,Monthly plan,84.1,96.6,98.7,9.1
+deccan_vidarbha,Fixed 45 deg,80.2,86.2,90.1,17.3

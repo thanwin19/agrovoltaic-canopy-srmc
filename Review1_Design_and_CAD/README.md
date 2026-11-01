@@ -91,3 +91,7 @@ MATLAB: the scripts in `matlab/` run directly from this folder (open MATLAB, `cd
 - 8-panel set (4.4 kWp): weights, installation steps and cost in `documents/SRMC_8Panel_Guide_and_Cost.docx`, `SRMC_8Panel_Installation_Spec.html`, `8panel_BOM.csv`; generator `code_reference/build_hardware_docs.py`. Cost mid about INR 7.2 lakh, indicative.
 - Wind stow: anemometer plus a 45 deg offset lever arm (the plain arm has no lever at 90 deg).
 - Drawings and animations are regenerated for the final design: `results/cad_drawings/` (plan, elevation with anemometer mast and 90 deg stow, section and wire drive with the offset arm, parts list), `results/mechanism/mechanism_closeup.gif` and `mechanism_tilt.gif` (generators: `code_reference/derive_final_dxf.py` then `make_dxf_final.py`, and `make_mech_gifs.py`). The guide-pulley GIF and the Blender renders are from the first design.
+
+## Update 2026-11-01: finite element check of the lever arm
+
+`fea/arm_fea.py` (scikit-fem). The arm as first drawn is safe at the 4.1 kN design load (factor of safety 2.3) but yields at the 10.2 kN limit of the drive wire (0.9); the arm is now 120/70 x 16 mm (4.7 and 1.9) and the 3D mechanism viewer shows it. See `../WOW_ADDITIONS.md`.

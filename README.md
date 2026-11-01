@@ -121,3 +121,7 @@ Say clearly: this is a **simulation study**; prices and the farmer share are **a
 - The final live twin is `Review3_Digital_Twin/results/live_twin/SRMC_Digital_Twin.html` (six-sensor controller ON by default). Serve it with `python -m http.server 8765` in this folder.
 - `_project_core/` was restored with only the design file and data files so the MATLAB scripts run (they read `../_project_core/design` and `../_project_core/data`).
 - Hardware after the strength check: 10 kN winch, 6 mm SS316 drive wire, M24 turnbuckles, bigger anchors (see Review1 documents).
+
+## Update 2026-11-01: additions to the one digital twin
+
+Four new tabs in the single twin (ground light map, structure and trade-off, design explorer, edge AI and sensor-attack test) plus a finite element check of the lever arm and a revised arm. See `WOW_ADDITIONS.md` for what each does, the numbers, and the limits. The second copy of the twin was moved to `_archive/`.
