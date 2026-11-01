@@ -1,0 +1,17 @@
+{
+ "peak_model_clear": 837.262751756018,
+ "peak_nasa_clear": 986.1111111111111,
+ "peak_nasa_all": 897.2222222222222,
+ "peak_pvgis_clearest_day": 1043.2,
+ "pvgis_clearest_day": 1,
+ "daily_Wh_model_clear": 6501.566689919719,
+ "daily_Wh_nasa_clear": 7144.444444444444,
+ "daily_Wh_nasa_all": 6538.888888888889,
+ "daily_Wh_pvgis_clearest": 7544.1,
+ "daily_Wh_pvgis_april_mean": 6336.920000000001,
+ "rmse_model_vs_nasa_clear": 103.62466283030057,
+ "rmse_model_vs_nasa_all": 78.08649117224881,
+ "par_over_ghi_nasa_all": 0.4448248949412458,
+ "par_over_ghi_nasa_clear": 0.44427656792860776,
+ "par_over_ghi_model": 0.45
+}
