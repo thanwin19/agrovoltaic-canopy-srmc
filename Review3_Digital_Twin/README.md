@@ -87,3 +87,5 @@ Ground map, Structure, Design explorer, Edge AI (with the anemometer attack test
 ## Update 2026-11-01: manual sensors in the twin
 
 The sensor panel on the Live 3D demo tab has a typed number box beside every slider, a rain toggle, and a **Manual pyranometer and PAR** switch (type W/m2 and umol/m2/s; the controller then reads exactly those numbers). Built by `Review4_Control_and_Simulation/sensor_controller/patch_manual.py`, run after `patch_ux.py`.
+
+The How it tilts tab now starts with a "Drive it yourself" card (hold-to-tilt buttons, weather buttons, wind and cloud sliders, and a Follow the live controller switch with a live sensors-to-decision-to-motor-to-wire-to-panel chain). Built by `patch_mech.py`, run after `patch_manual.py`.

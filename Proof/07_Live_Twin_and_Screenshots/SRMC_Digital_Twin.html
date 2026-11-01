@@ -82,6 +82,11 @@ body:not(.adv) aside{display:none}body:not(.adv) .wrap{grid-template-columns:1fr
 #man-box{border:1px solid #4a6a2a;background:#14200d;border-radius:10px;padding:8px 12px;margin:10px 0}#man-box h5{margin:0 0 4px;font-size:13px;color:#b8d9a0}
 #man-box .r{display:flex;align-items:center;gap:8px;margin:5px 0;font-size:13px}#man-box .r span{flex:1}
 .man-on{outline:2px solid #FFB84D}
+
+/*MECHCTL_PATCHED*/
+#mc-card{border:2px solid #4a6a2a}#mc-card .mcrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+#mc-card .mcbig{font-size:18px;padding:10px 18px}#mc-card .mcon{background:#2d5a14;border-color:#72B830}
+#mc-chain{display:flex;gap:6px;flex-wrap:wrap;align-items:stretch;margin-top:8px}#mc-chain div{flex:1;min-width:150px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:12px;color:var(--mute)}#mc-chain div b{display:block;color:var(--g);font-size:13px;margin-bottom:2px}#mc-chain div span{display:block;color:var(--tx);font-size:14px}#mc-chain i{align-self:center;font-style:normal;color:var(--mute)}
 </style>
 </head>
 <body>
@@ -199,6 +204,12 @@ body:not(.adv) aside{display:none}body:not(.adv) .wrap{grid-template-columns:1fr
   </section>
 
   <section class="pane" id="pane-mech" style="display:none">
+    <div class="card" id="mc-card"><h4>DRIVE IT YOURSELF: make the panels tilt and see why</h4>
+      <div class="note" style="margin-top:0;font-size:14px">Two ways. <b>(1) You are the motor:</b> hold a tilt button and watch the drum, the red wire, the lever arms and the panels all move together. <b>(2) Follow the controller:</b> press a weather button; the six sensors change, the controller decides, and the mechanism below moves in real time.</div>
+      <div class="mcrow"><button class="b mcbig" id="mc-less">&#9660; less tilt (hold)</button><button class="b mcbig" id="mc-more">&#9650; more tilt (hold)</button><span style="color:var(--mute)">or</span><button class="b mcbig" id="mc-follow">Follow the live controller: OFF</button></div>
+      <div class="mcrow"><span style="color:var(--mute)">Weather (sets the sensors):</span><button class="b" data-mcs="clear">&#9728; Clear noon</button><button class="b" data-mcs="cloud">&#9925; Clouds</button><button class="b" data-mcs="hot">&#128293; Hot and dry</button><button class="b" data-mcs="rain">&#127783; Rain</button><button class="b" data-mcs="storm">&#127786; Storm</button><button class="b" data-mcs="night">&#127769; Night</button></div>
+      <div class="mcrow"><label style="display:inline;margin:0">Wind sensor <b id="mc-wv">3 m/s</b></label><input type="range" id="mc-wind" min="0" max="25" step="0.5" value="3" style="max-width:220px"><label style="display:inline;margin:0 0 0 12px">Cloud <b id="mc-cv">0 %</b></label><input type="range" id="mc-cloud" min="0" max="100" step="5" value="0" style="max-width:220px"></div>
+      <div id="mc-chain"></div></div>
     <div class="card"><h4>STEP A. Close-up of ONE panel: where the movement comes from</h4>
       <canvas id="mechcv2"></canvas>
       <div class="note" style="font-size:14px"><b>Read it like this:</b> the <b style="color:#ff5a4a">red wire</b> slides sideways. It is clamped to the tip of the <b style="color:#f0b030">yellow lever arm</b>. The arm is rigid with the panel's pivot tube, so when the tip is pulled sideways by <b style="color:#7CFFB2">d</b>, the arm swings by angle <b style="color:#ffd36a">θ</b> and the panel tilts by the <b>same</b> θ. One wire is clamped to all the arms, so they all move together.</div></div>
@@ -2766,6 +2777,35 @@ function manInit() {
   }, 400);
 }
 
+
+/* ---------------- Drive it yourself (How it tilts tab) ---------------- */
+function mechFollow(dt) {
+  MECH.auto = false; MECH.fT = (MECH.fT || 0) + dt;
+  if (MECH.fT > .5) { MECH.fT = 0; try { senseDecide(true); } catch (e) { } }
+  const L = SENS.last; if (L) MECH.target = ['STOW', 'RAIN', 'NIGHT'].includes(L.mode) && L.angle != null ? L.angle : SENS.cmd;
+}
+function mechCtlInit() {
+  const fb = $('#mc-follow'); if (!fb) return;
+  const setFollow = on => { MECH.follow = on; fb.textContent = 'Follow the live controller: ' + (on ? 'ON' : 'OFF'); fb.classList.toggle('mcon', on); if (on) { MECH.auto = false; $('#mech-auto').checked = false; if (!SENS.on) { $('#sens-on').checked = true; $('#sens-on').dispatchEvent(new Event('change')); } } };
+  fb.onclick = () => setFollow(!MECH.follow);
+  const hold = (id, dir) => { const b = $(id); const dn = e => { e.preventDefault(); setFollow(false); MECH.auto = false; $('#mech-auto').checked = false; MECH.hold2 = dir; }, up = () => { MECH.hold2 = 0; }; b.addEventListener('pointerdown', dn); ['pointerup', 'pointerleave', 'pointercancel'].forEach(ev => b.addEventListener(ev, up)); };
+  hold('#mc-more', 1); hold('#mc-less', -1);
+  const off = () => setFollow(false); $('#mech-slider').addEventListener('input', off); $$('[data-mech]').forEach(b => b.addEventListener('click', off));
+  $$('[data-mcs]').forEach(b => b.onclick = () => { const sc = UX_SCEN.find(x => x.id === b.dataset.mcs); $('#sens-reset') && $('#sens-reset').click(); uxFault('none'); uxRain(false); uxSet('#sens-wind', 3); const so = $('#sens-on'); so.checked = true; so.dispatchEvent(new Event('change')); sc.set(); setFollow(true); const w = $('#ux-watch'); if (w) w.innerHTML = `<b>${sc.icon} ${sc.name}:</b> ${sc.what} <span>What to watch: ${sc.watch}</span>`; });
+  $('#mc-wind').oninput = e => { uxSet('#sens-wind', e.target.value); setFollow(true); }; $('#mc-cloud').oninput = e => { uxSet('#sens-cloud', e.target.value); setFollow(true); };
+  setInterval(() => {
+    if (st.tab !== 'mech') return; const L = SENS.last, cur = MECH.cur, tgt = MECH.target, Lr = .44, OFF = 45 * D2R, tipx = th => Lr * Math.sin(OFF - th * D2R), dmm = Math.round(1000 * (tipx(cur) - tipx(3)));
+    const run = Math.abs(tgt - cur) > .3, dir = tgt > cur ? 'winding the wire in' : 'letting the wire out';
+    $('#mc-wv').textContent = SENS.wind + ' m/s'; $('#mc-cv').textContent = SENS.cloud + ' %'; if (document.activeElement !== $('#mc-wind')) $('#mc-wind').value = SENS.wind; if (document.activeElement !== $('#mc-cloud')) $('#mc-cloud').value = SENS.cloud;
+    const c = (t, h, x) => `<div><b>${t}</b><span>${h}</span>${x || ''}</div>`;
+    $('#mc-chain').innerHTML = c('1 Sensors', L ? Math.round(L.ghi) + ' W/m² sun, wind ' + SENS.wind + ' m/s, ' + (st.rain ? 'RAIN' : 'dry') : '-', L ? SENS.temp + ' °C, ' + SENS.rh + ' % RH, soil ' + SENS.soil + ' %' : '') + '<i>&rarr;</i>' +
+      c('2 Controller decides', L ? L.mode.replace('OPTIMISE', 'tracking the sun') + ' &rarr; ' + (['STOW', 'RAIN', 'NIGHT'].includes(L.mode) ? L.angle : SENS.cmd).toFixed(1) + '°' : '-', MECH.follow ? 'following it' : 'you are in control') + '<i>&rarr;</i>' +
+      c('3 Motor and drum', run ? 'running: ' + dir : 'stopped, brake on', 'target ' + tgt.toFixed(1) + '°') + '<i>&rarr;</i>' +
+      c('4 Wire moves', Math.abs(dmm) + ' mm', 'at the lever-arm tip, from flat') + '<i>&rarr;</i>' +
+      c('5 Panels tilt', cur.toFixed(1) + '°', 'all arms together');
+  }, 300);
+}
+
 /* ---------------- Tab: mechanism (how the motor tilts the panels) ---------------- */
 const MECH = { cur: 3, target: 3, auto: true, step: 0, hold: 0, running: false, last: 0, seq: [3, 15, 30, 45, 60, 90, 45, 3], names: ['RAIN MODE (flat roof, 3° fall)', 'TILT 15°', 'TILT 30°', 'TILT 45°', 'TILT 60° (max)', 'WIND STOW 90°', 'TILT 45°', 'RAIN MODE (flat roof, 3° fall)'], t: 0 };
 function tabMech() {
@@ -2782,6 +2822,8 @@ function mechLoop(now) {
   if (st.tab !== 'mech' || !R) { MECH.running = false; return; }
   const dt = Math.min(.08, (now - MECH.last) / 1000); MECH.last = now; MECH.t += dt;
   if (MECH.auto) { if (Math.abs(MECH.cur - MECH.seq[MECH.step]) < .05) { MECH.hold += dt; if (MECH.hold > 1.8) { MECH.hold = 0; MECH.step = (MECH.step + 1) % MECH.seq.length; } } MECH.target = MECH.seq[MECH.step]; }
+  if (MECH.follow) mechFollow(dt);
+  if (MECH.hold2) { MECH.target = Math.max(3, Math.min(90, MECH.target + MECH.hold2 * 30 * dt)); MECH.cur = MECH.cur; }
   const e = MECH.target - MECH.cur, mv = 22 * dt; MECH.cur += Math.abs(e) < mv ? e : Math.sign(e) * mv;     // motor + rate limit
   $('#mech-slider').value = MECH.cur; $('#mech-v').textContent = MECH.cur.toFixed(1) + '°'; drawMech($('#mechcv'), MECH.cur, MECH.target); drawClose($('#mechcv2'), MECH.cur, MECH.target); drawPulley($('#mechcv3')); requestAnimationFrame(mechLoop);
 }
@@ -3305,7 +3347,7 @@ document.addEventListener('DOMContentLoaded', () => {
   $('#sens-on').onchange = e => { SENS.on = e.target.checked; SENS.timer = 0; SENS.cmd = 27; $('#sens-box').style.display = SENS.on ? '' : 'none'; scene3d.refresh(true); };
   [['cloud', 'cloud', v => Math.round(v * 100) + ' %', v => v / 100], ['temp', 'temp', v => v + ' °C', v => +v], ['rh', 'rh', v => v + ' %', v => +v], ['soil', 'soil', v => v + ' %', v => +v], ['wind', 'wind', v => v + ' m/s', v => +v]].forEach(([id, key, lab, cv_]) => { const el = $('#sens-' + id); el.oninput = () => { SENS[key] = cv_(+el.value); if (id === 'temp' || id === 'rh') SENS.manualTH = true; if (id === 'soil') SENS.manualSoil = true; $('#v-sens-' + id).textContent = lab(+el.value); scene3d.refresh(true); }; });
   $('#sens-reset').onclick = () => { SENS.manualTH = false; SENS.manualSoil = false; SENS.cloud = 0; $('#sens-cloud').value = 0; $('#v-sens-cloud').textContent = '0 %'; scene3d.refresh(true); };
-  $('#live-connect').onclick = liveConnect; uxInit(); manInit(); (function () { const q = new URLSearchParams(location.search), set = (id, v) => { const el = $(id); if (el && v != null) { el.value = v; el.dispatchEvent(new Event('input')); } }; set('#t-day', q.get('day')); set('#t-hour', q.get('hour')); if (q.get('tab')) setTimeout(() => { const b = document.querySelector('[data-t="' + q.get('tab') + '"]'); if (b) b.click(); }, 700); })(); $('#sens-fault').onchange = e => { SENS.fault = e.target.value; SENS.ctlR = null; scene3d.refresh(true); }; $('#acc-run').onclick = runLiveAcc; $('#acc-noise-in').oninput = e => { $('#v-acc-noise-in').textContent = 'x' + e.target.value; }; window.SRMC_UI = { st, SENS, liveLine, liveConnect, get R() { return R; }, compute };
+  $('#live-connect').onclick = liveConnect; uxInit(); manInit(); mechCtlInit(); (function () { const q = new URLSearchParams(location.search), set = (id, v) => { const el = $(id); if (el && v != null) { el.value = v; el.dispatchEvent(new Event('input')); } }; set('#t-day', q.get('day')); set('#t-hour', q.get('hour')); if (q.get('tab')) setTimeout(() => { const b = document.querySelector('[data-t="' + q.get('tab') + '"]'); if (b) b.click(); }, 700); })(); $('#sens-fault').onchange = e => { SENS.fault = e.target.value; SENS.ctlR = null; scene3d.refresh(true); }; $('#acc-run').onclick = runLiveAcc; $('#acc-noise-in').oninput = e => { $('#v-acc-noise-in').textContent = 'x' + e.target.value; }; window.SRMC_UI = { st, SENS, liveLine, liveConnect, get R() { return R; }, compute };
 });
 })();
 </script>
