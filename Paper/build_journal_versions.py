@@ -38,7 +38,10 @@ made = []
 for pub, cfgname, journal, folder, fit, risk in J:
     outdir = os.path.join(DEST, pub.replace(' ', '_'), folder); os.makedirs(outdir, exist_ok=True)
     fname = 'SRMC_Manuscript_%s.docx' % folder
-    if pub == 'IEEE': shutil.copy(os.path.join(HERE, 'SRMC_FinalYear_Project_Paper.docx'), os.path.join(outdir, fname))
+    if pub == 'IEEE':
+        import build_ieee_access_official as IA; IA.build(os.path.join(outdir, fname))      # official IEEE Access Word template
+    elif pub == 'Springer Nature':
+        import build_springer_nature_official as SN; SN.build(os.path.join(outdir, fname))      # Springer Nature Word template
     else: B.build(cfgname, B.PUBS[cfgname], journal=journal, outdir=outdir, filename=fname)
     letter(journal, fit, risk, os.path.join(outdir, 'Cover_letter_DRAFT_%s.docx' % folder)); made.append((pub, journal, outdir))
 for pub, journal, outdir in made:
