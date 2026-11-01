@@ -42,9 +42,9 @@ h.pyr = uicontrol(fig, 'Style', 'slider', 'Units', 'normalized', 'Position', [x0
 h.parLbl = U([x0 0.558 w 0.028], 'text', '', [], 'FontWeight', 'bold');
 h.par = uicontrol(fig, 'Style', 'slider', 'Units', 'normalized', 'Position', [x0 0.539 w 0.02], 'Min', 0, 'Max', 2400, 'Value', 1650, 'Enable', 'off', 'Callback', @(~, ~) step());
 h.play = uicontrol(fig, 'Style', 'checkbox', 'Units', 'normalized', 'Position', [x0 0.505 w 0.03], 'String', 'play the day (hour advances)', 'BackgroundColor', [0.97 0.97 0.96], 'Callback', @(s, ~) setPlay(s.Value));
-U([x0 0.472 w 0.03], 'text', 'REAL sensors', [], 'FontWeight', 'bold');
+U([x0 0.472 w 0.03], 'text', 'DHT11 / soil / rain (simulated; REAL over USB)', [], 'FontWeight', 'bold');
 h.rainOv = uicontrol(fig, 'Style', 'togglebutton', 'Units', 'normalized', 'Position', [0.985 0.004 0.012 0.02], 'String', '.', 'BackgroundColor', [0.94 0.94 0.94], 'ForegroundColor', [0.8 0.8 0.8], 'Callback', @(s, ~) setRainOv(s.Value));   % small backup switch: forces rain = wet even when serial data is live (shown as SIM in the text panel)
-h.rain = U([x0 0.437 w 0.035], 'togglebutton', 'Simulate rain (when Simulate)', @(s, ~) setSimRain(s.Value));
+h.rain = U([x0 0.437 w 0.035], 'togglebutton', 'RAIN: dry (press to make it rain)', @(s, ~) setSimRain(s.Value));
 U([x0 0.403 w 0.03], 'text', 'soil calibration (raw ADC)', []);
 h.capDry = U([x0 0.368 0.09 0.033], 'pushbutton', 'Capture DRY', @(~, ~) capture('dry')); h.capWet = U([x0 + 0.095 0.368 0.09 0.033], 'pushbutton', 'Capture WET', @(~, ~) capture('wet'));
 h.calTxt = U([x0 0.337 w 0.03], 'text', '', []);
@@ -71,13 +71,14 @@ h.release = U([0.505 0.36 0.11 0.032], 'pushbutton', 'Back to AUTO', @(~, ~) onR
 h.log = uicontrol(fig, 'Style', 'text', 'Units', 'normalized', 'Position', [0.64 0.01 0.345 0.07], 'String', '', 'BackgroundColor', [0.97 0.97 0.96], 'HorizontalAlignment', 'left', 'FontSize', 9);
 tm = [];
 if ~headless
-    tm = timer('ExecutionMode', 'fixedSpacing', 'Period', 1, 'TimerFcn', @(~, ~) step(), 'BusyMode', 'drop');
+    tm = timer('ExecutionMode', 'fixedSpacing', 'Period', 0.4, 'TimerFcn', @(~, ~) step(), 'BusyMode', 'drop');
     fig.CloseRequestFcn = @onClose;
 end
 lastD = []; lastS = []; lastV = [];
 MP = review0_mppt(); pmP = MP.params(); st.mppt = struct('M', MP, 'pm', pmP, 'st', MP.init(pmP, 30), 'V', 30, 'P', 0, 'Pmpp', 0, 'Vmpp', 0, 'sumP', 0, 'sumM', 0, 'effRun', 100, 'eff', 100);
 WD = review0_words();
 updateCalText(); step();
+if ~headless, h.run.Value = 1; h.run.String = 'STOP live loop'; start(tm); end   % the live loop starts by itself, so buttons react at once
 
 % ---------------- API for headless use ----------------
 app = struct('fig', fig, 'step', @step, 'set', @setState, 'snapshot', @snapshot, 'state', @getState, 'last', @getLast, 'trust', @runTrust, 'explain', @openExplain, 'close', @() delete(fig));
@@ -141,7 +142,7 @@ app = struct('fig', fig, 'step', @step, 'set', @setState, 'snapshot', @snapshot,
         end
         h.smode.Value = 1; onSensorMode(); h.preset.Value = 1;
     end
-    function onRain2(v), st.simRain = logical(v); h.rain.Value = logical(v); step(); end
+    function onRain2(v), h.rain.Value = logical(v); setSimRain(v); end
     function onRelease()                    % hand control back to the generated day and the sun/sky model
         st.fixT = false; st.fixRH = false; st.fixSoil = false; h.smode.Value = 1; onSensorMode();
     end
@@ -153,8 +154,8 @@ app = struct('fig', fig, 'step', @step, 'set', @setState, 'snapshot', @snapshot,
         catch, end
     end
     function setPlay(v), st.play = logical(v); end
-    function setSimRain(v), st.simRain = logical(v); end
-    function setRainOv(v), st.rainOv = logical(v); end
+    function setSimRain(v), st.simRain = logical(v); h.rain.String = ternary(st.simRain, 'RAIN: WET (press to dry)', 'RAIN: dry (press to make it rain)'); step(); end
+    function setRainOv(v), st.rainOv = logical(v); step(); end
     function setRun(v)
         if isempty(tm), return; end
         if v, start(tm); h.run.String = 'STOP live loop'; else, stop(tm); h.run.String = 'START live loop'; end
@@ -281,6 +282,7 @@ app = struct('fig', fig, 'step', @step, 'set', @setState, 'snapshot', @snapshot,
         text(ax, -8.8, 11.6, 'Side view: blue bars = solar panels, coloured strip = 4 crop zones', 'FontSize', 9);
         title(ax, sprintf('SRMC canopy: day %d, solar hour %.1f', V.day, V.hour), 'FontSize', 11);
         % ---- time series ----
+        if ~headless && mod(st.n, 4) ~= 1, h.log.String = ['status: ' st.lastMsg '   |   samples: ' num2str(st.n)]; return; end      % the four time-series plots are the slow part: redraw every 4th update so buttons react at once
         n = size(st.hist, 1); t = st.hist(:, 1); if n < 2, t = [0; 1]; end
         ts = @(axx, ttl) title(axx, ttl, 'FontSize', 9, 'Interpreter', 'none');
         cla(h.axT); yyaxis(h.axT, 'left'); plot(h.axT, t(1:n), st.hist(:, 2), 'r-', 'LineWidth', 1.3); ylabel(h.axT, 'temperature (C)'); yyaxis(h.axT, 'right'); plot(h.axT, t(1:n), st.hist(:, 3), 'b-', 'LineWidth', 1.3); ylabel(h.axT, 'humidity (%)'); ts(h.axT, [rT ' sensor DHT11: air temperature (red) and humidity (blue)']); xlabel(h.axT, 'time since start (seconds)'); grid(h.axT, 'on');
