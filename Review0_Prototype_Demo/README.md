@@ -2,26 +2,24 @@
 
 Rubric: prototype demonstration 20 | testing/validation evidence 10 | feasibility 5 | SDG and cost 5 | time management 5 | questions 5.
 
-## Start here tomorrow
-1. `documents/Review0_Morning_Checklist.md`  (do in order: wire, upload, calibrate, demo, finish)
-2. `firmware/PIN_MAP.md`  (pins for the NodeMCU ESP8266 and the ESP32)
-3. In MATLAB:  `cd` into the `matlab` folder, then type `review0_dashboard`
-   - Source "Simulate" works with no hardware (rehearse tonight).  Source "Serial (ESP)" + COM port + Connect + START live loop uses the real board.
-4. `ppt/Review0_Prototype_Demo.pptx`  - 18 slides; slide 14 needs your photos and measured numbers.
-5. Print `documents/Review0_Supervisor_OnePager.docx` for the signature.
+## Start here (Review 0, 100 % on the computer)
+1. In MATLAB: `cd` into the `matlab` folder, then type `review0_dashboard`. The live loop starts by itself.
+2. Every sensor is **simulated after a real, named device** and **can be set by hand** (slider or typed number). Until you touch one it follows the day / sky model.
+3. Four graph tabs: sensors through a day, panel angle and output, accuracy of the co-optimisation, sensors and panels (datasheet numbers).
+4. Proof of the devices, panels and numbers: `documents/SENSOR_AND_PANEL_PROOF.md`.
+5. `ppt/Review0_Prototype_Demo.pptx` (deck, built before the hardware was removed: edit the hardware slides) and `documents/Review0_Supervisor_OnePager.docx`.
 
-## What is real and what is simulated
-REAL (ESP board): DHT11 temperature + humidity, soil moisture, rain.   SIMULATED (MATLAB, labelled SIM): pyranometer, PAR, wind.   Tilt: drawn on screen only.
+## What is simulated
+All six sensors (Apogee SP-110 pyranometer, Apogee SQ-110 PAR, DHT11, DFRobot SEN0193 soil, YL-83/FC-37 rain, Adafruit 1733 anemometer) and the 8 JinkoSolar Tiger Pro JKM550M-72HL4-V panels (4.4 kWp). No board, no wiring. The hardware files (ESP firmware, serial logger, morning checklist) were moved to `../_archive/hardware_removed_for_review0/`.
 
 ## Folder map
 | Folder | Content |
 |---|---|
-| `firmware/` | `SRMC_ESP8266_NodeMCU` and `SRMC_ESP32` sketches (library-free, 115200 baud), `PIN_MAP.md` |
-| `matlab/` | `review0_dashboard.m` (live GUI), `review0_controller.m` (decision), `review0_irrigation.m`, `review0_parse.m`, `review0_physics.m` (validated sun/PV/shadow functions), `review0_run_tests.m`, `review0_make_screens.m` |
-| `results/` | `test_results.md/.csv` (16 tests), `day_comparison.md/.csv`, figures, `screens/` (dashboard screenshots), `proof/` (validation figures), `live_logs/` (your saved evidence) |
-| `ppt/` | deck + `build_review0_deck.py` (regenerates it from the result files) |
-| `documents/` | checklist, demo script and likely questions, supervisor one-pager |
-| `test_data/` | `bench_log_template.csv` for the morning measurements |
+| `matlab/` | `review0_dashboard.m` (live GUI), `review0_controller.m` (decision), `review0_irrigation.m`, `review0_physics.m` (validated sun/PV/shadow functions), `review0_mppt.m`, tests and screenshot scripts |
+| `results/` | `test_results.md/.csv`, `day_comparison.md/.csv`, figures, `screens/` (dashboard screenshots), dashboard_*.png |
+| `ppt/` | deck + `build_review0_deck.py` |
+| `documents/` | `SENSOR_AND_PANEL_PROOF.md`, `REVIEW0_TALK_TRACK.md`, supervisor one-pager |
+| `data_logging/` | scores a (fake) week of sensor data with the controller |
 
 ## Commands
 - Tests (about 1 min): `review0_run_tests` -> results/test_results.md, day_comparison.md, fig_*.png
@@ -29,7 +27,7 @@ REAL (ESP board): DHT11 temperature + humidity, soil moisture, rain.   SIMULATED
 - Rebuild the deck after editing results: `python ppt/build_review0_deck.py`
 
 ## Honest limits
-- The firmware and the Serial path of the dashboard could not be tested here without the board; the parser, rules, physics and the Simulate path are tested (16/16).
+- No hardware: sensors are software models of real devices; their readings are generated or typed, not measured.
 - Pyranometer/PAR/wind are simulated; results are screening-level, validated against PVGIS and Blender, not against field data.
 - Part prices on slide 16 are indicative ranges, to be replaced with your bill.
 
