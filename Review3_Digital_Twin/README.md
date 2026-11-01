@@ -89,3 +89,7 @@ Ground map, Structure, Design explorer, Edge AI (with the anemometer attack test
 The sensor panel on the Live 3D demo tab has a typed number box beside every slider, a rain toggle, and a **Manual pyranometer and PAR** switch (type W/m2 and umol/m2/s; the controller then reads exactly those numbers). Built by `Review4_Control_and_Simulation/sensor_controller/patch_manual.py`, run after `patch_ux.py`.
 
 The How it tilts tab now starts with a "Drive it yourself" card (hold-to-tilt buttons, weather buttons, wind and cloud sliders, and a Follow the live controller switch with a live sensors-to-decision-to-motor-to-wire-to-panel chain). Built by `patch_mech.py`, run after `patch_manual.py`.
+
+## Update 2026-11-01: Review 0 sensors and proof in the twin
+
+Sensor panel now names the six real devices (Apogee SP-110, SQ-110, DHT11, DFRobot SEN0193, YL-83/FC-37, Adafruit 1733) and shows each device's output signal; a switch adds datasheet-sized sensor errors; sensor readings and decisions can be recorded and downloaded as CSV. New tab **Sensors and proof**: datasheet table with links to the downloaded files, the 8 x JinkoSolar JKM550M panel with a live I-V / P-V curve and array power, where the sunlight comes from and the NASA POWER / PVGIS check, accuracy against ordinary designs, cost if real, what is still needed. Built by `patch_proof.py` (after `patch_mech.py`). The sensors are software models; the readings are not measured.
