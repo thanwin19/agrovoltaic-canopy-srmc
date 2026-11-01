@@ -89,7 +89,7 @@ body:not(.adv) aside{display:none}body:not(.adv) .wrap{grid-template-columns:1fr
 #mc-chain{display:flex;gap:6px;flex-wrap:wrap;align-items:stretch;margin-top:8px}#mc-chain div{flex:1;min-width:150px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:12px;color:var(--mute)}#mc-chain div b{display:block;color:var(--g);font-size:13px;margin-bottom:2px}#mc-chain div span{display:block;color:var(--tx);font-size:14px}#mc-chain i{align-self:center;font-style:normal;color:var(--mute)}
 
 /*PROOF_PATCHED*/
-.pt{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0}.pt th{background:#1f3a5f;color:#fff;text-align:left;padding:6px 8px}.pt td{padding:5px 8px;border-bottom:1px solid var(--line);vertical-align:top}.pt tr:nth-child(even) td{background:rgba(255,255,255,.03)}
+.pt{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0}.pt th{background:#1f3a5f;color:#fff;text-align:left;padding:6px 8px}.pt td{text-align:left;padding:5px 8px;border-bottom:1px solid var(--line);vertical-align:top}.pt tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 .pt a,.plinks a{color:#9ad0ff}.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:1000px){.pgrid{display:block}}
 .pbig{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}.pbig div{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:8px 14px;min-width:150px}.pbig b{display:block;font-size:26px;color:#72B830}.pbig span{font-size:12px;color:var(--mute)}
 #px-box{border:1px solid #2e4a6a;background:#101c2a;border-radius:10px;padding:8px 12px;margin:10px 0;font-size:13px}#px-box h5{margin:0 0 4px;font-size:13px;color:#9ad0ff}#px-sig td{padding:2px 6px;font-size:12.5px}#px-sig td:first-child{color:var(--mute)}
@@ -2883,7 +2883,7 @@ function pxDraw() {
   g.fillStyle = '#0f1620'; g.fillRect(0, 0, w, h); g.strokeStyle = GRID; g.lineWidth = 1; g.fillStyle = TXT; g.font = '11px system-ui'; g.textAlign = 'center';
   for (let v = 0; v <= 60; v += 10) { const x = mx + pw * v / Vm; g.beginPath(); g.moveTo(x, my); g.lineTo(x, my + ph); g.stroke(); g.fillText(v, x, my + ph + 14); } g.fillText('module voltage (V)', mx + pw / 2, h - 6);
   g.textAlign = 'right'; for (let i = 0; i <= 15; i += 5) { const y = my + ph - ph * i / Im; g.beginPath(); g.moveTo(mx, y); g.lineTo(mx + pw, y); g.stroke(); g.fillText(i, mx - 4, y + 4); } g.save(); g.translate(12, my + ph / 2); g.rotate(-Math.PI / 2); g.textAlign = 'center'; g.fillText('current (A)', 0, 0); g.restore();
-  g.textAlign = 'left'; for (let p = 0; p <= 600; p += 200) { const y = my + ph - ph * p / Pm; g.fillText(p, mx + pw + 6, y + 4); } g.fillStyle = '#e0a030'; g.fillText('power (W)', mx + pw - 40, my + 10);
+  g.textAlign = 'left'; for (let p = 0; p <= 600; p += 200) { const y = my + ph - ph * p / Pm; g.fillText(p, mx + pw + 6, y + 4); } g.fillStyle = '#e0a030'; g.fillText('power (W)', mx + pw - 70, my + 12);
   g.strokeStyle = '#72B830'; g.lineWidth = 2.5; g.beginPath(); o.pts.forEach((q, i) => { const x = mx + pw * q[0] / Vm, y = my + ph - ph * q[1] / Im; i ? g.lineTo(x, y) : g.moveTo(x, y); }); g.stroke();
   g.strokeStyle = '#e0a030'; g.beginPath(); o.pts.forEach((q, i) => { const x = mx + pw * q[0] / Vm, y = my + ph - ph * q[2] / Pm; i ? g.lineTo(x, y) : g.moveTo(x, y); }); g.stroke();
   if (o.best.P > 1) { const x = mx + pw * o.best.V / Vm, y = my + ph - ph * o.best.P / Pm; g.fillStyle = '#ff5a4a'; g.beginPath(); g.arc(x, y, 5, 0, 7); g.fill(); }
