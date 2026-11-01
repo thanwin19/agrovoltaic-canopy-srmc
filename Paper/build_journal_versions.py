@@ -42,6 +42,10 @@ for pub, cfgname, journal, folder, fit, risk in J:
         import build_ieee_access_official as IA; IA.build(os.path.join(outdir, fname))      # official IEEE Access Word template
     elif pub == 'Springer Nature':
         import build_springer_nature_official as SN; SN.build(os.path.join(outdir, fname))      # Springer Nature Word template
+    elif pub == 'MDPI':
+        import build_mdpi_official as MD; MD.build(folder.lower(), os.path.join(outdir, fname))      # official MDPI Word template of that journal
+    elif pub == 'Taylor and Francis':
+        import build_tf_official as TF; TF.build(os.path.join(outdir, fname))      # official Taylor and Francis Word template
     else: B.build(cfgname, B.PUBS[cfgname], journal=journal, outdir=outdir, filename=fname)
     letter(journal, fit, risk, os.path.join(outdir, 'Cover_letter_DRAFT_%s.docx' % folder)); made.append((pub, journal, outdir))
 for pub, journal, outdir in made:
